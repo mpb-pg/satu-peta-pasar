@@ -14,15 +14,39 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestRouteImport } from './routes/test'
 import { Route as MapsRouteImport } from './routes/maps'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as MapRouteRouteImport } from './routes/map/route'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoOrpcTodoRouteImport } from './routes/demo.orpc-todo'
+import { Route as StallIndexRouteImport } from './routes/stall/index'
+import { Route as SalesRealizationIndexRouteImport } from './routes/sales-realization/index'
+import { Route as ProductPotentialIndexRouteImport } from './routes/product-potential/index'
+import { Route as ProductKnowledgeIndexRouteImport } from './routes/product-knowledge/index'
+import { Route as MapIndexRouteImport } from './routes/map/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as StallIdRouteImport } from './routes/stall/$id'
+import { Route as DemoOrpcTodoRouteImport } from './routes/demo/orpc-todo'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
-import { Route as DemoFormSimpleRouteImport } from './routes/demo.form.simple'
-import { Route as DemoFormAddressRouteImport } from './routes/demo.form.address'
-import { ServerRoute as ApiSplatServerRouteImport } from './routes/api.$'
-import { ServerRoute as ApiRpcSplatServerRouteImport } from './routes/api.rpc.$'
-import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api.auth.$'
+import { Route as AdminStallIndexRouteImport } from './routes/admin/stall/index'
+import { Route as AdminSaleIndexRouteImport } from './routes/admin/sale/index'
+import { Route as AdminProductIndexRouteImport } from './routes/admin/product/index'
+import { Route as AdminLandIndexRouteImport } from './routes/admin/land/index'
+import { Route as AdminCommodityIndexRouteImport } from './routes/admin/commodity/index'
+import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
+import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
+import { Route as AdminSaleSaleDailyIndexRouteImport } from './routes/admin/sale/sale-daily/index'
+import { Route as AdminRegionRegencyIndexRouteImport } from './routes/admin/region/regency/index'
+import { Route as AdminRegionProvinceIndexRouteImport } from './routes/admin/region/province/index'
+import { Route as AdminProductProductDosageIndexRouteImport } from './routes/admin/product/product-dosage/index'
+import { Route as AdminProductProductBrandIndexRouteImport } from './routes/admin/product/product-brand/index'
+import { Route as AdminLandRegencyLandIndexRouteImport } from './routes/admin/land/regency-land/index'
+import { Route as AdminLandProvinceLandIndexRouteImport } from './routes/admin/land/province-land/index'
+import { Route as AdminCommodityRegencyCommodityIndexRouteImport } from './routes/admin/commodity/regency-commodity/index'
+import { Route as AdminCommodityProvinceCommodityIndexRouteImport } from './routes/admin/commodity/province-commodity/index'
+import { Route as AdminLandProvinceLandLandTypeRouteImport } from './routes/admin/land/province-land/$landType'
+import { ServerRoute as ApiSplatServerRouteImport } from './routes/api/$'
+import { ServerRoute as ApiRpcSplatServerRouteImport } from './routes/api/rpc.$'
+import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
 
 const rootServerRouteImport = createServerRootRoute()
 
@@ -41,9 +65,54 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MapRouteRoute = MapRouteRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StallIndexRoute = StallIndexRouteImport.update({
+  id: '/stall/',
+  path: '/stall/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalesRealizationIndexRoute = SalesRealizationIndexRouteImport.update({
+  id: '/sales-realization/',
+  path: '/sales-realization/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductPotentialIndexRoute = ProductPotentialIndexRouteImport.update({
+  id: '/product-potential/',
+  path: '/product-potential/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductKnowledgeIndexRoute = ProductKnowledgeIndexRouteImport.update({
+  id: '/product-knowledge/',
+  path: '/product-knowledge/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapIndexRoute = MapIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MapRouteRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const StallIdRoute = StallIdRouteImport.update({
+  id: '/stall/$id',
+  path: '/stall/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoOrpcTodoRoute = DemoOrpcTodoRouteImport.update({
@@ -61,6 +130,31 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStallIndexRoute = AdminStallIndexRouteImport.update({
+  id: '/stall/',
+  path: '/stall/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminSaleIndexRoute = AdminSaleIndexRouteImport.update({
+  id: '/sale/',
+  path: '/sale/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminProductIndexRoute = AdminProductIndexRouteImport.update({
+  id: '/product/',
+  path: '/product/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminLandIndexRoute = AdminLandIndexRouteImport.update({
+  id: '/land/',
+  path: '/land/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminCommodityIndexRoute = AdminCommodityIndexRouteImport.update({
+  id: '/commodity/',
+  path: '/commodity/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
   id: '/demo/form/simple',
   path: '/demo/form/simple',
@@ -71,6 +165,64 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
   path: '/demo/form/address',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSaleSaleDailyIndexRoute = AdminSaleSaleDailyIndexRouteImport.update({
+  id: '/sale/sale-daily/',
+  path: '/sale/sale-daily/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminRegionRegencyIndexRoute = AdminRegionRegencyIndexRouteImport.update({
+  id: '/region/regency/',
+  path: '/region/regency/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminRegionProvinceIndexRoute =
+  AdminRegionProvinceIndexRouteImport.update({
+    id: '/region/province/',
+    path: '/region/province/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminProductProductDosageIndexRoute =
+  AdminProductProductDosageIndexRouteImport.update({
+    id: '/product/product-dosage/',
+    path: '/product/product-dosage/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminProductProductBrandIndexRoute =
+  AdminProductProductBrandIndexRouteImport.update({
+    id: '/product/product-brand/',
+    path: '/product/product-brand/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminLandRegencyLandIndexRoute =
+  AdminLandRegencyLandIndexRouteImport.update({
+    id: '/land/regency-land/',
+    path: '/land/regency-land/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminLandProvinceLandIndexRoute =
+  AdminLandProvinceLandIndexRouteImport.update({
+    id: '/land/province-land/',
+    path: '/land/province-land/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminCommodityRegencyCommodityIndexRoute =
+  AdminCommodityRegencyCommodityIndexRouteImport.update({
+    id: '/commodity/regency-commodity/',
+    path: '/commodity/regency-commodity/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminCommodityProvinceCommodityIndexRoute =
+  AdminCommodityProvinceCommodityIndexRouteImport.update({
+    id: '/commodity/province-commodity/',
+    path: '/commodity/province-commodity/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminLandProvinceLandLandTypeRoute =
+  AdminLandProvinceLandLandTypeRouteImport.update({
+    id: '/land/province-land/$landType',
+    path: '/land/province-land/$landType',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
 const ApiSplatServerRoute = ApiSplatServerRouteImport.update({
   id: '/api/$',
   path: '/api/$',
@@ -89,14 +241,38 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/map': typeof MapRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/maps': typeof MapsRoute
   '/test': typeof TestRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/stall/$id': typeof StallIdRoute
+  '/admin/': typeof AdminIndexRoute
+  '/map/': typeof MapIndexRoute
+  '/product-knowledge': typeof ProductKnowledgeIndexRoute
+  '/product-potential': typeof ProductPotentialIndexRoute
+  '/sales-realization': typeof SalesRealizationIndexRoute
+  '/stall': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/admin/commodity': typeof AdminCommodityIndexRoute
+  '/admin/land': typeof AdminLandIndexRoute
+  '/admin/product': typeof AdminProductIndexRoute
+  '/admin/sale': typeof AdminSaleIndexRoute
+  '/admin/stall': typeof AdminStallIndexRoute
+  '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
+  '/admin/commodity/province-commodity': typeof AdminCommodityProvinceCommodityIndexRoute
+  '/admin/commodity/regency-commodity': typeof AdminCommodityRegencyCommodityIndexRoute
+  '/admin/land/province-land': typeof AdminLandProvinceLandIndexRoute
+  '/admin/land/regency-land': typeof AdminLandRegencyLandIndexRoute
+  '/admin/product/product-brand': typeof AdminProductProductBrandIndexRoute
+  '/admin/product/product-dosage': typeof AdminProductProductDosageIndexRoute
+  '/admin/region/province': typeof AdminRegionProvinceIndexRoute
+  '/admin/region/regency': typeof AdminRegionRegencyIndexRoute
+  '/admin/sale/sale-daily': typeof AdminSaleSaleDailyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -106,33 +282,103 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/stall/$id': typeof StallIdRoute
+  '/admin': typeof AdminIndexRoute
+  '/map': typeof MapIndexRoute
+  '/product-knowledge': typeof ProductKnowledgeIndexRoute
+  '/product-potential': typeof ProductPotentialIndexRoute
+  '/sales-realization': typeof SalesRealizationIndexRoute
+  '/stall': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/admin/commodity': typeof AdminCommodityIndexRoute
+  '/admin/land': typeof AdminLandIndexRoute
+  '/admin/product': typeof AdminProductIndexRoute
+  '/admin/sale': typeof AdminSaleIndexRoute
+  '/admin/stall': typeof AdminStallIndexRoute
+  '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
+  '/admin/commodity/province-commodity': typeof AdminCommodityProvinceCommodityIndexRoute
+  '/admin/commodity/regency-commodity': typeof AdminCommodityRegencyCommodityIndexRoute
+  '/admin/land/province-land': typeof AdminLandProvinceLandIndexRoute
+  '/admin/land/regency-land': typeof AdminLandRegencyLandIndexRoute
+  '/admin/product/product-brand': typeof AdminProductProductBrandIndexRoute
+  '/admin/product/product-dosage': typeof AdminProductProductDosageIndexRoute
+  '/admin/region/province': typeof AdminRegionProvinceIndexRoute
+  '/admin/region/regency': typeof AdminRegionRegencyIndexRoute
+  '/admin/sale/sale-daily': typeof AdminSaleSaleDailyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/map': typeof MapRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/maps': typeof MapsRoute
   '/test': typeof TestRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/stall/$id': typeof StallIdRoute
+  '/admin/': typeof AdminIndexRoute
+  '/map/': typeof MapIndexRoute
+  '/product-knowledge/': typeof ProductKnowledgeIndexRoute
+  '/product-potential/': typeof ProductPotentialIndexRoute
+  '/sales-realization/': typeof SalesRealizationIndexRoute
+  '/stall/': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/admin/commodity/': typeof AdminCommodityIndexRoute
+  '/admin/land/': typeof AdminLandIndexRoute
+  '/admin/product/': typeof AdminProductIndexRoute
+  '/admin/sale/': typeof AdminSaleIndexRoute
+  '/admin/stall/': typeof AdminStallIndexRoute
+  '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
+  '/admin/commodity/province-commodity/': typeof AdminCommodityProvinceCommodityIndexRoute
+  '/admin/commodity/regency-commodity/': typeof AdminCommodityRegencyCommodityIndexRoute
+  '/admin/land/province-land/': typeof AdminLandProvinceLandIndexRoute
+  '/admin/land/regency-land/': typeof AdminLandRegencyLandIndexRoute
+  '/admin/product/product-brand/': typeof AdminProductProductBrandIndexRoute
+  '/admin/product/product-dosage/': typeof AdminProductProductDosageIndexRoute
+  '/admin/region/province/': typeof AdminRegionProvinceIndexRoute
+  '/admin/region/regency/': typeof AdminRegionRegencyIndexRoute
+  '/admin/sale/sale-daily/': typeof AdminSaleSaleDailyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/map'
     | '/dashboard'
     | '/maps'
     | '/test'
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/stall/$id'
+    | '/admin/'
+    | '/map/'
+    | '/product-knowledge'
+    | '/product-potential'
+    | '/sales-realization'
+    | '/stall'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/admin/commodity'
+    | '/admin/land'
+    | '/admin/product'
+    | '/admin/sale'
+    | '/admin/stall'
+    | '/admin/land/province-land/$landType'
+    | '/admin/commodity/province-commodity'
+    | '/admin/commodity/regency-commodity'
+    | '/admin/land/province-land'
+    | '/admin/land/regency-land'
+    | '/admin/product/product-brand'
+    | '/admin/product/product-dosage'
+    | '/admin/region/province'
+    | '/admin/region/regency'
+    | '/admin/sale/sale-daily'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -142,29 +388,82 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/stall/$id'
+    | '/admin'
+    | '/map'
+    | '/product-knowledge'
+    | '/product-potential'
+    | '/sales-realization'
+    | '/stall'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/admin/commodity'
+    | '/admin/land'
+    | '/admin/product'
+    | '/admin/sale'
+    | '/admin/stall'
+    | '/admin/land/province-land/$landType'
+    | '/admin/commodity/province-commodity'
+    | '/admin/commodity/regency-commodity'
+    | '/admin/land/province-land'
+    | '/admin/land/regency-land'
+    | '/admin/product/product-brand'
+    | '/admin/product/product-dosage'
+    | '/admin/region/province'
+    | '/admin/region/regency'
+    | '/admin/sale/sale-daily'
   id:
     | '__root__'
     | '/'
+    | '/admin'
+    | '/map'
     | '/dashboard'
     | '/maps'
     | '/test'
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/stall/$id'
+    | '/admin/'
+    | '/map/'
+    | '/product-knowledge/'
+    | '/product-potential/'
+    | '/sales-realization/'
+    | '/stall/'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/admin/commodity/'
+    | '/admin/land/'
+    | '/admin/product/'
+    | '/admin/sale/'
+    | '/admin/stall/'
+    | '/admin/land/province-land/$landType'
+    | '/admin/commodity/province-commodity/'
+    | '/admin/commodity/regency-commodity/'
+    | '/admin/land/province-land/'
+    | '/admin/land/regency-land/'
+    | '/admin/product/product-brand/'
+    | '/admin/product/product-dosage/'
+    | '/admin/region/province/'
+    | '/admin/region/regency/'
+    | '/admin/sale/sale-daily/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  MapRouteRoute: typeof MapRouteRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   MapsRoute: typeof MapsRoute
   TestRoute: typeof TestRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
   DemoOrpcTodoRoute: typeof DemoOrpcTodoRoute
+  StallIdRoute: typeof StallIdRoute
+  ProductKnowledgeIndexRoute: typeof ProductKnowledgeIndexRoute
+  ProductPotentialIndexRoute: typeof ProductPotentialIndexRoute
+  SalesRealizationIndexRoute: typeof SalesRealizationIndexRoute
+  StallIndexRoute: typeof StallIndexRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
 }
@@ -221,11 +520,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stall/': {
+      id: '/stall/'
+      path: '/stall'
+      fullPath: '/stall'
+      preLoaderRoute: typeof StallIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sales-realization/': {
+      id: '/sales-realization/'
+      path: '/sales-realization'
+      fullPath: '/sales-realization'
+      preLoaderRoute: typeof SalesRealizationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product-potential/': {
+      id: '/product-potential/'
+      path: '/product-potential'
+      fullPath: '/product-potential'
+      preLoaderRoute: typeof ProductPotentialIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product-knowledge/': {
+      id: '/product-knowledge/'
+      path: '/product-knowledge'
+      fullPath: '/product-knowledge'
+      preLoaderRoute: typeof ProductKnowledgeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map/': {
+      id: '/map/'
+      path: '/'
+      fullPath: '/map/'
+      preLoaderRoute: typeof MapIndexRouteImport
+      parentRoute: typeof MapRouteRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/stall/$id': {
+      id: '/stall/$id'
+      path: '/stall/$id'
+      fullPath: '/stall/$id'
+      preLoaderRoute: typeof StallIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/orpc-todo': {
@@ -249,6 +611,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/stall/': {
+      id: '/admin/stall/'
+      path: '/stall'
+      fullPath: '/admin/stall'
+      preLoaderRoute: typeof AdminStallIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/sale/': {
+      id: '/admin/sale/'
+      path: '/sale'
+      fullPath: '/admin/sale'
+      preLoaderRoute: typeof AdminSaleIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/product/': {
+      id: '/admin/product/'
+      path: '/product'
+      fullPath: '/admin/product'
+      preLoaderRoute: typeof AdminProductIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/land/': {
+      id: '/admin/land/'
+      path: '/land'
+      fullPath: '/admin/land'
+      preLoaderRoute: typeof AdminLandIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/commodity/': {
+      id: '/admin/commodity/'
+      path: '/commodity'
+      fullPath: '/admin/commodity'
+      preLoaderRoute: typeof AdminCommodityIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/demo/form/simple': {
       id: '/demo/form/simple'
       path: '/demo/form/simple'
@@ -262,6 +659,76 @@ declare module '@tanstack/react-router' {
       fullPath: '/demo/form/address'
       preLoaderRoute: typeof DemoFormAddressRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/admin/sale/sale-daily/': {
+      id: '/admin/sale/sale-daily/'
+      path: '/sale/sale-daily'
+      fullPath: '/admin/sale/sale-daily'
+      preLoaderRoute: typeof AdminSaleSaleDailyIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/region/regency/': {
+      id: '/admin/region/regency/'
+      path: '/region/regency'
+      fullPath: '/admin/region/regency'
+      preLoaderRoute: typeof AdminRegionRegencyIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/region/province/': {
+      id: '/admin/region/province/'
+      path: '/region/province'
+      fullPath: '/admin/region/province'
+      preLoaderRoute: typeof AdminRegionProvinceIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/product/product-dosage/': {
+      id: '/admin/product/product-dosage/'
+      path: '/product/product-dosage'
+      fullPath: '/admin/product/product-dosage'
+      preLoaderRoute: typeof AdminProductProductDosageIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/product/product-brand/': {
+      id: '/admin/product/product-brand/'
+      path: '/product/product-brand'
+      fullPath: '/admin/product/product-brand'
+      preLoaderRoute: typeof AdminProductProductBrandIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/land/regency-land/': {
+      id: '/admin/land/regency-land/'
+      path: '/land/regency-land'
+      fullPath: '/admin/land/regency-land'
+      preLoaderRoute: typeof AdminLandRegencyLandIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/land/province-land/': {
+      id: '/admin/land/province-land/'
+      path: '/land/province-land'
+      fullPath: '/admin/land/province-land'
+      preLoaderRoute: typeof AdminLandProvinceLandIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/commodity/regency-commodity/': {
+      id: '/admin/commodity/regency-commodity/'
+      path: '/commodity/regency-commodity'
+      fullPath: '/admin/commodity/regency-commodity'
+      preLoaderRoute: typeof AdminCommodityRegencyCommodityIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/commodity/province-commodity/': {
+      id: '/admin/commodity/province-commodity/'
+      path: '/commodity/province-commodity'
+      fullPath: '/admin/commodity/province-commodity'
+      preLoaderRoute: typeof AdminCommodityProvinceCommodityIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/land/province-land/$landType': {
+      id: '/admin/land/province-land/$landType'
+      path: '/land/province-land/$landType'
+      fullPath: '/admin/land/province-land/$landType'
+      preLoaderRoute: typeof AdminLandProvinceLandLandTypeRouteImport
+      parentRoute: typeof AdminRouteRoute
     }
   }
 }
@@ -291,14 +758,77 @@ declare module '@tanstack/react-start/server' {
   }
 }
 
+interface AdminRouteRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminCommodityIndexRoute: typeof AdminCommodityIndexRoute
+  AdminLandIndexRoute: typeof AdminLandIndexRoute
+  AdminProductIndexRoute: typeof AdminProductIndexRoute
+  AdminSaleIndexRoute: typeof AdminSaleIndexRoute
+  AdminStallIndexRoute: typeof AdminStallIndexRoute
+  AdminLandProvinceLandLandTypeRoute: typeof AdminLandProvinceLandLandTypeRoute
+  AdminCommodityProvinceCommodityIndexRoute: typeof AdminCommodityProvinceCommodityIndexRoute
+  AdminCommodityRegencyCommodityIndexRoute: typeof AdminCommodityRegencyCommodityIndexRoute
+  AdminLandProvinceLandIndexRoute: typeof AdminLandProvinceLandIndexRoute
+  AdminLandRegencyLandIndexRoute: typeof AdminLandRegencyLandIndexRoute
+  AdminProductProductBrandIndexRoute: typeof AdminProductProductBrandIndexRoute
+  AdminProductProductDosageIndexRoute: typeof AdminProductProductDosageIndexRoute
+  AdminRegionProvinceIndexRoute: typeof AdminRegionProvinceIndexRoute
+  AdminRegionRegencyIndexRoute: typeof AdminRegionRegencyIndexRoute
+  AdminSaleSaleDailyIndexRoute: typeof AdminSaleSaleDailyIndexRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+  AdminCommodityIndexRoute: AdminCommodityIndexRoute,
+  AdminLandIndexRoute: AdminLandIndexRoute,
+  AdminProductIndexRoute: AdminProductIndexRoute,
+  AdminSaleIndexRoute: AdminSaleIndexRoute,
+  AdminStallIndexRoute: AdminStallIndexRoute,
+  AdminLandProvinceLandLandTypeRoute: AdminLandProvinceLandLandTypeRoute,
+  AdminCommodityProvinceCommodityIndexRoute:
+    AdminCommodityProvinceCommodityIndexRoute,
+  AdminCommodityRegencyCommodityIndexRoute:
+    AdminCommodityRegencyCommodityIndexRoute,
+  AdminLandProvinceLandIndexRoute: AdminLandProvinceLandIndexRoute,
+  AdminLandRegencyLandIndexRoute: AdminLandRegencyLandIndexRoute,
+  AdminProductProductBrandIndexRoute: AdminProductProductBrandIndexRoute,
+  AdminProductProductDosageIndexRoute: AdminProductProductDosageIndexRoute,
+  AdminRegionProvinceIndexRoute: AdminRegionProvinceIndexRoute,
+  AdminRegionRegencyIndexRoute: AdminRegionRegencyIndexRoute,
+  AdminSaleSaleDailyIndexRoute: AdminSaleSaleDailyIndexRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
+interface MapRouteRouteChildren {
+  MapIndexRoute: typeof MapIndexRoute
+}
+
+const MapRouteRouteChildren: MapRouteRouteChildren = {
+  MapIndexRoute: MapIndexRoute,
+}
+
+const MapRouteRouteWithChildren = MapRouteRoute._addFileChildren(
+  MapRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
+  MapRouteRoute: MapRouteRouteWithChildren,
   DashboardRoute: DashboardRoute,
   MapsRoute: MapsRoute,
   TestRoute: TestRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
   DemoOrpcTodoRoute: DemoOrpcTodoRoute,
+  StallIdRoute: StallIdRoute,
+  ProductKnowledgeIndexRoute: ProductKnowledgeIndexRoute,
+  ProductPotentialIndexRoute: ProductPotentialIndexRoute,
+  SalesRealizationIndexRoute: SalesRealizationIndexRoute,
+  StallIndexRoute: StallIndexRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
 }

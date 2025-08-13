@@ -18,30 +18,28 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between gap-2 bg-white p-2 text-black">
+    <header className="flex justify-between gap-2 border-amber-950 border-b bg-white p-2 text-black shadow-md">
       <nav className="flex flex-row">
         <div className="px-2 font-bold">
           <Link to="/">Home</Link>
         </div>
 
-        <div className="px-2 font-extrabold">
-          <Link to="/test">TEST</Link>
-        </div>
+        {user ? (
+            <div className="px-2 font-bold">
+              <Link to="/map">Potential Maps</Link>
+            </div>
+          ) : null }
 
-        <div className="px-2 font-extrabold">
-          <Link to="/test">MAPS</Link>
+        <div className="px-2 font-bold">
+          {/* <Link to="/product-potential">Product Potential</Link> */}
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/orpc-todo">oRPC Todo</Link>
+          {/* <Link to="/sales-realization">Sales Realization</Link> */}
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/form/simple">Simple Form</Link>
-        </div>
-
-        <div className="px-2 font-bold">
-          <Link to="/demo/form/address">Address Form</Link>
+          {/* <Link to="/product-knowledge">Product Knowledge</Link> */}
         </div>
       </nav>
 
@@ -49,11 +47,13 @@ export default function Header() {
         <LanguageSwitcher />
         {user ? (
           <>
-            <Link to="/dashboard">
+            {/* {user.isAdmin && ( */}
+            <Link to="/admin">
               <Button size="sm" variant="ghost">
-                Dashboard
+                Admin Panel
               </Button>
             </Link>
+            {/* )} */}
             <span className="text-sm">Welcome, {user.name}!</span>
             <Button onClick={handleSignOut} size="sm" variant="outline">
               Sign Out
