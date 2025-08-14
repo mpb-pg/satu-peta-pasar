@@ -24,6 +24,14 @@ export default function Header() {
           <Link to="/">Home</Link>
         </div>
 
+        <div className="px-2 font-extrabold">
+          <Link to="/test">TEST</Link>
+        </div>
+
+        <div className="px-2 font-extrabold">
+          <Link to="/test">MAPS</Link>
+        </div>
+
         <div className="px-2 font-bold">
           <Link to="/demo/orpc-todo">oRPC Todo</Link>
         </div>

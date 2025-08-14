@@ -7,11 +7,11 @@ import {
   retainSearchParams,
   Scripts,
 } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { z } from 'zod';
 import Header from '../components/header';
 import { orpc } from '../lib/orpc/client';
-import TanStackQueryLayout from '../lib/tanstack-query/layout';
+// import TanStackQueryLayout from '../lib/tanstack-query/layout';
 import appCss from '../styles/globals.css?url';
 
 type Session = Awaited<ReturnType<typeof orpc.auth.getSession.call>>;
@@ -91,8 +91,8 @@ function RootDocument() {
       <body>
         <Header />
         <Outlet />
-        <TanStackRouterDevtools />
-        <TanStackQueryLayout />
+        {/* <TanStackRouterDevtools /> */}
+        {/* <TanStackQueryLayout /> */}
         <Scripts />
       </body>
     </html>
