@@ -43,8 +43,8 @@ export async function dynamicActivate(i18n: I18n, locale: string) {
     // Global translations (header, common UI)
     () => import(`../../locales/global-${locale}.po`),
     // Feature-specific translations
-    () => import(`../../app/auth/_locales/auth-${locale}.po`),
-    () => import(`../../app/todos/_locales/todos-${locale}.po`),
+    () => import(`../../routes/auth/-locales/auth-${locale}.po`),
+    () => import(`../../routes/todos/-locales/todos-${locale}.po`),
   ];
 
   // Load all catalogs in parallel

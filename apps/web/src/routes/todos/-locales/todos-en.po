@@ -13,26 +13,26 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/todos/_components/todo-form.tsx
+#: src/routes/todos/-components/todo-form.tsx
 msgid "Add"
 msgstr "Add"
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "Deleting..."
 msgstr "Deleting..."
 
-#: src/app/todos/_components/todo-form.tsx
+#: src/routes/todos/-components/todo-form.tsx
 msgid "Enter a new todo..."
 msgstr "Enter a new todo..."
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "Loading todos..."
 msgstr "Loading todos..."
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "No todos yet. Add one above!"
 msgstr "No todos yet. Add one above!"
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "Updating..."
 msgstr "Updating..."

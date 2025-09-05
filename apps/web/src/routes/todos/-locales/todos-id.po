@@ -13,26 +13,26 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/app/todos/_components/todo-form.tsx
+#: src/routes/todos/-components/todo-form.tsx
 msgid "Add"
 msgstr "Tambah"
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "Deleting..."
 msgstr "Menghapus..."
 
-#: src/app/todos/_components/todo-form.tsx
+#: src/routes/todos/-components/todo-form.tsx
 msgid "Enter a new todo..."
 msgstr "Masukkan todo baru..."
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "Loading todos..."
 msgstr "Memuat todos..."
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "No todos yet. Add one above!"
 msgstr "Belum ada todos. Tambahkan di atas!"
 
-#: src/app/todos/_components/todo-list.tsx
+#: src/routes/todos/-components/todo-list.tsx
 msgid "Updating..."
 msgstr "Memperbarui..."
