@@ -6,7 +6,7 @@ import { OpenAPIReferencePlugin } from '@orpc/openapi/plugins';
 import { onError } from '@orpc/server';
 import { ZodToJsonSchemaConverter } from '@orpc/zod/zod4';
 import { createServerFileRoute } from '@tanstack/react-start/server';
-import { createContext } from '@/lib/context';
+import { createContext } from '@/lib/orpc/context';
 import router from '@/lib/orpc/router';
 import { TodoSchema } from '@/lib/orpc/schema';
 

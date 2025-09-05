@@ -7,8 +7,8 @@ import { db } from '../db';
 import { generateUUID } from '../db/schema';
 import { account, session, user, verification } from '../db/schema/auth';
 
-const getAuthConfig = serverOnly(() =>
-  betterAuth({
+const getAuthConfig = serverOnly(() => {
+  return betterAuth({
     baseURL: env.BETTER_AUTH_URL || 'http://localhost:3000',
     database: drizzleAdapter(db, {
       provider: 'pg',
@@ -55,7 +55,7 @@ const getAuthConfig = serverOnly(() =>
         generateId: generateUUID,
       },
     },
-  })
-);
+  });
+});
 
 export const auth = getAuthConfig();

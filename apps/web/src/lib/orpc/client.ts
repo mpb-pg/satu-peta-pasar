@@ -5,7 +5,7 @@ import { createRouterClient } from '@orpc/server';
 import { createTanstackQueryUtils } from '@orpc/tanstack-query';
 import { createIsomorphicFn } from '@tanstack/react-start';
 import { getWebRequest } from '@tanstack/react-start/server';
-import { createContext } from '@/lib/context';
+import { createContext } from '@/lib/orpc/context';
 import router from '@/lib/orpc/router';
 
 const getORPCClient = createIsomorphicFn()

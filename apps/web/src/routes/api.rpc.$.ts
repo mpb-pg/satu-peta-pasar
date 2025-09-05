@@ -2,7 +2,7 @@ import '@/polyfill';
 
 import { RPCHandler } from '@orpc/server/fetch';
 import { createServerFileRoute } from '@tanstack/react-start/server';
-import { createContext } from '@/lib/context';
+import { createContext } from '@/lib/orpc/context';
 import router from '@/lib/orpc/router';
 
 const handler = new RPCHandler(router);
