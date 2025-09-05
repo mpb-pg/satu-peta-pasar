@@ -125,16 +125,16 @@ const todos = await orpc.todo.getAll.fetch({}); // oRPC
 
 ```
 apps/web/src/
-├── app/                    # 🏛️ Feature modules (Clean Architecture)
+├── routes/                 # 🏛️ Feature modules (Clean Architecture) & TanStack Router
 │   ├── auth/
-│   │   ├── _api/          # Application layer (use cases)
-│   │   ├── _domain/       # Domain layer (business rules)
-│   │   ├── _components/   # Presentation layer (UI)
+│   │   ├── -app/          # Application layer (use cases)
+│   │   ├── -domain/       # Domain layer (business rules)
+│   │   ├── -components/   # Presentation layer (UI)
 │   │   └── signin/        # Sub-features
 │   └── todos/
-│       ├── _api/          # CRUD operations
-│       ├── _domain/       # Todo validation & entities
-│       └── _components/   # Todo UI components
+│       ├── -app/          # CRUD operations
+│       ├── -domain/       # Todo validation & entities
+│       └── -components/   # Todo UI components
 ├── lib/                   # 🔧 Infrastructure layer
 │   ├── auth/             # Better Auth configuration
 │   ├── db/               # Database connection & schema
@@ -147,11 +147,11 @@ apps/web/src/
 ### Layer Dependencies
 
 ```
-Presentation (_components) 
+Presentation (-components) 
     ↓ 
-Application (_api) 
+Application (-app) 
     ↓ 
-Domain (_domain) 
+Domain (-domain) 
     ↑ 
 Infrastructure (lib/)
 ```
@@ -292,12 +292,12 @@ bun lingui:dev        # Extract and compile (development)
 
 1. **Create feature module** following Clean Architecture:
 ```bash
-mkdir -p apps/web/src/app/posts/{_api,_domain,_components,_locales}
+mkdir -p apps/web/src/routes/posts/{-app,-domain,-components,-locales}
 ```
 
-2. **Define domain entities** in `_domain/`:
+2. **Define domain entities** in `-domain/`:
 ```typescript
-// apps/web/src/app/posts/_domain/post.ts
+// apps/web/src/routes/posts/-domain/post.ts
 export interface Post {
   id: string;
   title: string;
@@ -306,9 +306,9 @@ export interface Post {
 }
 ```
 
-3. **Create API endpoints** in `_api/`:
+3. **Create API endpoints** in `-app/`:
 ```typescript
-// apps/web/src/app/posts/_api/get-posts.ts
+// apps/web/src/routes/posts/-app/get-posts.ts
 export const getPosts = publicProcedure.handler(async ({ context }) => {
   return await context.db.select().from(posts);
 });
@@ -330,21 +330,21 @@ export default {
 # Update Lingui configuration
 # Add posts catalog to lingui.config.ts catalogs array:
 {
-  path: '<rootDir>/src/app/posts/_locales/posts-{locale}',
-  include: ['src/app/posts/**'],
+  path: '<rootDir>/src/routes/posts/-locales/posts-{locale}',
+  include: ['src/routes/posts/**'],
   exclude: ['**/node_modules/**'],
 }
 
 # Update import paths in src/lib/lingui/i18n.ts:
-() => import('../../app/posts/_locales/posts-${locale}.po')
+() => import('../../routes/posts/-locales/posts-${locale}.po')
 
 # Extract translations to generate files
 bun run lingui:extract
 ```
 
-6. **Create UI components** in `_components/`:
+6. **Create UI components** in `-components/`:
 ```typescript
-// apps/web/src/app/posts/_components/post-list.tsx
+// apps/web/src/routes/posts/-components/post-list.tsx
 import { useLingui } from '@lingui/react/macro';
 
 export function PostList() {
@@ -435,11 +435,11 @@ src/
 ├── locales/                # Global translations
 │   ├── global-en.po        # Global English translations
 │   └── global-id.po        # Global Indonesian translations
-└── app/
-    ├── auth/_locales/      # Auth feature translations
+└── routes/
+    ├── auth/-locales/      # Auth feature translations
     │   ├── auth-en.po      # Auth English translations
     │   └── auth-id.po      # Auth Indonesian translations
-    └── todos/_locales/     # Todos feature translations
+    └── todos/-locales/     # Todos feature translations
         ├── todos-en.po     # Todos English translations
         └── todos-id.po     # Todos Indonesian translations
 ```
@@ -490,7 +490,7 @@ export function LoginForm() {
 - **`id`** - Indonesian
 
 **Adding New Features:**
-1. Create `_locales/` folder in your feature directory
+1. Create `-locales/` folder in your feature directory
 2. Add feature-prefixed translation files (e.g., `posts-en.po`, `posts-id.po`)
 3. Update `lingui.config.ts` catalog paths
 4. Update `src/lib/lingui/i18n.ts` import paths

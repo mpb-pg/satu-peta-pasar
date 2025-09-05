@@ -14,7 +14,7 @@ import {
 import { Slider as ShadcnSlider } from '@/components/ui/slider';
 import { Switch as ShadcnSwitch } from '@/components/ui/switch';
 import { Textarea as ShadcnTextarea } from '@/components/ui/textarea';
-import { useFieldContext, useFormContext } from '../_hooks/form-context';
+import { useFieldContext, useFormContext } from '../-hooks/form-context';
 
 export function SubscribeButton({ label }: { label: string }) {
   const form = useFormContext();

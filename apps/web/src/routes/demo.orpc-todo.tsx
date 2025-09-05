@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { TodoForm } from '@/app/todos/_components/todo-form';
-import { TodoList } from '@/app/todos/_components/todo-list';
 import { orpc } from '@/lib/orpc/client';
+import { TodoForm } from '@/routes/todos/-components/todo-form';
+import { TodoList } from '@/routes/todos/-components/todo-list';
 
 export const Route = createFileRoute('/demo/orpc-todo')({
   component: ORPCTodos,

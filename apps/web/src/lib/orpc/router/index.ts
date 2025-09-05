@@ -1,9 +1,9 @@
-import { getSession } from '@/app/auth/_api/get-session';
-import { createTodo } from '@/app/todos/_api/create-todo';
-import { deleteTodo } from '@/app/todos/_api/delete-todo';
-import { getTodos } from '@/app/todos/_api/get-todos';
-import { toggleTodo } from '@/app/todos/_api/toggle-todo';
 import { protectedProcedure, publicProcedure } from '@/lib/orpc';
+import { getSession } from '@/routes/auth/-app/get-session';
+import { createTodo } from '@/routes/todos/-app/create-todo';
+import { deleteTodo } from '@/routes/todos/-app/delete-todo';
+import { getTodos } from '@/routes/todos/-app/get-todos';
+import { toggleTodo } from '@/routes/todos/-app/toggle-todo';
 
 /**
  * Main oRPC Router

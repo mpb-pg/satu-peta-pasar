@@ -1,9 +1,9 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Check, Trash2 } from 'lucide-react';
-import type { Todo } from '@/app/todos/_domain/todo-entity';
 import { Button } from '@/components/ui/button';
 import { orpc } from '@/lib/orpc/client';
+import type { Todo } from '@/routes/todos/-domain/todo-entity';
 
 interface TodoItemProps {
   todo: Todo;
