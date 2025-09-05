@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { useAppForm } from './demo/-hooks/form';
+import { useAppForm } from './-hooks/form';
 
 // Regex patterns defined at module level for performance
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
