@@ -4,7 +4,6 @@ import { createTodo } from '@/routes/todos/-app/create-todo';
 import { deleteTodo } from '@/routes/todos/-app/delete-todo';
 import { getTodos } from '@/routes/todos/-app/get-todos';
 import { toggleTodo } from '@/routes/todos/-app/toggle-todo';
-
 /**
  * Main oRPC Router
  *
@@ -55,5 +54,11 @@ export default {
     create: createTodo,
     toggle: toggleTodo,
     delete: deleteTodo,
+  },
+
+  /**
+   * Map data feature endpoints
+   */
+  map: {
   },
 };

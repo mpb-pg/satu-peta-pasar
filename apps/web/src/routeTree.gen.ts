@@ -13,6 +13,12 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StallIndexRouteImport } from './routes/stall/index'
+import { Route as SalesRealizationIndexRouteImport } from './routes/sales-realization/index'
+import { Route as ProductPotentialIndexRouteImport } from './routes/product-potential/index'
+import { Route as ProductKnowledgeIndexRouteImport } from './routes/product-knowledge/index'
+import { Route as MapIndexRouteImport } from './routes/map/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as DemoOrpcTodoRouteImport } from './routes/demo/orpc-todo'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
@@ -32,6 +38,36 @@ const DashboardRoute = DashboardRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StallIndexRoute = StallIndexRouteImport.update({
+  id: '/stall/',
+  path: '/stall/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SalesRealizationIndexRoute = SalesRealizationIndexRouteImport.update({
+  id: '/sales-realization/',
+  path: '/sales-realization/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductPotentialIndexRoute = ProductPotentialIndexRouteImport.update({
+  id: '/product-potential/',
+  path: '/product-potential/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductKnowledgeIndexRoute = ProductKnowledgeIndexRouteImport.update({
+  id: '/product-knowledge/',
+  path: '/product-knowledge/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapIndexRoute = MapIndexRouteImport.update({
+  id: '/map/',
+  path: '/map/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoOrpcTodoRoute = DemoOrpcTodoRouteImport.update({
@@ -81,6 +117,12 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/admin': typeof AdminIndexRoute
+  '/map': typeof MapIndexRoute
+  '/product-knowledge': typeof ProductKnowledgeIndexRoute
+  '/product-potential': typeof ProductPotentialIndexRoute
+  '/sales-realization': typeof SalesRealizationIndexRoute
+  '/stall': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
@@ -90,6 +132,12 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/admin': typeof AdminIndexRoute
+  '/map': typeof MapIndexRoute
+  '/product-knowledge': typeof ProductKnowledgeIndexRoute
+  '/product-potential': typeof ProductPotentialIndexRoute
+  '/sales-realization': typeof SalesRealizationIndexRoute
+  '/stall': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
@@ -100,6 +148,12 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/admin/': typeof AdminIndexRoute
+  '/map/': typeof MapIndexRoute
+  '/product-knowledge/': typeof ProductKnowledgeIndexRoute
+  '/product-potential/': typeof ProductPotentialIndexRoute
+  '/sales-realization/': typeof SalesRealizationIndexRoute
+  '/stall/': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
 }
@@ -111,6 +165,12 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/admin'
+    | '/map'
+    | '/product-knowledge'
+    | '/product-potential'
+    | '/sales-realization'
+    | '/stall'
     | '/demo/form/address'
     | '/demo/form/simple'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +180,12 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/admin'
+    | '/map'
+    | '/product-knowledge'
+    | '/product-potential'
+    | '/sales-realization'
+    | '/stall'
     | '/demo/form/address'
     | '/demo/form/simple'
   id:
@@ -129,6 +195,12 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/admin/'
+    | '/map/'
+    | '/product-knowledge/'
+    | '/product-potential/'
+    | '/sales-realization/'
+    | '/stall/'
     | '/demo/form/address'
     | '/demo/form/simple'
   fileRoutesById: FileRoutesById
@@ -139,6 +211,12 @@ export interface RootRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
   DemoOrpcTodoRoute: typeof DemoOrpcTodoRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  MapIndexRoute: typeof MapIndexRoute
+  ProductKnowledgeIndexRoute: typeof ProductKnowledgeIndexRoute
+  ProductPotentialIndexRoute: typeof ProductPotentialIndexRoute
+  SalesRealizationIndexRoute: typeof SalesRealizationIndexRoute
+  StallIndexRoute: typeof StallIndexRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
 }
@@ -186,6 +264,48 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stall/': {
+      id: '/stall/'
+      path: '/stall'
+      fullPath: '/stall'
+      preLoaderRoute: typeof StallIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sales-realization/': {
+      id: '/sales-realization/'
+      path: '/sales-realization'
+      fullPath: '/sales-realization'
+      preLoaderRoute: typeof SalesRealizationIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product-potential/': {
+      id: '/product-potential/'
+      path: '/product-potential'
+      fullPath: '/product-potential'
+      preLoaderRoute: typeof ProductPotentialIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product-knowledge/': {
+      id: '/product-knowledge/'
+      path: '/product-knowledge'
+      fullPath: '/product-knowledge'
+      preLoaderRoute: typeof ProductKnowledgeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map/': {
+      id: '/map/'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/orpc-todo': {
@@ -257,6 +377,12 @@ const rootRouteChildren: RootRouteChildren = {
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
   DemoOrpcTodoRoute: DemoOrpcTodoRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  MapIndexRoute: MapIndexRoute,
+  ProductKnowledgeIndexRoute: ProductKnowledgeIndexRoute,
+  ProductPotentialIndexRoute: ProductPotentialIndexRoute,
+  SalesRealizationIndexRoute: SalesRealizationIndexRoute,
+  StallIndexRoute: StallIndexRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
 }

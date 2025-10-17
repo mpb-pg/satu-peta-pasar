@@ -25,16 +25,26 @@ export default function Header() {
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/orpc-todo">oRPC Todo</Link>
+          <Link to="/map">Potential Maps</Link>
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/form/simple">Simple Form</Link>
+          <Link to="/product-potential">Product Potential</Link>
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/demo/form/address">Address Form</Link>
+          <Link to="/sales-realization">Sales Realization</Link>
         </div>
+
+        <div className="px-2 font-bold">
+          <Link to="/product-knowledge">Product Knowledge</Link>
+        </div>
+
+        {/* {user?.isAdmin && ( */}
+          <div className="px-2 font-bold">
+            <Link to="/admin">Admin</Link>
+          </div>
+        {/* )} */}
       </nav>
 
       <div className="flex items-center gap-2">
