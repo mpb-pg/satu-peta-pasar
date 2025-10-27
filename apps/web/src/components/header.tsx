@@ -45,12 +45,6 @@ export default function Header() {
         <div className="px-2 font-bold">
           <Link to="/product-knowledge">Product Knowledge</Link>
         </div>
-
-        {/* {user?.isAdmin && ( */}
-          <div className="px-2 font-bold">
-            <Link to="/admin">Admin</Link>
-          </div>
-        {/* )} */}
       </nav>
 
       <div className="flex items-center gap-2">
