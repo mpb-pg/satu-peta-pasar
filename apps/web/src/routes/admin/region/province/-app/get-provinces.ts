@@ -24,11 +24,8 @@ export const getProvinces = protectedProcedure
         area: provinces.area,
       })
       .from(provinces);
-    console.log('Base query constructed');
-    console.log('Input search term:', input.search);
 
     if (input.search) {
-      console.log('Searching for provinces with term:', input.search);
       baseQuery.where(ilike(provinces.name, `%${input.search}%`));
     }
 

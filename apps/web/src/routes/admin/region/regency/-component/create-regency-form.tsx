@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,31 +9,28 @@ import { useToast } from "@/hooks/use-toast";
 import { orpc } from "@/lib/orpc/client";
 import { useAppForm } from "../-hooks/form";
 
-export function EditProvinceForm({
+export function CreateRegencyForm({
   open,
   onOpenChange,
-  provinceId,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  provinceId: string | null;
 }) {
   const queryClient = useQueryClient();
 
   const { data: province } = useQuery(
     orpc.admin.region.province.get.queryOptions({ input: {} })
   );
-  const currentProvince = province?.data.find((p) => p.id === provinceId);
 
-  const updateMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.region.province.update.call>>,
+  const createMutation = useMutation<
+    Awaited<ReturnType<typeof orpc.admin.region.regency.create.call>>,
     Error,
-    Parameters<typeof orpc.admin.region.province.update.call>[0]
+    Parameters<typeof orpc.admin.region.regency.create.call>[0]
   >({
-    mutationFn: (provinceData) => orpc.admin.region.province.update.call(provinceData),
+    mutationFn: (regencyData) => orpc.admin.region.regency.create.call(regencyData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.region.province.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.region.regency.get.queryKey({ input: {} }),
       });
     },
   });
@@ -42,12 +38,10 @@ export function EditProvinceForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      // Use empty-string fallbacks so inputs remain controlled for the
-      // lifetime of the component (avoids controlled -> uncontrolled warning)
-      code: currentProvince?.code ?? '',
-      name: currentProvince?.name ?? '',
-      // area input is a text input; normalize to empty string when absent
-      area: currentProvince?.area ?? '',
+      code: "",
+      name: "",
+      area: "",
+      provinceId: "",
     },
     validators: {
       onBlur: () => {
@@ -62,35 +56,27 @@ export function EditProvinceForm({
     },
     onSubmit: async ({ value }) => {
       try {
-        await updateMutation.mutateAsync({
-          id: currentProvince?.id as string,
-          name: value.name,
-          // Convert area string back to number, but keep undefined when empty
-          area: value.area !== '' && value.area != null ? Number(value.area) : undefined,
-        });
-        toast.success("Province updated successfully!");
+        const payload = {
+          ...value,
+          area: Number(value.area),
+        };
+
+        await createMutation.mutateAsync(payload);
+        toast.success("Regency created successfully!");
         onOpenChange(false);
         form.reset();
       } catch (error) {
-        toast.error(`Failed to update tag group: ${(error as Error).message}`);
+        toast.error(`Failed to create regency: ${(error as Error).message}`);
       }
     },
   });
 
-  useEffect(() => {
-    if (open && currentProvince) {
-      form.setFieldValue("code", currentProvince.code ?? '');
-      form.setFieldValue("name", currentProvince.name ?? '');
-      form.setFieldValue("area", currentProvince.area ?? '');
-    }
-  }, [open, currentProvince, form]);
-
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <DialogTitle>Update Province</DialogTitle>
+        <DialogTitle>Create New Regency</DialogTitle>
         <DialogDescription>
-          Update the province
+          Add a new regency
         </DialogDescription>
 
         <form
@@ -114,10 +100,34 @@ export function EditProvinceForm({
               }}
             >
               {(field) => (
-                <field.readOnlyField
-                  label="Province Code"
-                  // Ensure value is always a string to keep input controlled
-                  value={currentProvince?.code ?? ''}
+                <field.textField
+                  label="Regency Code"
+                  placeholder="ex. 99.99"
+                />
+              )}
+            </form.AppField>
+
+            <form.AppField
+              name="provinceId"
+              validators={{
+                onBlur: ({ value }) => {
+                  if (!value || value.trim().length === 0) {
+                    return "Province is required";
+                  }
+                  return;
+                },
+              }}
+            >
+              {(field) => (
+                <field.selectField
+                  label="Province"
+                  placeholder="Select a province"
+                  values={
+                    province?.data?.map((prov) => ({
+                      label: prov.name,
+                      value: prov.id,
+                    })) || []
+                  }
                 />
               )}
             </form.AppField>
@@ -127,7 +137,7 @@ export function EditProvinceForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Name is required (ex. East Java)";
+                    return "Name is required (ex. Gresik)";
                   }
                   return;
                 },
@@ -135,8 +145,8 @@ export function EditProvinceForm({
             >
               {(field) => (
                 <field.textField
-                  label="Province Name"
-                  placeholder="ex. East Java"
+                  label="Regency Name"
+                  placeholder="ex. Gresik"
                 />
               )}
             </form.AppField>
@@ -145,8 +155,8 @@ export function EditProvinceForm({
               name="area"
               validators={{
                 onBlur: ({ value }) => {
-                  if (!value) {
-                    return "Area is required";
+                  if (!value || isNaN(Number(value)) || Number(value) <= 0) {
+                    return "Area is required and must be greater than 0";
                   }
                   return;
                 },
@@ -160,9 +170,11 @@ export function EditProvinceForm({
               )}
             </form.AppField>
 
-            <div className="flex justify-end mt-7">
+            <div />
+
+            <div className="flex justify-end">
               <form.AppForm>
-                <form.subscribeButton label="Update" />
+                <form.subscribeButton label="Create" />
               </form.AppForm>
             </div>
           </div>

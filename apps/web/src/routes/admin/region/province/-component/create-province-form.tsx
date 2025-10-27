@@ -140,9 +140,7 @@ export function CreateProvinceForm({
               )}
             </form.AppField>
 
-            <div />
-
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-7">
               <form.AppForm>
                 <form.subscribeButton label="Create" />
               </form.AppForm>

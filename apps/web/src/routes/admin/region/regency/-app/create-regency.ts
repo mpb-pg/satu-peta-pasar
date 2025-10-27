@@ -1,32 +1,33 @@
 import { generateUUID } from '@/lib/db/schema';
-import { provinces } from '@/lib/db/schema/map_product';
+import { regencies } from '@/lib/db/schema/map_product';
 import { protectedProcedure } from '@/lib/orpc';
 import { ORPCError } from '@orpc/server';
-import { ProvinceSchema } from '../-domain/schema';
+import { RegencySchema } from '../-domain/schema';
 
-export const createProvince = protectedProcedure
+export const createRegency = protectedProcedure
   .input(
-    ProvinceSchema.omit({ id: true })
+    RegencySchema.omit({ id: true })
   )
   .handler(async ({ input, context }) => {
-    const newProvince = {
+    const newRegency = {
       id: generateUUID(),
       code: input.code,
       name: input.name,
+      provinceId: input.provinceId,
       area: input.area,
     };
 
     try {
-      const [createdProvince] = await context.db
-        .insert(provinces)
-        .values(newProvince)
+      const [createdRegency] = await context.db
+        .insert(regencies)
+        .values(newRegency)
         .returning();
-      return createdProvince;
+      return createdRegency;
     } catch (err) {
       const msg = (err as any)?.message ?? String(err);
       // Convert common unique constraint DB errors into a friendly ORPCError
       if (msg.toLowerCase().includes('unique') || msg.toLowerCase().includes('duplicate')) {
-        throw new ORPCError('CONFLICT', { message: 'Province code already exists' });
+        throw new ORPCError('CONFLICT', { message: 'Regency code already exists' });
       }
       // Re-throw generic internal server error
       throw err;

@@ -9,28 +9,28 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { orpc } from "@/lib/orpc/client";
 
-export function DeleteProvinceForm({
+export function DeleteRegencyForm({
   open,
   onOpenChange,
-  province,
+  regency,
   onDelete,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  province: { id: string; code: string; name: string } | null;
+  regency: { id: string; code: string; name: string } | null;
   onDelete: (tagGroupId: string) => void;
 }) {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.region.province.delete.call>>,
+    Awaited<ReturnType<typeof orpc.admin.region.regency.delete.call>>,
     Error,
-    Parameters<typeof orpc.admin.region.province.delete.call>[0]
+    Parameters<typeof orpc.admin.region.regency.delete.call>[0]
   >({
-    mutationFn: (provinceData) => orpc.admin.region.province.delete.call(provinceData),
+    mutationFn: (regencyData) => orpc.admin.region.regency.delete.call(regencyData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.region.province.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.region.regency.get.queryKey({ input: {} }),
       });
     },
   });
@@ -40,16 +40,16 @@ export function DeleteProvinceForm({
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>
-          Are you sure you want to delete this province?
+          Are you sure you want to delete this regency?
         </DialogTitle>
         <DialogDescription>This action cannot be undone.</DialogDescription>
 
         <div className="mt-4">
           <p>
-            <strong>Province Code:</strong> {province?.code}
+            <strong>Regency Code:</strong> {regency?.code}
           </p>
           <p>
-            <strong>Province Name:</strong> {province?.name}
+            <strong>Regency Name:</strong> {regency?.name}
           </p>
         </div>
 
@@ -61,15 +61,15 @@ export function DeleteProvinceForm({
           <Button
             onClick={async () => {
               try {
-                if (province) {
-                  await deleteMutation.mutateAsync({ id: province.id });
-                  toast.success("Province deleted successfully!");
-                  onDelete(province.id);
+                if (regency) {
+                  await deleteMutation.mutateAsync({ id: regency.id });
+                  toast.success("Regency deleted successfully!");
+                  onDelete(regency.id);
                   onOpenChange(false);
                 }
               } catch (error) {
                 toast.error(
-                  `Failed to delete province: ${(error as Error).message}`
+                  `Failed to delete regency: ${(error as Error).message}`
                 );
               }
             }}
