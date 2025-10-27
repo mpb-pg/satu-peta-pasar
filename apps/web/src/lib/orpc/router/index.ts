@@ -1,4 +1,8 @@
 import { protectedProcedure, publicProcedure } from '@/lib/orpc';
+import { getCommodityTypes } from '@/routes/admin/commofity/commodity-type/-app/get-commodity-types';
+import { getLandTypes } from '@/routes/admin/land/land-type/-app/get-land-types';
+import { getProductBrands } from '@/routes/admin/product/product-brand/-app/get-product-brands';
+import { getProductTypes } from '@/routes/admin/product/product-type/-app/get-product-types';
 import { createProvince } from '@/routes/admin/region/province/-app/create-province';
 import { deleteProvince } from '@/routes/admin/region/province/-app/delete-province';
 import { getProvinces } from '@/routes/admin/region/province/-app/get-provinces';
@@ -85,5 +89,23 @@ export default {
         delete: deleteRegency,
       },
     },
+    land: {
+      land_type: {
+        get: getLandTypes,
+      },
+    },
+    commodity: {
+      commodity_type: {
+        get: getCommodityTypes,
+      },
+    },
+    product: {
+      product_type: {
+        get: getProductTypes,
+      },
+      product_brand: {
+        get: getProductBrands,
+      },
+    }
   }
 };
