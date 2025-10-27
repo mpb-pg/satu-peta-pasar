@@ -12,6 +12,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StallIndexRouteImport } from './routes/stall/index'
 import { Route as SalesRealizationIndexRouteImport } from './routes/sales-realization/index'
@@ -24,6 +25,8 @@ import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
+import { Route as AdminRegionRegencyIndexRouteImport } from './routes/admin/region/regency/index'
+import { Route as AdminRegionProvinceIndexRouteImport } from './routes/admin/region/province/index'
 import { ServerRoute as ApiSplatServerRouteImport } from './routes/api/$'
 import { ServerRoute as ApiRpcSplatServerRouteImport } from './routes/api/rpc.$'
 import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api/auth.$'
@@ -33,6 +36,11 @@ const rootServerRouteImport = createServerRootRoute()
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -66,9 +74,9 @@ const MapIndexRoute = MapIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/admin/',
-  path: '/admin/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
 const DemoOrpcTodoRoute = DemoOrpcTodoRouteImport.update({
   id: '/demo/orpc-todo',
@@ -95,6 +103,17 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
   path: '/demo/form/address',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRegionRegencyIndexRoute = AdminRegionRegencyIndexRouteImport.update({
+  id: '/region/regency/',
+  path: '/region/regency/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminRegionProvinceIndexRoute =
+  AdminRegionProvinceIndexRouteImport.update({
+    id: '/region/province/',
+    path: '/region/province/',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
 const ApiSplatServerRoute = ApiSplatServerRouteImport.update({
   id: '/api/$',
   path: '/api/$',
@@ -113,11 +132,12 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
-  '/admin': typeof AdminIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/map': typeof MapIndexRoute
   '/product-knowledge': typeof ProductKnowledgeIndexRoute
   '/product-potential': typeof ProductPotentialIndexRoute
@@ -125,6 +145,8 @@ export interface FileRoutesByFullPath {
   '/stall': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/admin/region/province': typeof AdminRegionProvinceIndexRoute
+  '/admin/region/regency': typeof AdminRegionRegencyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -140,10 +162,13 @@ export interface FileRoutesByTo {
   '/stall': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/admin/region/province': typeof AdminRegionProvinceIndexRoute
+  '/admin/region/regency': typeof AdminRegionRegencyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -156,16 +181,19 @@ export interface FileRoutesById {
   '/stall/': typeof StallIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/admin/region/province/': typeof AdminRegionProvinceIndexRoute
+  '/admin/region/regency/': typeof AdminRegionRegencyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/dashboard'
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
-    | '/admin'
+    | '/admin/'
     | '/map'
     | '/product-knowledge'
     | '/product-potential'
@@ -173,6 +201,8 @@ export interface FileRouteTypes {
     | '/stall'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/admin/region/province'
+    | '/admin/region/regency'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -188,9 +218,12 @@ export interface FileRouteTypes {
     | '/stall'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/admin/region/province'
+    | '/admin/region/regency'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/dashboard'
     | '/auth/login'
     | '/auth/signup'
@@ -203,15 +236,17 @@ export interface FileRouteTypes {
     | '/stall/'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/admin/region/province/'
+    | '/admin/region/regency/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
   DemoOrpcTodoRoute: typeof DemoOrpcTodoRoute
-  AdminIndexRoute: typeof AdminIndexRoute
   MapIndexRoute: typeof MapIndexRoute
   ProductKnowledgeIndexRoute: typeof ProductKnowledgeIndexRoute
   ProductPotentialIndexRoute: typeof ProductPotentialIndexRoute
@@ -259,6 +294,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -303,10 +345,10 @@ declare module '@tanstack/react-router' {
     }
     '/admin/': {
       id: '/admin/'
-      path: '/admin'
-      fullPath: '/admin'
+      path: '/'
+      fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminRouteRoute
     }
     '/demo/orpc-todo': {
       id: '/demo/orpc-todo'
@@ -343,6 +385,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoFormAddressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/region/regency/': {
+      id: '/admin/region/regency/'
+      path: '/region/regency'
+      fullPath: '/admin/region/regency'
+      preLoaderRoute: typeof AdminRegionRegencyIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/region/province/': {
+      id: '/admin/region/province/'
+      path: '/region/province'
+      fullPath: '/admin/region/province'
+      preLoaderRoute: typeof AdminRegionProvinceIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
   }
 }
 declare module '@tanstack/react-start/server' {
@@ -371,13 +427,29 @@ declare module '@tanstack/react-start/server' {
   }
 }
 
+interface AdminRouteRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminRegionProvinceIndexRoute: typeof AdminRegionProvinceIndexRoute
+  AdminRegionRegencyIndexRoute: typeof AdminRegionRegencyIndexRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+  AdminRegionProvinceIndexRoute: AdminRegionProvinceIndexRoute,
+  AdminRegionRegencyIndexRoute: AdminRegionRegencyIndexRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
   DashboardRoute: DashboardRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
   DemoOrpcTodoRoute: DemoOrpcTodoRoute,
-  AdminIndexRoute: AdminIndexRoute,
   MapIndexRoute: MapIndexRoute,
   ProductKnowledgeIndexRoute: ProductKnowledgeIndexRoute,
   ProductPotentialIndexRoute: ProductPotentialIndexRoute,

@@ -39,23 +39,19 @@ export default function Header() {
         <div className="px-2 font-bold">
           <Link to="/product-knowledge">Product Knowledge</Link>
         </div>
-
-        {/* {user?.isAdmin && ( */}
-          <div className="px-2 font-bold">
-            <Link to="/admin">Admin</Link>
-          </div>
-        {/* )} */}
       </nav>
 
       <div className="flex items-center gap-2">
         <LanguageSwitcher />
         {user ? (
           <>
-            <Link to="/dashboard">
-              <Button size="sm" variant="ghost">
-                Dashboard
-              </Button>
-            </Link>
+            {/* {user.isAdmin && ( */}
+              <Link to="/admin">
+                <Button size="sm" variant="ghost">
+                  Admin Panel
+                </Button>
+              </Link>
+            {/* )} */}
             <span className="text-sm">Welcome, {user.name}!</span>
             <Button onClick={handleSignOut} size="sm" variant="outline">
               Sign Out

@@ -6,6 +6,7 @@ import {
   Outlet,
   retainSearchParams,
   Scripts,
+  useMatches,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { z } from 'zod';
@@ -81,6 +82,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument() {
   const { i18n } = Route.useRouteContext();
+  const matches = useMatches();
+  const isAdminRoute = matches.some((match) => match.pathname.startsWith('/admin'));
 
   return (
     <html lang={i18n.locale}>
@@ -89,7 +92,7 @@ function RootDocument() {
         <HeadContent />
       </head>
       <body>
-        <Header />
+        {!isAdminRoute && <Header />}
         <Outlet />
         <TanStackRouterDevtools />
         <TanStackQueryLayout />

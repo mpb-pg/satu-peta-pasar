@@ -1,4 +1,13 @@
 import { protectedProcedure, publicProcedure } from '@/lib/orpc';
+import { createProvince } from '@/routes/admin/region/province/-app/create-province';
+import { deleteProvince } from '@/routes/admin/region/province/-app/delete-province';
+import { getProvinces } from '@/routes/admin/region/province/-app/get-provinces';
+import { updateProvince } from '@/routes/admin/region/province/-app/update-province';
+// import { createRegency } from '@/routes/map/region/regency/-app/create-regency';
+// import { deleteRegency } from '@/routes/map/region/regency/-app/delete-regency';
+// import { getAllRegencies } from '@/routes/map/region/regency/-app/get-all-regencies';
+// import { getRegencies } from '@/routes/map/region/regency/-app/get-regencies';
+// import { updateRegency } from '@/routes/map/region/regency/-app/update-regency';
 import { getSession } from '@/routes/auth/-app/get-session';
 import { createTodo } from '@/routes/todos/-app/create-todo';
 import { deleteTodo } from '@/routes/todos/-app/delete-todo';
@@ -61,4 +70,15 @@ export default {
    */
   map: {
   },
+
+  admin: {
+    region: {
+      province: {
+        get: getProvinces,
+        create: createProvince,
+        update: updateProvince,
+        delete: deleteProvince,
+      },
+    },
+  }
 };
