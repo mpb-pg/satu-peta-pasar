@@ -14,7 +14,7 @@ interface MapViewState {
 
 interface FilterCriteria {
   productTypes?: string[];
-  // productBrands?: string[];
+  productBrands?: string[];
   landTypes?: string[];
   commodityTypes?: string[];
   timeRange?: { start: Date; end: Date };
@@ -24,7 +24,6 @@ interface FilterCriteria {
 interface MarketingMapProps {
   productData?: any[];
   administrativeLevel?: AdministrativeLevel;
-  selectedProductBrand?: string;
   filters?: FilterCriteria;
   onMapViewChange?: (viewState: MapViewState) => void;
   onProductBrandChange?: (brand: string) => void;
@@ -32,9 +31,7 @@ interface MarketingMapProps {
 }
 
 const MarketingMap: React.FC<MarketingMapProps> = ({
-  productData = [],
   administrativeLevel = 'national',
-  selectedProductBrand,
   filters = {},
   onMapViewChange,
   onProductBrandChange,
@@ -43,7 +40,7 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
   const [currentLevel, setCurrentLevel] =
     useState<AdministrativeLevel>(administrativeLevel);
   const [selectedBrand, setSelectedBrand] = useState<string | undefined>(
-    selectedProductBrand
+    filters.productBrands ? filters.productBrands[0] : undefined
   );
   const [selectedLandType, setSelectedLandType] = useState<string | undefined>(
     filters.landTypes ? filters.landTypes[0] : undefined
@@ -68,6 +65,11 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
   const { data: commodityTypes } = useQuery(
     orpc.admin.commodity.commodity_type.get.queryOptions({ input: {} })
   );
+  const filteredCommodityTypes = selectedLandType
+    ? commodityTypes?.data.filter(
+        (ct) => ct.landTypeId === selectedLandType
+      )
+    : commodityTypes?.data;
 
   useEffect(() => {
     const loadProvinces = async () => {
@@ -253,7 +255,7 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
             }}
             value={selectedBrand}
           >
-            <SelectTrigger>
+            <SelectTrigger className="w-full rounded">
               <SelectValue placeholder="Select a Product Brand" />
             </SelectTrigger>
             <SelectContent>
@@ -273,10 +275,11 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
           <Select
             onValueChange={(value) => {
               handleLandTypeChange(value);
+              setSelectedLandType(value);
             }}
             value={selectedLandType}
           >
-            <SelectTrigger>
+            <SelectTrigger className="w-full rounded">
               <SelectValue placeholder="Select a Land Type" />
             </SelectTrigger>
             <SelectContent>
@@ -299,11 +302,11 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
             }}
             value={selectedCommodityType}
           >
-            <SelectTrigger>
+            <SelectTrigger className="w-full rounded">
               <SelectValue placeholder="Select a Commodity Type" />
             </SelectTrigger>
             <SelectContent>
-              {commodityTypes?.data.map((commodityType) => (
+              {filteredCommodityTypes?.map((commodityType) => (
                 <SelectItem key={commodityType.id} value={commodityType.id}>
                   {commodityType.name}
                 </SelectItem>
