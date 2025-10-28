@@ -40,11 +40,11 @@ export const marketingMapNavigationItems: NavigationItem[] = [
       },
       {
         title: "Province Land",
-        url: "/admin/land/province",
+        url: "/admin/land/province-land",
       },
       {
         title: "Regency Land",
-        url: "/admin/land/regency",
+        url: "/admin/land/regency-land",
       },
     ],
   },
@@ -59,11 +59,11 @@ export const marketingMapNavigationItems: NavigationItem[] = [
       },
       {
         title: "Province Commodity",
-        url: "/admin/commodity/province",
+        url: "/admin/commodity/province-commodity",
       },
       {
         title: "Regency Commodity",
-        url: "/admin/commodity/regency",
+        url: "/admin/commodity/regency-commodity",
       },
     ],
   },
@@ -78,11 +78,11 @@ export const marketingMapNavigationItems: NavigationItem[] = [
       },
       {
         title: "Product Brand",
-        url: "/admin/product/brand",
+        url: "/admin/product/product-brand",
       },
       {
         title: "Product Dosage",
-        url: "/admin/product/dosage",
+        url: "/admin/product/product-dosage",
       },
     ],
   },
@@ -100,7 +100,7 @@ export const saleNavigationItems: NavigationItem[] = [
       },
       {
         title: "Daily Sales",
-        url: "/admin/sale/daily",
+        url: "/admin/sale/sale-daily",
       }
     ]
   },
