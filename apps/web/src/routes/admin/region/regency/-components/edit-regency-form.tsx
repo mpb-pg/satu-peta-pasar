@@ -25,10 +25,10 @@ export function EditRegencyForm({
     orpc.admin.region.province.get.queryOptions({ input: {} })
   );
 
-  const { data: regency } = useQuery(
+  const { data: regencies } = useQuery(
     orpc.admin.region.regency.get.queryOptions({ input: {} })
   );
-  const currentRegency = regency?.data.find((r) => r.id === regencyId);
+  const currentRegency = regencies?.data.find((r) => r.id === regencyId);
 
   const updateMutation = useMutation<
     Awaited<ReturnType<typeof orpc.admin.region.regency.update.call>>,

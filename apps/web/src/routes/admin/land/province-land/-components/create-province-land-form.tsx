@@ -1,15 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { orpc } from "@/lib/orpc/client";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAppForm } from "../-hooks/form";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
-export function CreateRegencyForm({
+export function CreateProvinceLandForm({
   open,
   onOpenChange,
 }: {
@@ -22,15 +17,20 @@ export function CreateRegencyForm({
     orpc.admin.region.province.get.queryOptions({ input: {} })
   );
 
+  const { data: landTypes } = useQuery(
+    orpc.admin.land.land_type.get.queryOptions({ input: {} })
+  );
+
   const createMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.region.regency.create.call>>,
+    Awaited<ReturnType<typeof orpc.admin.land.province_land.create.call>>,
     Error,
-    Parameters<typeof orpc.admin.region.regency.create.call>[0]
+    Parameters<typeof orpc.admin.land.province_land.create.call>[0]
   >({
-    mutationFn: (regencyData) => orpc.admin.region.regency.create.call(regencyData),
+    mutationFn: (provinceLandData) =>
+      orpc.admin.land.province_land.create.call(provinceLandData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.region.regency.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.land.province_land.get.queryKey({ input: {} }),
       });
     },
   });
@@ -38,10 +38,9 @@ export function CreateRegencyForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      code: "",
-      name: "",
-      area: "",
       provinceId: "",
+      landTypeId: "",
+      area: 0,
     },
     validators: {
       onBlur: () => {
@@ -56,28 +55,23 @@ export function CreateRegencyForm({
     },
     onSubmit: async ({ value }) => {
       try {
-        const payload = {
+        await createMutation.mutateAsync({
           ...value,
           area: Number(value.area),
-        };
-
-        await createMutation.mutateAsync(payload);
-        toast.success("Regency created successfully!");
+        });
+        toast.success("Province land created successfully!");
         onOpenChange(false);
-        form.reset();
       } catch (error) {
-        toast.error(`Failed to create regency: ${(error as Error).message}`);
+        toast.error("Failed to create province land.");
       }
-    },
+    }
   });
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <DialogTitle>Create New Regency</DialogTitle>
-        <DialogDescription>
-          Add a new regency
-        </DialogDescription>
+        <DialogTitle>Create Province Land</DialogTitle>
+        <DialogDescription>Add a new province land</DialogDescription>
 
         <form
           className="space-y-4"
@@ -87,26 +81,7 @@ export function CreateRegencyForm({
             form.handleSubmit();
           }}
         >
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <form.AppField
-              name="code"
-              validators={{
-                onBlur: ({ value }) => {
-                  if (!value || value.trim().length === 0) {
-                    return "Code is required";
-                  }
-                  return;
-                },
-              }}
-            >
-              {(field) => (
-                <field.textField
-                  label="Regency Code"
-                  placeholder="ex. 99.99"
-                />
-              )}
-            </form.AppField>
-
+          <div className="grid grid-col-1 gap-4 md:grid-cols-2">
             <form.AppField
               name="provinceId"
               validators={{
@@ -133,20 +108,26 @@ export function CreateRegencyForm({
             </form.AppField>
 
             <form.AppField
-              name="name"
+              name="landTypeId"
               validators={{
                 onBlur: ({ value }) => {
-                  if (!value || value.trim().length === 0) {
-                    return "Name is required (ex. Gresik)";
+                  if(!value || value.trim().length === 0) {
+                    return "Land type is required";
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField
-                  label="Regency Name"
-                  placeholder="ex. Gresik"
+                <field.selectField
+                  label="Land Type"
+                  placeholder="Select a land type"
+                  values={
+                    landTypes?.data?.map((lt) => ({
+                      label: lt.name,
+                      value: lt.id,
+                    })) || []
+                  }
                 />
               )}
             </form.AppField>
@@ -155,22 +136,20 @@ export function CreateRegencyForm({
               name="area"
               validators={{
                 onBlur: ({ value }) => {
-                  if (!value || isNaN(Number(value)) || Number(value) <= 0) {
-                    return "Area is required and must be greater than 0";
+                  if (isNaN(Number(value)) || Number(value) < 0) {
+                    return "Area must be a non-negative number";
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField 
-                  label="Area"
-                  placeholder="ex. 100000"
+                <field.textField
+                  label="Area (km²)"
+                  placeholder="Enter area in square kilometers"
                 />
               )}
             </form.AppField>
-
-            <div />
 
             <div className="flex justify-end">
               <form.AppForm>
@@ -181,5 +160,5 @@ export function CreateRegencyForm({
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

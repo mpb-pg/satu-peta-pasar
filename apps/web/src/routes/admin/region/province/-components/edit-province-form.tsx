@@ -21,10 +21,10 @@ export function EditProvinceForm({
 }) {
   const queryClient = useQueryClient();
 
-  const { data: province } = useQuery(
+  const { data: provinces } = useQuery(
     orpc.admin.region.province.get.queryOptions({ input: {} })
   );
-  const currentProvince = province?.data.find((p) => p.id === provinceId);
+  const currentProvince = provinces?.data.find((p) => p.id === provinceId);
 
   const updateMutation = useMutation<
     Awaited<ReturnType<typeof orpc.admin.region.province.update.call>>,
