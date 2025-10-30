@@ -6,9 +6,9 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Edit, Plus, Search, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { z } from 'zod'
-import { CreateProvinceForm } from './-component/create-province-form'
-import { EditProvinceForm } from './-component/edit-province-form'
-import { DeleteProvinceForm } from './-component/delete-province-form'
+import { CreateProvinceForm } from './-components/create-province-form'
+import { EditProvinceForm } from './-components/edit-province-form'
+import { DeleteProvinceForm } from './-components/delete-province-form'
 
 type ProvinceListItem = {
   id: string

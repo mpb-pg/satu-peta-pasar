@@ -7,7 +7,7 @@ import {
   Switch as switchField,
   TextArea as textArea,
   TextField as textField,
-} from "@/routes/admin/region/regency/-component/form-components";
+} from "@/routes/admin/region/regency/-components/form-components";
 import {
   fieldContext,
   formContext,

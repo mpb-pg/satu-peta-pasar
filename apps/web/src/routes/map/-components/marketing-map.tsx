@@ -1,7 +1,7 @@
 import type React from 'react';
 import { useState, useEffect } from 'react';
-import { AdministrativeBoundariesService, type AdministrativeLevel } from '../../lib/services/AdministrativeBoundariesService';
-import DynamicMap from './-component/DynamicMap';
+import { AdministrativeBoundariesService, type AdministrativeLevel } from '../../../lib/services/AdministrativeBoundariesService';
+import DynamicMap from './DynamicMap';
 import { orpc } from '@/lib/orpc/client';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useQuery } from '@tanstack/react-query';

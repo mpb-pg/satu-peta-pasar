@@ -6,9 +6,9 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Edit, Plus, Search, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import z from 'zod'
-import { CreateRegencyForm } from './-component/create-regency-form'
-import { EditRegencyForm } from './-component/edit-regency-form'
-import { DeleteRegencyForm } from './-component/delete-regency-form'
+import { CreateRegencyForm } from './-components/create-regency-form'
+import { EditRegencyForm } from './-components/edit-regency-form'
+import { DeleteRegencyForm } from './-components/delete-regency-form'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 type RegencyListItem = {
