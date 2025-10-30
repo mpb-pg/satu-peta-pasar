@@ -27,6 +27,9 @@ import { createTodo } from '@/routes/todos/-app/create-todo';
 import { deleteTodo } from '@/routes/todos/-app/delete-todo';
 import { getTodos } from '@/routes/todos/-app/get-todos';
 import { toggleTodo } from '@/routes/todos/-app/toggle-todo';
+import { createLandType } from '@/routes/admin/land/-app/create-land-type';
+import { updateLandType } from '@/routes/admin/land/-app/update-land-type';
+import { deleteLandType } from '@/routes/admin/land/-app/delete-land-type';
 /**
  * Main oRPC Router
  *
