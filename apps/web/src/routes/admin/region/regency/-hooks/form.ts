@@ -7,11 +7,11 @@ import {
   Switch as switchField,
   TextArea as textArea,
   TextField as textField,
-} from "@/routes/admin/region/regency/-components/form-components";
+} from "@/routes/admin/-components/form-components";
 import {
   fieldContext,
   formContext,
-} from "@/routes/admin/region/regency/-hooks/form-context";
+} from "@/routes/admin/-hooks/form-context";
 
 export const { useAppForm } = createFormHook({
   fieldComponents: {
