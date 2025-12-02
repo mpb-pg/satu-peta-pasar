@@ -34,6 +34,7 @@ import { getProvinceLands } from '@/routes/admin/land/province-land/-app/get-pro
 import { createProvinceLand } from '@/routes/admin/land/province-land/-app/create-province-land';
 import { updateProvinceLand } from '@/routes/admin/land/province-land/-app/update-province-land';
 import { deleteProvinceLand } from '@/routes/admin/land/province-land/-app/delete-province-land';
+import { getProvincePotentials } from '@/routes/admin/potential/province_potential/-app/get-province-potentials';
 /**
  * Main oRPC Router
  *

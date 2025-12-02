@@ -59,6 +59,13 @@ export const getProvinceLands = protectedProcedure
         ? query.limit(limit).offset(offset)
         : query.offset(offset);
 
+    const query = baseQuery.where(and(...conditions)).orderBy(provinces.name);
+
+    const finalQuery =
+      limit !== undefined
+        ? query.limit(limit).offset(offset)
+        : query.offset(offset);
+
     return {
       data: await finalQuery,
     };
