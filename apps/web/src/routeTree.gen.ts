@@ -12,6 +12,7 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as MapRouteRouteImport } from './routes/map/route'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StallIndexRouteImport } from './routes/stall/index'
@@ -51,6 +52,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MapRouteRoute = MapRouteRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRouteRoute = AdminRouteRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -82,9 +88,9 @@ const ProductKnowledgeIndexRoute = ProductKnowledgeIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const MapIndexRoute = MapIndexRouteImport.update({
-  id: '/map/',
-  path: '/map/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => MapRouteRoute,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
@@ -218,12 +224,13 @@ const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
+  '/map': typeof MapRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
   '/admin/': typeof AdminIndexRoute
-  '/map': typeof MapIndexRoute
+  '/map/': typeof MapIndexRoute
   '/product-knowledge': typeof ProductKnowledgeIndexRoute
   '/product-potential': typeof ProductPotentialIndexRoute
   '/sales-realization': typeof SalesRealizationIndexRoute
@@ -280,6 +287,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
+  '/map': typeof MapRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -313,12 +321,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/map'
     | '/dashboard'
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
     | '/admin/'
-    | '/map'
+    | '/map/'
     | '/product-knowledge'
     | '/product-potential'
     | '/sales-realization'
@@ -374,6 +383,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/map'
     | '/dashboard'
     | '/auth/login'
     | '/auth/signup'
@@ -406,11 +416,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  MapRouteRoute: typeof MapRouteRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
   DemoOrpcTodoRoute: typeof DemoOrpcTodoRoute
-  MapIndexRoute: typeof MapIndexRoute
   ProductKnowledgeIndexRoute: typeof ProductKnowledgeIndexRoute
   ProductPotentialIndexRoute: typeof ProductPotentialIndexRoute
   SalesRealizationIndexRoute: typeof SalesRealizationIndexRoute
@@ -457,6 +467,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -501,10 +518,10 @@ declare module '@tanstack/react-router' {
     }
     '/map/': {
       id: '/map/'
-      path: '/map'
-      fullPath: '/map'
+      path: '/'
+      fullPath: '/map/'
       preLoaderRoute: typeof MapIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof MapRouteRoute
     }
     '/admin/': {
       id: '/admin/'
@@ -725,14 +742,26 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
   AdminRouteRouteChildren,
 )
 
+interface MapRouteRouteChildren {
+  MapIndexRoute: typeof MapIndexRoute
+}
+
+const MapRouteRouteChildren: MapRouteRouteChildren = {
+  MapIndexRoute: MapIndexRoute,
+}
+
+const MapRouteRouteWithChildren = MapRouteRoute._addFileChildren(
+  MapRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
+  MapRouteRoute: MapRouteRouteWithChildren,
   DashboardRoute: DashboardRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
   DemoOrpcTodoRoute: DemoOrpcTodoRoute,
-  MapIndexRoute: MapIndexRoute,
   ProductKnowledgeIndexRoute: ProductKnowledgeIndexRoute,
   ProductPotentialIndexRoute: ProductPotentialIndexRoute,
   SalesRealizationIndexRoute: SalesRealizationIndexRoute,

@@ -1,6 +1,6 @@
 import { landTypes, provinceLands, provinces } from "@/lib/db/schema/map_product";
 import { protectedProcedure } from "@/lib/orpc";
-import { and, asc, eq } from "drizzle-orm";
+import { and, asc, eq, or } from "drizzle-orm";
 import z from "zod";
 
 export const getProvinceLands = protectedProcedure
@@ -10,6 +10,7 @@ export const getProvinceLands = protectedProcedure
       limit: z.number().optional(),
       search: z.string().optional(),
       provinceId: z.string().optional(),
+      landTypeId: z.string().optional(),
     })
   )
   .handler(async ({ input, context }) => {
@@ -21,6 +22,7 @@ export const getProvinceLands = protectedProcedure
       .select({
         id: provinceLands.id,
         provinceId: provinceLands.provinceId,
+        provinceCode: provinces.code,
         provinceName: provinces.name,
         landTypeId: provinceLands.landTypeId,
         landTypeName: landTypes.name,
@@ -34,8 +36,14 @@ export const getProvinceLands = protectedProcedure
     if (input.provinceId) {
       conditions.push(eq(provinceLands.provinceId, input.provinceId));
     }
+    if (input.landTypeId) {
+      conditions.push(eq(provinceLands.landTypeId, input.landTypeId));
+    }
     if (input.search) {
-      conditions.push(eq(provinces.name, `%${input.search}%`));
+      conditions.push(or(
+        eq(provinces.name, `%${input.search}%`),
+        eq(landTypes.name, `%${input.search}%`)
+      ));
     }
 
     return {

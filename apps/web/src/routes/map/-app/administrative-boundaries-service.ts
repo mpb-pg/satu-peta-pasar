@@ -1,5 +1,5 @@
 import type { FeatureCollection, Feature } from 'geojson';
-import { orpc } from '../orpc/client';
+import { orpc } from '../../../lib/orpc/client';
 
 export type AdministrativeLevel = 'national' | 'province' | 'regency';
 

@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, useMap, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { AdministrativeBoundariesService, type AdministrativeLevel } from '../../../lib/services/AdministrativeBoundariesService';
+import { AdministrativeBoundariesService, type AdministrativeLevel } from '../-app/administrative-boundaries-service';
+import ChoroplethMap from './ChoroplethMap';
 import { loadProvinceGeoJSON, loadRegencyGeoJSON } from '../../../lib/utils/geojson-utils';
 
 // Fix for default marker icons in Leaflet with React
@@ -34,6 +35,8 @@ interface FilterCriteria {
 interface DynamicMapProps {
   administrativeLevel: AdministrativeLevel;
   selectedProductBrand?: string;
+  selectedLandType?: string;
+  selectedCommodityType?: string;
   filters?: FilterCriteria;
   onMapViewChange?: (viewState: MapViewState) => void;
 }
@@ -147,18 +150,25 @@ const BoundaryDisplay: React.FC<{
 const DynamicMap: React.FC<DynamicMapProps> = ({
   administrativeLevel,
   selectedProductBrand,
+  selectedLandType,
+  selectedCommodityType,
   filters,
   onMapViewChange,
 }) => {
+  console.log('DynamicMap props:', { administrativeLevel, selectedProductBrand, filters });
   // Default to center of Indonesia
   const center: [number, number] = [-0.7893, 113.9213];
   const zoom =
     administrativeLevel === 'national'
-      ? 5
+      ? 7
       : administrativeLevel === 'province'
         ? 7
         : 10;
 
+  console.log('administrativeLevel', administrativeLevel);
+  console.log('filters', filters);
+  console.log('center', center);
+  console.log('zoom', zoom);
   // Extract administrative code from filters if available
   let administrativeCode: string | undefined;
   if (administrativeLevel !== 'national' && filters?.administrativeRegion) {
@@ -182,6 +192,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
         administrativeLevel={administrativeLevel} 
         administrativeBoundaryCode={administrativeCode}
       />
+      <ChoroplethMap productBrandId={selectedProductBrand} landTypeId={selectedLandType} commodityTypeId={selectedCommodityType} />
       <MapViewHandler onMapViewChange={onMapViewChange} />
     </MapContainer>
   );

@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between gap-2 bg-white p-2 text-black">
+    <header className="flex justify-between gap-2 bg-white p-2 text-black border-amber-950 border-b shadow-md">
       <nav className="flex flex-row">
         <div className="px-2 font-bold">
           <Link to="/">Home</Link>

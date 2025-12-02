@@ -23,6 +23,7 @@ import { getProvinceLands } from '@/routes/admin/land/province-land/-app/get-pro
 import { createProvinceLand } from '@/routes/admin/land/province-land/-app/create-province-land';
 import { updateProvinceLand } from '@/routes/admin/land/province-land/-app/update-province-land';
 import { deleteProvinceLand } from '@/routes/admin/land/province-land/-app/delete-province-land';
+import { getProvincePotentials } from '@/routes/admin/potential/province_potential/-app/get-province-potentials';
 /**
  * Main oRPC Router
  *
@@ -108,13 +109,50 @@ export default {
         create: createProvinceLand,
         update: updateProvinceLand,
         delete: deleteProvinceLand,
+      },
+      regency_land: {
+        // get: getRegencyLands,
+        // create: createRegencyLand,
+        // update: updateRegencyLand,
+        // delete: deleteRegencyLand,
       }
     },
     commodity: {
       commodity_type: {
         get: getCommodityTypes,
+        // createCommodityTypes,
+        // updateCommodityTypes,
+        // deleteCommodityTypes,
       },
+      province_commodity: {
+        // getProvinceCommodities,
+        // createProvinceCommodity,
+        // updateProvinceCommodity,
+        // deleteProvinceCommodity,
+      },
+      regency_commodity: {
+        // getRegencyCommodities,
+        // createRegencyCommodity,
+        // updateRegencyCommodity,
+        // deleteRegencyCommodity,
+      }
     },
+    potential: {
+      province_potential: {
+        get: getProvincePotentials,
+        // createProvincePotential,
+        // updateProvincePotential,
+        // deleteProvincePotential,
+      },
+      regency_potential: {
+        // getRegencyPotentials,
+        // createRegencyPotential,
+        // updateRegencyPotential,
+        // deleteRegencyPotential,
+      }
+    },
+
+
     product: {
       product_type: {
         get: getProductTypes,
