@@ -1,11 +1,11 @@
-import type { LucideIcon } from "lucide-react";
+import type { LucideIcon } from 'lucide-react';
 
 // User data types
 export type User = {
   id: string;
   name: string;
   email: string;
-  role: "admin" | "user";
+  role: 'admin' | 'user';
   avatar?: string;
 };
 

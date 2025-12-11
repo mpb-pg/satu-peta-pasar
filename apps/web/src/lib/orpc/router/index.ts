@@ -1,8 +1,17 @@
 import { protectedProcedure, publicProcedure } from '@/lib/orpc';
 import { getCommodityTypes } from '@/routes/admin/commodity/-app/get-commodity-types';
+import { getProvinceCommodities } from '@/routes/admin/commodity/province-commodity/-app/get-province-commodities';
+import { createLandType } from '@/routes/admin/land/-app/create-land-type';
+import { deleteLandType } from '@/routes/admin/land/-app/delete-land-type';
 import { getLandTypes } from '@/routes/admin/land/-app/get-land-types';
-import { getProductBrands } from '@/routes/admin/product/product-brand/-app/get-product-brands';
+import { updateLandType } from '@/routes/admin/land/-app/update-land-type';
+import { createProvinceLand } from '@/routes/admin/land/province-land/-app/create-province-land';
+import { deleteProvinceLand } from '@/routes/admin/land/province-land/-app/delete-province-land';
+import { getProvinceLands } from '@/routes/admin/land/province-land/-app/get-province-lands';
+import { updateProvinceLand } from '@/routes/admin/land/province-land/-app/update-province-land';
+import { getProvincePotentials } from '@/routes/admin/potential/province_potential/-app/get-province-potentials';
 import { getProductTypes } from '@/routes/admin/product/-app/get-product-types';
+import { getProductBrands } from '@/routes/admin/product/product-brand/-app/get-product-brands';
 import { createProvince } from '@/routes/admin/region/province/-app/create-province';
 import { deleteProvince } from '@/routes/admin/region/province/-app/delete-province';
 import { getProvinces } from '@/routes/admin/region/province/-app/get-provinces';
@@ -16,14 +25,6 @@ import { createTodo } from '@/routes/todos/-app/create-todo';
 import { deleteTodo } from '@/routes/todos/-app/delete-todo';
 import { getTodos } from '@/routes/todos/-app/get-todos';
 import { toggleTodo } from '@/routes/todos/-app/toggle-todo';
-import { createLandType } from '@/routes/admin/land/-app/create-land-type';
-import { updateLandType } from '@/routes/admin/land/-app/update-land-type';
-import { deleteLandType } from '@/routes/admin/land/-app/delete-land-type';
-import { getProvinceLands } from '@/routes/admin/land/province-land/-app/get-province-lands';
-import { createProvinceLand } from '@/routes/admin/land/province-land/-app/create-province-land';
-import { updateProvinceLand } from '@/routes/admin/land/province-land/-app/update-province-land';
-import { deleteProvinceLand } from '@/routes/admin/land/province-land/-app/delete-province-land';
-import { getProvincePotentials } from '@/routes/admin/potential/province_potential/-app/get-province-potentials';
 /**
  * Main oRPC Router
  *
@@ -79,8 +80,7 @@ export default {
   /**
    * Map data feature endpoints
    */
-  map: {
-  },
+  map: {},
 
   admin: {
     region: {
@@ -115,7 +115,7 @@ export default {
         // create: createRegencyLand,
         // update: updateRegencyLand,
         // delete: deleteRegencyLand,
-      }
+      },
     },
     commodity: {
       commodity_type: {
@@ -125,7 +125,7 @@ export default {
         // deleteCommodityTypes,
       },
       province_commodity: {
-        // getProvinceCommodities,
+        get: getProvinceCommodities,
         // createProvinceCommodity,
         // updateProvinceCommodity,
         // deleteProvinceCommodity,
@@ -135,7 +135,7 @@ export default {
         // createRegencyCommodity,
         // updateRegencyCommodity,
         // deleteRegencyCommodity,
-      }
+      },
     },
     potential: {
       province_potential: {
@@ -149,9 +149,8 @@ export default {
         // createRegencyPotential,
         // updateRegencyPotential,
         // deleteRegencyPotential,
-      }
+      },
     },
-
 
     product: {
       product_type: {
@@ -160,6 +159,6 @@ export default {
       product_brand: {
         get: getProductBrands,
       },
-    }
-  }
+    },
+  },
 };

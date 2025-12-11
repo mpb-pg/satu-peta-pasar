@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { z } from 'zod';
-import { regencies } from '@/lib/db/schema/map_product';
+import { regencies } from '@/lib/db/schema/map-product';
 import { protectedProcedure } from '@/lib/orpc';
 
 export const deleteRegency = protectedProcedure

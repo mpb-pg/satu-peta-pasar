@@ -6,7 +6,7 @@ import {
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
-import { productBrands } from './map_product';
+import { productBrands } from './map-product';
 
 export const dailySales = pgTable('daily_sales', {
   id: uuid('id').primaryKey(),

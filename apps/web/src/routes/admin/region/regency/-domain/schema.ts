@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const RegencySchema = z.object({
   id: z.uuid(),
@@ -6,4 +6,4 @@ export const RegencySchema = z.object({
   name: z.string(),
   provinceId: z.uuid(),
   area: z.number().optional(),
-})
+});

@@ -1,13 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useAppForm } from "../-hooks/form";
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
+import { useAppForm } from '../-hooks/form';
 
 export function CreateProvinceForm({
   open,
@@ -23,7 +23,8 @@ export function CreateProvinceForm({
     Error,
     Parameters<typeof orpc.admin.region.province.create.call>[0]
   >({
-    mutationFn: (provinceData) => orpc.admin.region.province.create.call(provinceData),
+    mutationFn: (provinceData) =>
+      orpc.admin.region.province.create.call(provinceData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.region.province.get.queryKey({ input: {} }),
@@ -34,9 +35,9 @@ export function CreateProvinceForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      code: "",
-      name: "",
-      area: "",
+      code: '',
+      name: '',
+      area: '',
     },
     validators: {
       onBlur: () => {
@@ -57,7 +58,7 @@ export function CreateProvinceForm({
         };
 
         await createMutation.mutateAsync(payload);
-        toast.success("Province created successfully!");
+        toast.success('Province created successfully!');
         onOpenChange(false);
         form.reset();
       } catch (error) {
@@ -70,9 +71,7 @@ export function CreateProvinceForm({
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>Create New Province</DialogTitle>
-        <DialogDescription>
-          Add a new province
-        </DialogDescription>
+        <DialogDescription>Add a new province</DialogDescription>
 
         <form
           className="space-y-4"
@@ -88,17 +87,14 @@ export function CreateProvinceForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Code is required";
+                    return 'Code is required';
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField
-                  label="Province Code"
-                  placeholder="ex. 99"
-                />
+                <field.textField label="Province Code" placeholder="ex. 99" />
               )}
             </form.AppField>
 
@@ -107,7 +103,7 @@ export function CreateProvinceForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Name is required (ex. East Java)";
+                    return 'Name is required (ex. East Java)';
                   }
                   return;
                 },
@@ -125,22 +121,23 @@ export function CreateProvinceForm({
               name="area"
               validators={{
                 onBlur: ({ value }) => {
-                  if (!value || isNaN(Number(value)) || Number(value) <= 0) {
-                    return "Area is required and must be greater than 0";
+                  if (
+                    !value ||
+                    Number.isNaN(Number(value)) ||
+                    Number(value) <= 0
+                  ) {
+                    return 'Area is required and must be greater than 0';
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField 
-                  label="Area"
-                  placeholder="ex. 100000"
-                />
+                <field.textField label="Area" placeholder="ex. 100000" />
               )}
             </form.AppField>
 
-            <div className="flex justify-end mt-7">
+            <div className="mt-7 flex justify-end">
               <form.AppForm>
                 <form.subscribeButton label="Create" />
               </form.AppForm>

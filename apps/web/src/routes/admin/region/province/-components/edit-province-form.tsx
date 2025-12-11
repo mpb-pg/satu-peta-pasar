@@ -1,14 +1,14 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useAppForm } from "../-hooks/form";
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
+import { useAppForm } from '../-hooks/form';
 
 export function EditProvinceForm({
   open,
@@ -31,7 +31,8 @@ export function EditProvinceForm({
     Error,
     Parameters<typeof orpc.admin.region.province.update.call>[0]
   >({
-    mutationFn: (provinceData) => orpc.admin.region.province.update.call(provinceData),
+    mutationFn: (provinceData) =>
+      orpc.admin.region.province.update.call(provinceData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.region.province.get.queryKey({ input: {} }),
@@ -66,9 +67,12 @@ export function EditProvinceForm({
           id: currentProvince?.id as string,
           name: value.name,
           // Convert area string back to number, but keep undefined when empty
-          area: value.area !== '' && value.area != null ? Number(value.area) : undefined,
+          area:
+            value.area !== '' && value.area != null
+              ? Number(value.area)
+              : undefined,
         });
-        toast.success("Province updated successfully!");
+        toast.success('Province updated successfully!');
         onOpenChange(false);
         form.reset();
       } catch (error) {
@@ -79,9 +83,9 @@ export function EditProvinceForm({
 
   useEffect(() => {
     if (open && currentProvince) {
-      form.setFieldValue("code", currentProvince.code ?? '');
-      form.setFieldValue("name", currentProvince.name ?? '');
-      form.setFieldValue("area", currentProvince.area ?? '');
+      form.setFieldValue('code', currentProvince.code ?? '');
+      form.setFieldValue('name', currentProvince.name ?? '');
+      form.setFieldValue('area', currentProvince.area ?? '');
     }
   }, [open, currentProvince, form]);
 
@@ -89,9 +93,7 @@ export function EditProvinceForm({
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>Update Province</DialogTitle>
-        <DialogDescription>
-          Update the province
-        </DialogDescription>
+        <DialogDescription>Update the province</DialogDescription>
 
         <form
           className="space-y-4"
@@ -107,7 +109,7 @@ export function EditProvinceForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Code is required";
+                    return 'Code is required';
                   }
                   return;
                 },
@@ -127,7 +129,7 @@ export function EditProvinceForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Name is required (ex. East Java)";
+                    return 'Name is required (ex. East Java)';
                   }
                   return;
                 },
@@ -146,21 +148,18 @@ export function EditProvinceForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value) {
-                    return "Area is required";
+                    return 'Area is required';
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField 
-                  label="Area"
-                  placeholder="ex. 100000"
-                />
+                <field.textField label="Area" placeholder="ex. 100000" />
               )}
             </form.AppField>
 
-            <div className="flex justify-end mt-7">
+            <div className="mt-7 flex justify-end">
               <form.AppForm>
                 <form.subscribeButton label="Update" />
               </form.AppForm>

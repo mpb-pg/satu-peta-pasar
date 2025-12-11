@@ -1,5 +1,5 @@
 import { asc } from 'drizzle-orm';
-import { provinces } from '@/lib/db/schema/map_product';
+import { provinces } from '@/lib/db/schema/map-product';
 import { publicProcedure } from '@/lib/orpc';
 
 export const getAllProvinces = publicProcedure.handler(async ({ context }) => {

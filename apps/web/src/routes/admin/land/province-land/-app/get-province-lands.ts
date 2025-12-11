@@ -1,7 +1,11 @@
-import { landTypes, provinceLands, provinces } from "@/lib/db/schema/map_product";
-import { protectedProcedure } from "@/lib/orpc";
-import { and, asc, eq, or } from "drizzle-orm";
-import z from "zod";
+import { and, eq, or } from 'drizzle-orm';
+import z from 'zod';
+import {
+  landTypes,
+  provinceLands,
+  provinces,
+} from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
 
 export const getProvinceLands = protectedProcedure
   .input(
@@ -15,8 +19,8 @@ export const getProvinceLands = protectedProcedure
   )
   .handler(async ({ input, context }) => {
     const page = input?.page ?? 1;
-    const limit = input?.limit ?? 10;
-    const offset = (page - 1) * limit;
+    const limit = input?.limit;
+    const offset = (page - 1) * (limit ?? 0);
 
     const baseQuery = context.db
       .select({
@@ -32,7 +36,7 @@ export const getProvinceLands = protectedProcedure
       .innerJoin(landTypes, eq(provinceLands.landTypeId, landTypes.id))
       .innerJoin(provinces, eq(provinceLands.provinceId, provinces.id));
 
-    const conditions = [];
+    const conditions: ReturnType<typeof eq | typeof or>[] = [];
     if (input.provinceId) {
       conditions.push(eq(provinceLands.provinceId, input.provinceId));
     }
@@ -40,15 +44,22 @@ export const getProvinceLands = protectedProcedure
       conditions.push(eq(provinceLands.landTypeId, input.landTypeId));
     }
     if (input.search) {
-      conditions.push(or(
-        eq(provinces.name, `%${input.search}%`),
-        eq(landTypes.name, `%${input.search}%`)
-      ));
+      conditions.push(
+        or(
+          eq(provinces.name, `%${input.search}%`),
+          eq(landTypes.name, `%${input.search}%`)
+        )
+      );
     }
 
+    const query = baseQuery.where(and(...conditions)).orderBy(provinces.name);
+
+    const finalQuery =
+      limit !== undefined
+        ? query.limit(limit).offset(offset)
+        : query.offset(offset);
+
     return {
-      data: await baseQuery
-        .where(and(...conditions))
-        .orderBy(asc(provinces.name)),
-    }
-  })
+      data: await finalQuery,
+    };
+  });

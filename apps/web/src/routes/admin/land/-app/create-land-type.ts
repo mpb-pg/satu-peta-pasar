@@ -1,13 +1,11 @@
-import { protectedProcedure } from "@/lib/orpc";
-import { LandTypeSchema } from "../-domain/schema";
-import { generateUUID } from "@/lib/db/schema";
-import { landTypes } from "@/lib/db/schema/map_product";
-import { ORPCError } from "@orpc/server";
+import { ORPCError } from '@orpc/server';
+import { generateUUID } from '@/lib/db/schema';
+import { landTypes } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
+import { LandTypeSchema } from '../-domain/schema';
 
 export const createLandType = protectedProcedure
-  .input(
-    LandTypeSchema.omit({ id: true })
-  )
+  .input(LandTypeSchema.omit({ id: true }))
   .handler(async ({ input, context }) => {
     const newLandType = {
       id: generateUUID(),
@@ -20,12 +18,17 @@ export const createLandType = protectedProcedure
         .values(newLandType)
         .returning();
 
-        return createdLandType;
+      return createdLandType;
     } catch (err) {
-      const msg = (err as any)?.message ?? String(err);
-      if (msg.toLowerCase().includes('unique') || msg.toLowerCase().includes('duplicate')) {
-        throw new ORPCError('CONFLICT', { message: 'Land type name already exists' });
+      const msg = err instanceof Error ? err.message : String(err);
+      if (
+        msg.toLowerCase().includes('unique') ||
+        msg.toLowerCase().includes('duplicate')
+      ) {
+        throw new ORPCError('CONFLICT', {
+          message: 'Land type name already exists',
+        });
       }
       throw err;
     }
-  })
+  });

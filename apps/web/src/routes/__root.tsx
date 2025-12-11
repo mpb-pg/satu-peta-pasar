@@ -83,7 +83,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 function RootDocument() {
   const { i18n } = Route.useRouteContext();
   const matches = useMatches();
-  const isAdminRoute = matches.some((match) => match.pathname.startsWith('/admin'));
+  const isAdminRoute = matches.some((match) =>
+    match.pathname.startsWith('/admin')
+  );
 
   return (
     <html lang={i18n.locale}>

@@ -1,21 +1,18 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { useSetAtom } from "jotai";
-import { useEffect } from "react";
-import { AdminLayout } from "./-components/admin-layout";
-import { currentUserAtom } from "./-libs/admin-atoms";
-import { db } from "@/lib/db";
-import { access_role } from "@/lib/db/schema/access_role";
-import { eq } from "drizzle-orm";
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
+import { useSetAtom } from 'jotai';
+import { useEffect } from 'react';
+import { AdminLayout } from './-components/admin-layout';
+import { currentUserAtom } from './-libs/admin-atoms';
 
-export const Route = createFileRoute("/admin")({
-  beforeLoad: async ({ context }) => {
+export const Route = createFileRoute('/admin')({
+  beforeLoad: ({ context }) => {
     // Protect admin routes - require authentication
     if (!context.user) {
       throw redirect({
-        to: "/auth/login",
+        to: '/auth/login',
         search: (prev) => ({
           ...prev,
-          redirect: "/admin",
+          redirect: '/admin',
         }),
       });
     }
@@ -48,7 +45,7 @@ function AdminLayoutRoute() {
         id: user.id,
         name: user.name,
         email: user.email,
-        role: "admin",
+        role: 'admin',
         avatar: user.image ?? undefined,
       });
     }

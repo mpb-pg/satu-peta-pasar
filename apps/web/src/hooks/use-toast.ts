@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 type ToastState = {
   id: string;
-  variant: "success" | "error" | "warning" | "info";
+  variant: 'success' | 'error' | 'warning' | 'info';
   title?: string;
   message: string;
   duration?: number;
@@ -16,7 +16,7 @@ export function useToast() {
   }, []);
 
   const addToast = useCallback(
-    (toast: Omit<ToastState, "id">) => {
+    (toast: Omit<ToastState, 'id'>) => {
       const IdSubstringStart = 2;
       const IdSubstringEnd = 9;
       const DefaultToastDuration = 5000;
@@ -39,28 +39,28 @@ export function useToast() {
 
   const success = useCallback(
     (message: string, title?: string) => {
-      addToast({ variant: "success", message, title });
+      addToast({ variant: 'success', message, title });
     },
     [addToast]
   );
 
   const error = useCallback(
     (message: string, title?: string) => {
-      addToast({ variant: "error", message, title });
+      addToast({ variant: 'error', message, title });
     },
     [addToast]
   );
 
   const warning = useCallback(
     (message: string, title?: string) => {
-      addToast({ variant: "warning", message, title });
+      addToast({ variant: 'warning', message, title });
     },
     [addToast]
   );
 
   const info = useCallback(
     (message: string, title?: string) => {
-      addToast({ variant: "info", message, title });
+      addToast({ variant: 'info', message, title });
     },
     [addToast]
   );

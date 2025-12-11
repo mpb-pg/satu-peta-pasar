@@ -1,7 +1,11 @@
-import { productBrands, provincePotentials, provinces } from "@/lib/db/schema/map_product";
-import { protectedProcedure } from "@/lib/orpc";
-import { and, eq, or } from "drizzle-orm";
-import z from "zod";
+import { and, eq, type ilike, or } from 'drizzle-orm';
+import z from 'zod';
+import {
+  productBrands,
+  provincePotentials,
+  provinces,
+} from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
 
 export const getProvincePotentials = protectedProcedure
   .input(
@@ -15,8 +19,8 @@ export const getProvincePotentials = protectedProcedure
   )
   .handler(async ({ input, context }) => {
     const page = input?.page ?? 1;
-    const limit = input?.limit ?? 10;
-    const offset = (page - 1) * limit;
+    const limit = input?.limit;
+    const offset = (page - 1) * (limit ?? 0);
 
     const baseQuery = context.db
       .select({
@@ -29,27 +33,37 @@ export const getProvincePotentials = protectedProcedure
       })
       .from(provincePotentials)
       .innerJoin(provinces, eq(provincePotentials.provinceId, provinces.id))
-      .innerJoin(productBrands, eq(provincePotentials.productBrandId, productBrands.id));
+      .innerJoin(
+        productBrands,
+        eq(provincePotentials.productBrandId, productBrands.id)
+      );
 
-      const conditions = [];
-      if (input.provinceId) {
-        conditions.push(eq(provincePotentials.provinceId, input.provinceId));
-      }
-      if (input.productBrandId) {
-        conditions.push(eq(provincePotentials.productBrandId, input.productBrandId));
-      }
-      if (input.search) {
-        conditions.push(or(
+    const conditions: ReturnType<typeof ilike | typeof or>[] = [];
+    if (input.provinceId) {
+      conditions.push(eq(provincePotentials.provinceId, input.provinceId));
+    }
+    if (input.productBrandId) {
+      conditions.push(
+        eq(provincePotentials.productBrandId, input.productBrandId)
+      );
+    }
+    if (input.search) {
+      conditions.push(
+        or(
           eq(provinces.name, `%${input.search}%`),
           eq(productBrands.name, `%${input.search}%`)
-        ));
-      }
+        )
+      );
+    }
 
-      return {
-        data: await baseQuery
-          .where(and(...conditions))
-          .orderBy(provinces.name)
-          .limit(limit)
-          .offset(offset),
-      }
-  })
+    const query = baseQuery.where(and(...conditions)).orderBy(provinces.name);
+
+    const finalQuery =
+      limit !== undefined
+        ? query.limit(limit).offset(offset)
+        : query.offset(offset);
+
+    return {
+      data: await finalQuery,
+    };
+  });

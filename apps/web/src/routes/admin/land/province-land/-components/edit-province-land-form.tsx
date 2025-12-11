@@ -1,8 +1,13 @@
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAppForm } from "../-hooks/form";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
+import { useAppForm } from '../-hooks/form';
 
 export function EditProvinceLandForm({
   open,
@@ -26,7 +31,9 @@ export function EditProvinceLandForm({
   const { data: provinceLands } = useQuery(
     orpc.admin.land.province_land.get.queryOptions({ input: {} })
   );
-  const currentProvinceLand = provinceLands?.data.find((pl) => pl.id === landTypeId);
+  const currentProvinceLand = provinceLands?.data.find(
+    (pl) => pl.id === landTypeId
+  );
 
   const updateMutation = useMutation<
     Awaited<ReturnType<typeof orpc.admin.land.province_land.update.call>>,
@@ -45,8 +52,8 @@ export function EditProvinceLandForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      provinceId: currentProvinceLand?.provinceId ?? "",
-      landTypeId: currentProvinceLand?.landTypeId ?? "",
+      provinceId: currentProvinceLand?.provinceId ?? '',
+      landTypeId: currentProvinceLand?.landTypeId ?? '',
       area: currentProvinceLand?.area ?? 0,
     },
     validators: {
@@ -67,12 +74,12 @@ export function EditProvinceLandForm({
           ...value,
           area: Number(value.area),
         });
-        toast.success("Province land updated successfully!");
+        toast.success('Province land updated successfully!');
         onOpenChange(false);
-      } catch (error) {
-        toast.error("Failed to update province land.");
+      } catch (_error) {
+        toast.error('Failed to update province land.');
       }
-    }
+    },
   });
 
   return (
@@ -89,13 +96,13 @@ export function EditProvinceLandForm({
             form.handleSubmit();
           }}
         >
-          <div className="grid grid-col-1 gap-4 md:grid-cols-2">
+          <div className="grid-col-1 grid gap-4 md:grid-cols-2">
             <form.AppField
               name="provinceId"
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Province is required";
+                    return 'Province is required';
                   }
                   return;
                 },
@@ -119,8 +126,8 @@ export function EditProvinceLandForm({
               name="landTypeId"
               validators={{
                 onBlur: ({ value }) => {
-                  if(!value || value.trim().length === 0) {
-                    return "Land type is required";
+                  if (!value || value.trim().length === 0) {
+                    return 'Land type is required';
                   }
                   return;
                 },
@@ -144,8 +151,8 @@ export function EditProvinceLandForm({
               name="area"
               validators={{
                 onBlur: ({ value }) => {
-                  if (isNaN(Number(value)) || Number(value) < 0) {
-                    return "Area must be a non-negative number";
+                  if (Number.isNaN(Number(value)) || Number(value) < 0) {
+                    return 'Area must be a non-negative number';
                   }
                   return;
                 },
@@ -168,5 +175,5 @@ export function EditProvinceLandForm({
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

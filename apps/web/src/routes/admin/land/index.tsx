@@ -1,40 +1,45 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { orpc } from '@/lib/orpc/client'
-import { useQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
-import { Edit, Plus, Search, Trash2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import z from 'zod'
-import { CreateLandTypeForm } from './-components/create-land-type-form'
-import { EditLandTypeForm } from './-components/edit-land-type-form'
-import { DeleteLandTypeForm } from './-components/delete-land-type-form'
+import { useQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
+import { Edit, Plus, Search, Trash2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import z from 'zod';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { orpc } from '@/lib/orpc/client';
+import { CreateLandTypeForm } from './-components/create-land-type-form';
+import { DeleteLandTypeForm } from './-components/delete-land-type-form';
+import { EditLandTypeForm } from './-components/edit-land-type-form';
 
 type LandListItem = {
-  id: string
-  name: string
-}
+  id: string;
+  name: string;
+};
 
 export const Route = createFileRoute('/admin/land/')({
   component: RouteComponent,
-  validateSearch: (
-    z.object({
-      q: z.string().optional(),
-      create: z.string().optional(),
-      edit: z.string().optional(),
-      delete: z.string().optional(),
-    })
-  ).parse,
-})
+  validateSearch: z.object({
+    q: z.string().optional(),
+    create: z.string().optional(),
+    edit: z.string().optional(),
+    delete: z.string().optional(),
+  }).parse,
+});
 
 function RouteComponent() {
-  const navigate = Route.useNavigate()
-  const search = Route.useSearch()
+  const navigate = Route.useNavigate();
+  const search = Route.useSearch();
 
   const { create, edit, delete: deleteParam } = search;
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentDeleteLandType, setCurrentDeleteLandType] = useState<LandListItem | null>(null);
-  
+  const [currentDeleteLandType, setCurrentDeleteLandType] =
+    useState<LandListItem | null>(null);
+
   const updateUrlParams = (params: Record<string, string | undefined>) => {
     navigate({ to: '.', search: (prev) => ({ ...prev, ...params }) });
   };
@@ -45,12 +50,11 @@ function RouteComponent() {
 
   const { data: landTypes, isLoading } = useQuery(
     orpc.admin.land.land_type.get.queryOptions({ input: {} })
-  )
-  const landTypesList = (
+  );
+  const landTypesList =
     landTypes?.data.filter((landType) =>
       landType.name.toLowerCase().includes(searchTerm.toLowerCase())
-    ) || []
-  )
+    ) || [];
 
   useEffect(() => {
     if (deleteParam && landTypes) {
@@ -63,10 +67,10 @@ function RouteComponent() {
 
   const handleCreate = () => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
-        create: "true",
+        create: 'true',
         edit: undefined,
         delete: undefined,
       }),
@@ -75,7 +79,7 @@ function RouteComponent() {
 
   const handleEdit = (landType: LandListItem) => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
         edit: landType.id,
@@ -87,7 +91,7 @@ function RouteComponent() {
 
   const handleDelete = (landType: LandListItem) => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
         delete: landType.id,
@@ -101,9 +105,7 @@ function RouteComponent() {
     <div className="container mx-auto space-y-8 px-4 py-8">
       <div className="text-left">
         <h1 className="font-bold text-3xl">Manage Land Types</h1>
-        <p className="text-slate-600">
-          Create and manage land types
-        </p>
+        <p className="text-slate-600">Create and manage land types</p>
       </div>
       <Card>
         <CardHeader className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -188,12 +190,11 @@ function RouteComponent() {
         </CardContent>
       </Card>
 
-
       <CreateLandTypeForm
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, create: undefined }),
             });
           }
@@ -202,22 +203,23 @@ function RouteComponent() {
       />
 
       <EditLandTypeForm
+        landTypeId={edit ?? null}
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, edit: undefined }),
             });
           }
         }}
         open={Boolean(edit)}
-        landTypeId={edit ?? null}
       />
 
       <DeleteLandTypeForm
+        landType={currentDeleteLandType}
         onDelete={() => {
           navigate({
-            to: ".",
+            to: '.',
             search: (prev) => ({ ...prev, delete: undefined }),
           });
           setCurrentDeleteLandType(null);
@@ -225,14 +227,13 @@ function RouteComponent() {
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, delete: undefined }),
             });
           }
         }}
         open={Boolean(deleteParam)}
-        landType={currentDeleteLandType}
       />
     </div>
   );
-}  
+}

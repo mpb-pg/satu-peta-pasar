@@ -1,23 +1,19 @@
-import { landTypes } from "@/lib/db/schema/map_product";
-import { protectedProcedure } from "@/lib/orpc";
-import { eq } from "drizzle-orm";
-import z from "zod";
+import { eq } from 'drizzle-orm';
+import z from 'zod';
+import { landTypes } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
 
 export const deleteLandType = protectedProcedure
   .input(
-      z.object({
-          id: z.uuid(),
-      })
+    z.object({
+      id: z.uuid(),
+    })
   )
   .handler(async ({ input, context }) => {
-    try {
-      await context.db
-        .delete(landTypes)
-        .where(eq(landTypes.id, input.id))
-        .returning();
+    await context.db
+      .delete(landTypes)
+      .where(eq(landTypes.id, input.id))
+      .returning();
 
-      return { success: true };
-    } catch (err) {
-      throw err;
-    }
-  })
+    return { success: true };
+  });

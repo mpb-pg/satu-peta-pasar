@@ -1,16 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
-import {
-  Activity,
-} from "lucide-react";
+import { createFileRoute } from '@tanstack/react-router';
+import { Activity } from 'lucide-react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
-export const Route = createFileRoute("/admin/")({
+export const Route = createFileRoute('/admin/')({
   component: AdminDashboard,
 });
 
@@ -64,7 +62,9 @@ function AdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="font-bold text-2xl">3</div>
-            <p className="text-muted-foreground text-xs">TanPang, Horti, Perkebunan</p>
+            <p className="text-muted-foreground text-xs">
+              TanPang, Horti, Perkebunan
+            </p>
           </CardContent>
         </Card>
 
@@ -97,11 +97,10 @@ function AdminDashboard() {
                 <Activity className="h-4 w-4 text-destructive" />
               </div>
               <div className="flex-1 space-y-1">
-                <p className="font-medium text-sm">
-                  Petrofish
-                </p>
+                <p className="font-medium text-sm">Petrofish</p>
                 <p className="text-muted-foreground text-xs">
-                  New Probiotic Innovations Petrofish grows natural food and contains beneficial microbes!
+                  New Probiotic Innovations Petrofish grows natural food and
+                  contains beneficial microbes!
                 </p>
               </div>
             </div>
@@ -111,11 +110,10 @@ function AdminDashboard() {
                 <Activity className="h-4 w-4 text-primary" />
               </div>
               <div className="flex-1 space-y-1">
-                <p className="font-medium text-sm">
-                  NPK Phonska Cair
-                </p>
+                <p className="font-medium text-sm">NPK Phonska Cair</p>
                 <p className="text-muted-foreground text-xs">
-                  Foliar fertilizer with NPK 10-8-3 content enriched with complete micronutrients and ZPT!
+                  Foliar fertilizer with NPK 10-8-3 content enriched with
+                  complete micronutrients and ZPT!
                 </p>
               </div>
             </div>
@@ -125,11 +123,10 @@ function AdminDashboard() {
                 <Activity className="h-4 w-4 text-yellow-600" />
               </div>
               <div className="flex-1 space-y-1">
-                <p className="font-medium text-sm">
-                  Phonska OCA Plus
-                </p>
+                <p className="font-medium text-sm">Phonska OCA Plus</p>
                 <p className="text-muted-foreground text-xs">
-                  Liquid organic fertilizer containing organic carbon, macro and micro nutrients and functional microbes!
+                  Liquid organic fertilizer containing organic carbon, macro and
+                  micro nutrients and functional microbes!
                 </p>
               </div>
             </div>

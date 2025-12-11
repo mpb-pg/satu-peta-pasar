@@ -1,15 +1,16 @@
-import { protectedProcedure } from "@/lib/orpc";
-import { LandTypeSchema } from "../-domain/schema";
-import { landTypes } from "@/lib/db/schema/map_product";
-import { eq } from "drizzle-orm";
+import { eq } from 'drizzle-orm';
+import { landTypes } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
+import { LandTypeSchema } from '../-domain/schema';
 
 export const updateLandType = protectedProcedure
   .input(
     LandTypeSchema.pick({
-      id: true, name: true
+      id: true,
+      name: true,
     })
-    .partial()
-    .required({ id: true })
+      .partial()
+      .required({ id: true })
   )
   .handler(async ({ input, context }) => {
     const updateData = Object.fromEntries(
@@ -31,6 +32,6 @@ export const updateLandType = protectedProcedure
     if (!updatedLandType) {
       throw new Error('Land type not found');
     }
-    
+
     return updatedLandType;
-  })
+  });

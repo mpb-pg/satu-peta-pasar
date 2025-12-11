@@ -1,14 +1,14 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useAppForm } from "../-hooks/form";
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
+import { useAppForm } from '../-hooks/form';
 
 export function EditRegencyForm({
   open,
@@ -35,7 +35,8 @@ export function EditRegencyForm({
     Error,
     Parameters<typeof orpc.admin.region.regency.update.call>[0]
   >({
-    mutationFn: (regencyData) => orpc.admin.region.regency.update.call(regencyData),
+    mutationFn: (regencyData) =>
+      orpc.admin.region.regency.update.call(regencyData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.region.regency.get.queryKey({ input: {} }),
@@ -70,10 +71,13 @@ export function EditRegencyForm({
           id: currentRegency?.id as string,
           name: value.name,
           // Convert area string back to number, but keep undefined when empty
-          area: value.area !== '' && value.area != null ? Number(value.area) : undefined,
+          area:
+            value.area !== '' && value.area != null
+              ? Number(value.area)
+              : undefined,
           provinceId: value.provinceId,
         });
-        toast.success("Province updated successfully!");
+        toast.success('Province updated successfully!');
         onOpenChange(false);
         form.reset();
       } catch (error) {
@@ -84,10 +88,10 @@ export function EditRegencyForm({
 
   useEffect(() => {
     if (open && currentRegency) {
-      form.setFieldValue("code", currentRegency.code ?? '');
-      form.setFieldValue("name", currentRegency.name ?? '');
-      form.setFieldValue("area", currentRegency.area ?? '');
-      form.setFieldValue("provinceId", currentRegency.provinceId ?? '');
+      form.setFieldValue('code', currentRegency.code ?? '');
+      form.setFieldValue('name', currentRegency.name ?? '');
+      form.setFieldValue('area', currentRegency.area ?? '');
+      form.setFieldValue('provinceId', currentRegency.provinceId ?? '');
     }
   }, [open, currentRegency, form]);
 
@@ -95,9 +99,7 @@ export function EditRegencyForm({
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>Update Regency</DialogTitle>
-        <DialogDescription>
-          Update the regency
-        </DialogDescription>
+        <DialogDescription>Update the regency</DialogDescription>
 
         <form
           className="space-y-4"
@@ -113,7 +115,7 @@ export function EditRegencyForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Code is required";
+                    return 'Code is required';
                   }
                   return;
                 },
@@ -133,7 +135,7 @@ export function EditRegencyForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Province is required";
+                    return 'Province is required';
                   }
                   return;
                 },
@@ -144,10 +146,10 @@ export function EditRegencyForm({
                   label="Province"
                   placeholder="Select a province"
                   values={
-                    provinces?.data.map((prov) => ({ 
-                        value: prov.id, 
-                        label: prov.name 
-                      })) || []
+                    provinces?.data.map((prov) => ({
+                      value: prov.id,
+                      label: prov.name,
+                    })) || []
                   }
                 />
               )}
@@ -158,7 +160,7 @@ export function EditRegencyForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Name is required (ex. Gresik)";
+                    return 'Name is required (ex. Gresik)';
                   }
                   return;
                 },
@@ -177,17 +179,14 @@ export function EditRegencyForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value) {
-                    return "Area is required";
+                    return 'Area is required';
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField 
-                  label="Area"
-                  placeholder="ex. 100000"
-                />
+                <field.textField label="Area" placeholder="ex. 100000" />
               )}
             </form.AppField>
 

@@ -1,8 +1,8 @@
-import z from "zod";
+import z from 'zod';
 
 export const RegencyCommoditySchema = z.object({
   id: z.uuid(),
   regencyId: z.uuid(),
   commodityTypeId: z.uuid(),
   area: z.number(),
-})
+});

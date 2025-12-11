@@ -1,40 +1,45 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { orpc } from '@/lib/orpc/client'
-import { useQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
-import { Edit, Plus, Search, Trash2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { z } from 'zod'
-import { CreateProvinceForm } from './-components/create-province-form'
-import { EditProvinceForm } from './-components/edit-province-form'
-import { DeleteProvinceForm } from './-components/delete-province-form'
+import { useQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
+import { Edit, Plus, Search, Trash2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { orpc } from '@/lib/orpc/client';
+import { CreateProvinceForm } from './-components/create-province-form';
+import { DeleteProvinceForm } from './-components/delete-province-form';
+import { EditProvinceForm } from './-components/edit-province-form';
 
 type ProvinceListItem = {
-  id: string
-  code: string
-  name: string
-  area: number | null
-}
+  id: string;
+  code: string;
+  name: string;
+  area: number | null;
+};
 
 export const Route = createFileRoute('/admin/region/province/')({
   component: RouteComponent,
-  validateSearch: (
-    z.object({
-      q: z.string().optional(),
-      create: z.string().optional(),
-      edit: z.string().optional(),
-      delete: z.string().optional(),
-    })
-  ).parse,
-})
+  validateSearch: z.object({
+    q: z.string().optional(),
+    create: z.string().optional(),
+    edit: z.string().optional(),
+    delete: z.string().optional(),
+  }).parse,
+});
 
 function RouteComponent() {
-  const navigate = Route.useNavigate()
-  const search = Route.useSearch()
+  const navigate = Route.useNavigate();
+  const search = Route.useSearch();
 
   const { create, edit, delete: deleteParam } = search;
-  const [currentDeleteProvince, setCurrentDeleteProvince] = useState<ProvinceListItem | null>(null);
+  const [currentDeleteProvince, setCurrentDeleteProvince] =
+    useState<ProvinceListItem | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -47,12 +52,11 @@ function RouteComponent() {
 
   const { data: provinces, isLoading } = useQuery(
     orpc.admin.region.province.get.queryOptions({ input: {} })
-  )
-  const provincesList = (
+  );
+  const provincesList =
     provinces?.data.filter((province) =>
       province.name.toLowerCase().includes(searchTerm.toLowerCase())
-    ) || []
-  )
+    ) || [];
 
   useEffect(() => {
     if (deleteParam && provinces) {
@@ -65,10 +69,10 @@ function RouteComponent() {
 
   const handleCreate = () => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
-        create: "true",
+        create: 'true',
         edit: undefined,
         delete: undefined,
       }),
@@ -77,7 +81,7 @@ function RouteComponent() {
 
   const handleEdit = (province: ProvinceListItem) => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
         edit: province.id,
@@ -89,7 +93,7 @@ function RouteComponent() {
 
   const handleDelete = (province: ProvinceListItem) => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
         delete: province.id,
@@ -104,9 +108,7 @@ function RouteComponent() {
     <div className="container mx-auto space-y-8 px-4 py-8">
       <div className="text-left">
         <h1 className="font-bold text-3xl">Manage Provinces</h1>
-        <p className="text-slate-600">
-          Create and manage provinces
-        </p>
+        <p className="text-slate-600">Create and manage provinces</p>
       </div>
       <Card>
         <CardHeader className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -144,9 +146,7 @@ function RouteComponent() {
             }
             if (provincesList.length === 0) {
               return (
-                <p className="text-center text-gray-500">
-                  No provinces found.
-                </p>
+                <p className="text-center text-gray-500">No provinces found.</p>
               );
             }
             return (
@@ -163,7 +163,7 @@ function RouteComponent() {
                             {province.name}
                           </CardTitle>
                           <CardDescription className="mt-1 text-xs">
-                            Area: {province.area?.toFixed(2) || "No area"} km²
+                            Area: {province.area?.toFixed(2) || 'No area'} km²
                           </CardDescription>
                         </div>
                       </div>
@@ -194,12 +194,11 @@ function RouteComponent() {
         </CardContent>
       </Card>
 
-
       <CreateProvinceForm
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, create: undefined }),
             });
           }
@@ -211,7 +210,7 @@ function RouteComponent() {
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, edit: undefined }),
             });
           }
@@ -223,7 +222,7 @@ function RouteComponent() {
       <DeleteProvinceForm
         onDelete={() => {
           navigate({
-            to: ".",
+            to: '.',
             search: (prev) => ({ ...prev, delete: undefined }),
           });
           setCurrentDeleteProvince(null);
@@ -231,7 +230,7 @@ function RouteComponent() {
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, delete: undefined }),
             });
           }

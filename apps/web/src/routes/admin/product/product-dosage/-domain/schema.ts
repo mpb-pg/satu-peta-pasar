@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const ProductDosageSchema = z.object({
   id: z.uuid(),
@@ -6,4 +6,4 @@ export const ProductDosageSchema = z.object({
   productBrandId: z.uuid(),
   dosage: z.number(),
   unit: z.string(),
-})
+});

@@ -1,13 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useAppForm } from "../-hooks/form";
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
+import { useAppForm } from '../-hooks/form';
 
 export function CreateRegencyForm({
   open,
@@ -27,7 +27,8 @@ export function CreateRegencyForm({
     Error,
     Parameters<typeof orpc.admin.region.regency.create.call>[0]
   >({
-    mutationFn: (regencyData) => orpc.admin.region.regency.create.call(regencyData),
+    mutationFn: (regencyData) =>
+      orpc.admin.region.regency.create.call(regencyData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.region.regency.get.queryKey({ input: {} }),
@@ -38,10 +39,10 @@ export function CreateRegencyForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      code: "",
-      name: "",
-      area: "",
-      provinceId: "",
+      code: '',
+      name: '',
+      area: '',
+      provinceId: '',
     },
     validators: {
       onBlur: () => {
@@ -62,7 +63,7 @@ export function CreateRegencyForm({
         };
 
         await createMutation.mutateAsync(payload);
-        toast.success("Regency created successfully!");
+        toast.success('Regency created successfully!');
         onOpenChange(false);
         form.reset();
       } catch (error) {
@@ -75,9 +76,7 @@ export function CreateRegencyForm({
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>Create New Regency</DialogTitle>
-        <DialogDescription>
-          Add a new regency
-        </DialogDescription>
+        <DialogDescription>Add a new regency</DialogDescription>
 
         <form
           className="space-y-4"
@@ -93,17 +92,14 @@ export function CreateRegencyForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Code is required";
+                    return 'Code is required';
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField
-                  label="Regency Code"
-                  placeholder="ex. 99.99"
-                />
+                <field.textField label="Regency Code" placeholder="ex. 99.99" />
               )}
             </form.AppField>
 
@@ -112,7 +108,7 @@ export function CreateRegencyForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Province is required";
+                    return 'Province is required';
                   }
                   return;
                 },
@@ -137,7 +133,7 @@ export function CreateRegencyForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Name is required (ex. Gresik)";
+                    return 'Name is required (ex. Gresik)';
                   }
                   return;
                 },
@@ -155,18 +151,19 @@ export function CreateRegencyForm({
               name="area"
               validators={{
                 onBlur: ({ value }) => {
-                  if (!value || isNaN(Number(value)) || Number(value) <= 0) {
-                    return "Area is required and must be greater than 0";
+                  if (
+                    !value ||
+                    Number.isNaN(Number(value)) ||
+                    Number(value) <= 0
+                  ) {
+                    return 'Area is required and must be greater than 0';
                   }
                   return;
                 },
               }}
             >
               {(field) => (
-                <field.textField 
-                  label="Area"
-                  placeholder="ex. 100000"
-                />
+                <field.textField label="Area" placeholder="ex. 100000" />
               )}
             </form.AppField>
 

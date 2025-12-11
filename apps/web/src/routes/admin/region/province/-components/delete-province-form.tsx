@@ -1,13 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
 
 export function DeleteProvinceForm({
   open,
@@ -27,7 +27,8 @@ export function DeleteProvinceForm({
     Error,
     Parameters<typeof orpc.admin.region.province.delete.call>[0]
   >({
-    mutationFn: (provinceData) => orpc.admin.region.province.delete.call(provinceData),
+    mutationFn: (provinceData) =>
+      orpc.admin.region.province.delete.call(provinceData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.region.province.get.queryKey({ input: {} }),
@@ -63,7 +64,7 @@ export function DeleteProvinceForm({
               try {
                 if (province) {
                   await deleteMutation.mutateAsync({ id: province.id });
-                  toast.success("Province deleted successfully!");
+                  toast.success('Province deleted successfully!');
                   onDelete(province.id);
                   onOpenChange(false);
                 }

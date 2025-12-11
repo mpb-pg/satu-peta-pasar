@@ -1,8 +1,13 @@
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useAppForm } from "../-hooks/form";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
+import { useAppForm } from '../-hooks/form';
 
 export function CreateLandTypeForm({
   open,
@@ -14,11 +19,12 @@ export function CreateLandTypeForm({
   const queryClient = useQueryClient();
 
   const createMutation = useMutation<
-  Awaited<ReturnType<typeof orpc.admin.land.land_type.create.call>>,
-  Error,
-  Parameters<typeof orpc.admin.land.land_type.create.call>[0]
->({
-    mutationFn: (landTypeData) => orpc.admin.land.land_type.create.call(landTypeData),
+    Awaited<ReturnType<typeof orpc.admin.land.land_type.create.call>>,
+    Error,
+    Parameters<typeof orpc.admin.land.land_type.create.call>[0]
+  >({
+    mutationFn: (landTypeData) =>
+      orpc.admin.land.land_type.create.call(landTypeData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.land.land_type.get.queryKey({ input: {} }),
@@ -29,7 +35,7 @@ export function CreateLandTypeForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      name: "",
+      name: '',
     },
     validators: {
       onBlur: () => {
@@ -45,21 +51,19 @@ export function CreateLandTypeForm({
     onSubmit: async ({ value }) => {
       try {
         await createMutation.mutateAsync(value);
-        toast.success("Land type created successfully!");
+        toast.success('Land type created successfully!');
         onOpenChange(false);
-      } catch (error) {
-        toast.error("Failed to create land type. Please try again.");
+      } catch (_error) {
+        toast.error('Failed to create land type. Please try again.');
       }
-    }
+    },
   });
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>Create New Land Type</DialogTitle>
-        <DialogDescription>
-          Add a new land type
-        </DialogDescription>
+        <DialogDescription>Add a new land type</DialogDescription>
 
         <form
           className="space-y-4"
@@ -75,7 +79,7 @@ export function CreateLandTypeForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Name is required (ex. Hortikultura)";
+                    return 'Name is required (ex. Hortikultura)';
                   }
                   return;
                 },
@@ -89,7 +93,7 @@ export function CreateLandTypeForm({
               )}
             </form.AppField>
 
-            <div className="flex justify-end mt-7">
+            <div className="mt-7 flex justify-end">
               <form.AppForm>
                 <form.subscribeButton label="Create" />
               </form.AppForm>
@@ -98,5 +102,5 @@ export function CreateLandTypeForm({
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

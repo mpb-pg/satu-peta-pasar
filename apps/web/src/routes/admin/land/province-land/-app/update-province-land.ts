@@ -1,15 +1,18 @@
-import { protectedProcedure } from "@/lib/orpc";
-import { ProvinceLandSchema } from "../-domain/schema";
-import { provinceLands } from "@/lib/db/schema/map_product";
-import { eq } from "drizzle-orm";
+import { eq } from 'drizzle-orm';
+import { provinceLands } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
+import { ProvinceLandSchema } from '../-domain/schema';
 
 export const updateProvinceLand = protectedProcedure
   .input(
     ProvinceLandSchema.pick({
-      id: true, provinceId: true, landTypeId: true, area: true,
+      id: true,
+      provinceId: true,
+      landTypeId: true,
+      area: true,
     })
-    .partial()
-    .required({ id: true })
+      .partial()
+      .required({ id: true })
   )
   .handler(async ({ input, context }) => {
     const updateData = Object.fromEntries(
@@ -28,9 +31,9 @@ export const updateProvinceLand = protectedProcedure
       .where(eq(provinceLands.id, input.id))
       .returning();
 
-      if (!updatedProvinceLand) {
-        throw new Error('Province Land not found');
-      }
+    if (!updatedProvinceLand) {
+      throw new Error('Province Land not found');
+    }
 
     return updatedProvinceLand;
   });

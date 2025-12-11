@@ -1,8 +1,13 @@
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAppForm } from "../-hooks/form";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
+import { useAppForm } from '../-hooks/form';
 
 export function CreateProvinceLandForm({
   open,
@@ -38,8 +43,8 @@ export function CreateProvinceLandForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      provinceId: "",
-      landTypeId: "",
+      provinceId: '',
+      landTypeId: '',
       area: 0,
     },
     validators: {
@@ -59,12 +64,12 @@ export function CreateProvinceLandForm({
           ...value,
           area: Number(value.area),
         });
-        toast.success("Province land created successfully!");
+        toast.success('Province land created successfully!');
         onOpenChange(false);
-      } catch (error) {
-        toast.error("Failed to create province land.");
+      } catch (_error) {
+        toast.error('Failed to create province land.');
       }
-    }
+    },
   });
 
   return (
@@ -81,13 +86,13 @@ export function CreateProvinceLandForm({
             form.handleSubmit();
           }}
         >
-          <div className="grid grid-col-1 gap-4 md:grid-cols-2">
+          <div className="grid-col-1 grid gap-4 md:grid-cols-2">
             <form.AppField
               name="provinceId"
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return "Province is required";
+                    return 'Province is required';
                   }
                   return;
                 },
@@ -111,8 +116,8 @@ export function CreateProvinceLandForm({
               name="landTypeId"
               validators={{
                 onBlur: ({ value }) => {
-                  if(!value || value.trim().length === 0) {
-                    return "Land type is required";
+                  if (!value || value.trim().length === 0) {
+                    return 'Land type is required';
                   }
                   return;
                 },
@@ -136,8 +141,8 @@ export function CreateProvinceLandForm({
               name="area"
               validators={{
                 onBlur: ({ value }) => {
-                  if (isNaN(Number(value)) || Number(value) < 0) {
-                    return "Area must be a non-negative number";
+                  if (Number.isNaN(Number(value)) || Number(value) < 0) {
+                    return 'Area must be a non-negative number';
                   }
                   return;
                 },
@@ -160,5 +165,5 @@ export function CreateProvinceLandForm({
         </form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

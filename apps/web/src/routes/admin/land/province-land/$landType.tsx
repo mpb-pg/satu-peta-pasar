@@ -1,59 +1,60 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { orpc } from '@/lib/orpc/client'
-import { useQuery } from '@tanstack/react-query'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { useEffect, useState } from 'react'
-import { Edit, Plus, Search, Trash2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import z from 'zod'
-import { CreateProvinceLandForm } from './-components/create-province-land-form'
-import { EditProvinceLandForm } from './-components/edit-province-land-form'
-import { DeleteProvinceLandForm } from './-components/delete-province-land-form'
+import { useQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
+import { Edit, Plus, Search, Trash2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import z from 'zod';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { orpc } from '@/lib/orpc/client';
+import { CreateProvinceLandForm } from './-components/create-province-land-form';
+import { DeleteProvinceLandForm } from './-components/delete-province-land-form';
+import { EditProvinceLandForm } from './-components/edit-province-land-form';
 
 type ProvinceLandListItem = {
-  id: string
-  provinceId: string
-  landTypeId: string
-  area: number | null
-}
+  id: string;
+  provinceId: string;
+  landTypeId: string;
+  area: number | null;
+};
 
 export const Route = createFileRoute('/admin/land/province-land/$landType')({
   component: RouteComponent,
-  validateSearch: (
-    z.object({
-      q: z.string().optional(),
-      create: z.string().optional(),
-      edit: z.string().optional(),
-      delete: z.string().optional(),
-    })
-  )
-})
+  validateSearch: z.object({
+    q: z.string().optional(),
+    create: z.string().optional(),
+    edit: z.string().optional(),
+    delete: z.string().optional(),
+  }),
+});
 
 function RouteComponent() {
-  const params = Route.useParams()
-  const landTypeIdSlug = params.landType as string | undefined
+  const params = Route.useParams();
+  const landTypeIdSlug = params.landType as string | undefined;
 
   const { data: landTypes } = useQuery(
     orpc.admin.land.land_type.get.queryOptions({ input: {} })
-  )
-
-  const { data: provinces, isLoading } = useQuery(
-    orpc.admin.region.province.get.queryOptions({ input: {} })
-  )
-
-  const { data: provinceLands } = useQuery(
+  );
+  const { data: provinceLands, isLoading } = useQuery(
     orpc.admin.land.province_land.get.queryOptions({ input: {} })
-  )
+  );
   const filteredProvinceLands = provinceLands?.data.filter(
     (pl) => pl.landTypeId === landTypeIdSlug
   );
-  const landTypeName = landTypes?.data.find((lt) => lt.id === landTypeIdSlug)?.name || 'Unknown';
+  const landTypeName =
+    landTypes?.data.find((lt) => lt.id === landTypeIdSlug)?.name || 'Unknown';
 
-  const navigate = Route.useNavigate()
-  const search = Route.useSearch()
+  const navigate = Route.useNavigate();
+  const search = Route.useSearch();
 
   const { create, edit, delete: deleteParam } = search;
-  const [currentDeleteProvinceLand, setCurrentDeleteProvinceLand] = useState<ProvinceLandListItem | null>(null);
+  const [currentDeleteProvinceLand, setCurrentDeleteProvinceLand] =
+    useState<ProvinceLandListItem | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -61,10 +62,10 @@ function RouteComponent() {
   }, [search]);
 
   useEffect(() => {
-    if (deleteParam  && provinceLands) {
+    if (deleteParam && provinceLands) {
       const pl = provinceLands.data.find((pl) => pl.id === deleteParam);
       if (pl) {
-          setCurrentDeleteProvinceLand(pl);
+        setCurrentDeleteProvinceLand(pl);
       }
     }
   }, [deleteParam, provinceLands]);
@@ -75,10 +76,10 @@ function RouteComponent() {
 
   const handleCreate = () => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
-        create: "true",
+        create: 'true',
         edit: undefined,
         delete: undefined,
       }),
@@ -87,7 +88,7 @@ function RouteComponent() {
 
   const handleEdit = (provinceLand: ProvinceLandListItem) => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
         edit: provinceLand.id,
@@ -99,7 +100,7 @@ function RouteComponent() {
 
   const handleDelete = (provinceLand: ProvinceLandListItem) => {
     navigate({
-      to: ".",
+      to: '.',
       search: (prev) => ({
         ...prev,
         delete: provinceLand.id,
@@ -107,20 +108,24 @@ function RouteComponent() {
         edit: undefined,
       }),
     });
-  }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="text-left mb-4">
+      <div className="mb-4 text-left">
         <h1 className="font-bold text-3xl">{landTypeName} area by Province</h1>
-        <p className="text-slate-600">Overview of provinces and their {landTypeName} areas</p>
+        <p className="text-slate-600">
+          Overview of provinces and their {landTypeName} areas
+        </p>
       </div>
 
       <Card>
         <CardHeader>
           <div>
             <CardTitle>Province Land Area</CardTitle>
-            <CardDescription>Provinces and {landTypeName} areas</CardDescription>
+            <CardDescription>
+              Provinces and {landTypeName} areas
+            </CardDescription>
           </div>
           <div className="flex w-full flex-wrap gap-2 sm:w-auto">
             <div className="relative min-w-[150px] flex-1">
@@ -168,7 +173,8 @@ function RouteComponent() {
                             {provinceLand.provinceName}
                           </CardTitle>
                           <CardDescription className="mt-1 text-xs">
-                            Area: {provinceLand.area?.toFixed(2) || "No area"} km²
+                            Area: {provinceLand.area?.toFixed(2) || 'No area'}{' '}
+                            km²
                           </CardDescription>
                         </div>
                       </div>
@@ -203,8 +209,8 @@ function RouteComponent() {
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
-              search: (prev) => ({ ...prev, create: undefined}),
+              to: '.',
+              search: (prev) => ({ ...prev, create: undefined }),
             });
           }
         }}
@@ -212,22 +218,22 @@ function RouteComponent() {
       />
 
       <EditProvinceLandForm
+        landTypeId={edit ?? null}
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, edit: undefined }),
             });
           }
         }}
         open={Boolean(edit)}
-        landTypeId={edit ?? null}
       />
 
       <DeleteProvinceLandForm
         onDelete={() => {
           navigate({
-            to: ".",
+            to: '.',
             search: (prev) => ({ ...prev, delete: undefined }),
           });
           setCurrentDeleteProvinceLand(null);
@@ -235,7 +241,7 @@ function RouteComponent() {
         onOpenChange={(open) => {
           if (!open) {
             navigate({
-              to: ".",
+              to: '.',
               search: (prev) => ({ ...prev, delete: undefined }),
             });
           }

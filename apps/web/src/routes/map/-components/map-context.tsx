@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback } from "react";
+import {
+  createContext,
+  type ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 
 type MapParams = Record<string, unknown>;
 
@@ -19,29 +25,33 @@ export function MapProvider({
 }) {
   const [params, setParamsState] = useState<MapParams>(initialParams);
 
-  const setParams = useCallback((p: MapParams | ((prev: MapParams) => MapParams)) => {
-    setParamsState((prev) => {
-      const next = typeof p === "function" ? (p as (prev: MapParams) => MapParams)(prev) : p;
-      try {
-        if (JSON.stringify(prev) === JSON.stringify(next)) return prev;
-      } catch (_) {
-        // fallback: if stringify fails, still return next
-      }
-      return next;
-    });
-  }, []);
+  const setParams = useCallback(
+    (p: MapParams | ((prev: MapParams) => MapParams)) => {
+      setParamsState((prev) => {
+        const next =
+          typeof p === 'function'
+            ? (p as (prev: MapParams) => MapParams)(prev)
+            : p;
+
+        if (JSON.stringify(prev) === JSON.stringify(next)) {
+          return prev;
+        }
+        return next;
+      });
+    },
+    []
+  );
 
   const updateParam = useCallback((key: string, value: unknown) => {
     setParamsState((prev) => {
       const prevValue = (prev as any)?.[key];
-      try {
-        if (typeof prevValue === 'object' && typeof value === 'object') {
-          if (JSON.stringify(prevValue) === JSON.stringify(value)) return prev;
-        } else {
-          if (prevValue === value) return prev;
+
+      if (typeof prevValue === 'object' && typeof value === 'object') {
+        if (JSON.stringify(prevValue) === JSON.stringify(value)) {
+          return prev;
         }
-      } catch (_) {
-        // ignore stringify errors and proceed to set
+      } else if (prevValue === value) {
+        return prev;
       }
       return { ...prev, [key]: value };
     });
@@ -56,8 +66,9 @@ export function MapProvider({
 
 export function useMapParams() {
   const ctx = useContext(MapContext);
-  console.log("useMapParams context:", ctx);
-  if (!ctx) throw new Error("useMapParams must be used within a MapProvider");
+  if (!ctx) {
+    throw new Error('useMapParams must be used within a MapProvider');
+  }
   return ctx;
 }
 

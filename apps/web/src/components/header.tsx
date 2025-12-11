@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between gap-2 bg-white p-2 text-black border-amber-950 border-b shadow-md">
+    <header className="flex justify-between gap-2 border-amber-950 border-b bg-white p-2 text-black shadow-md">
       <nav className="flex flex-row">
         <div className="px-2 font-bold">
           <Link to="/">Home</Link>
@@ -46,11 +46,11 @@ export default function Header() {
         {user ? (
           <>
             {/* {user.isAdmin && ( */}
-              <Link to="/admin">
-                <Button size="sm" variant="ghost">
-                  Admin Panel
-                </Button>
-              </Link>
+            <Link to="/admin">
+              <Button size="sm" variant="ghost">
+                Admin Panel
+              </Button>
+            </Link>
             {/* )} */}
             <span className="text-sm">Welcome, {user.name}!</span>
             <Button onClick={handleSignOut} size="sm" variant="outline">

@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const StallSchema = z.object({
   id: z.uuid(),
@@ -11,4 +11,4 @@ export const StallSchema = z.object({
   owner: z.string().optional(),
   no_telp: z.string().optional(),
   criteria: z.string().min(1).max(1).optional(),
-})
+});

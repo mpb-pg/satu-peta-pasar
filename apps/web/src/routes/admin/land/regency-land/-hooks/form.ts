@@ -1,17 +1,14 @@
-import { createFormHook } from "@tanstack/react-form";
+import { createFormHook } from '@tanstack/react-form';
 
 import {
-  SubscribeButton as subscribeButton,
-  TextField as textField,
-  SelectForm as selectField,
-  TextArea as textArea,
-  Switch as switchField,
   ReadOnlyField as readOnlyField,
-} from "@/routes/admin/-components/form-components";
-import {
-  fieldContext,
-  formContext,
-} from "@/routes/admin/-hooks/form-context";
+  SelectForm as selectField,
+  SubscribeButton as subscribeButton,
+  Switch as switchField,
+  TextArea as textArea,
+  TextField as textField,
+} from '@/routes/admin/-components/form-components';
+import { fieldContext, formContext } from '@/routes/admin/-hooks/form-context';
 
 export const { useAppForm } = createFormHook({
   fieldComponents: {

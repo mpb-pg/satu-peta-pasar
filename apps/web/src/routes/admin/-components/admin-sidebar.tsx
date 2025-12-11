@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Link } from "@tanstack/react-router";
-import { useAtomValue } from "jotai";
-import { Sprout } from "lucide-react";
+import { Link } from '@tanstack/react-router';
+import { useAtomValue } from 'jotai';
+import { Sprout } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -11,16 +11,16 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 import {
   globalNavigationItems,
   marketingMapNavigationItems,
   saleNavigationItems,
   stallNavigationItems,
-} from "../-domain/navigation-items";
-import { currentUserAtom } from "../-libs/admin-atoms";
-import { NavMain } from "./nav-main";
-import { NavUser } from "./nav-user";
+} from '../-domain/navigation-items';
+import { currentUserAtom } from '../-libs/admin-atoms';
+import { NavMain } from './nav-main';
+import { NavUser } from './nav-user';
 
 export function AdminSidebar({
   className,
@@ -45,9 +45,7 @@ export function AdminSidebar({
                   <Sprout className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">
-                    Marketing Map
-                  </span>
+                  <span className="truncate font-semibold">Marketing Map</span>
                   <span className="truncate text-xs">Admin Panel</span>
                 </div>
               </Link>
@@ -64,17 +62,18 @@ export function AdminSidebar({
             <SidebarMenuButton asChild>
               <Link to="/">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2.5}
-                  stroke="currentColor"
+                  aria-label="Back to Home"
                   className="size-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
+                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
                   />
                 </svg>
                 <span className="font-medium">Back to Home</span>

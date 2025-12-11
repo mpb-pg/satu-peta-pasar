@@ -7,19 +7,19 @@
  * @param code The province code from the database (e.g., '11' for Aceh)
  * @returns Promise resolving to the GeoJSON Feature
  */
-export async function loadProvinceGeoJSON(code: string): Promise<any> {
-  try {
-    // Construct the path based on the code to match files in src/lib/data/provinces/
-    // e.g., /src/lib/data/provinces/11.geojson for Aceh
-    const response = await fetch(`/src/lib/data/provinces/${code}.geojson`);
-    if (!response.ok) {
-      throw new Error(`Failed to load province GeoJSON for code ${code}: ${response.statusText}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(`Error loading province GeoJSON for code ${code}:`, error);
-    throw error;
+export async function loadProvinceGeoJSON(
+  code: string
+): Promise<GeoJSON.GeoJSON> {
+  const response = await fetch('/data/indonesia-boundary.geojson');
+  // get specific coordinates for the province code
+  const data = await response.json();
+  const feature = data.features.find(
+    (f: any) => f.properties.code.toString() === code
+  );
+  if (!feature) {
+    throw new Error(`Province with code ${code} not found in GeoJSON data`);
   }
+  return feature;
 }
 
 /**
@@ -27,37 +27,34 @@ export async function loadProvinceGeoJSON(code: string): Promise<any> {
  * @param code The regency code from the database (e.g., '3204' for Kabupaten Bandung)
  * @returns Promise resolving to the GeoJSON Feature
  */
-export async function loadRegencyGeoJSON(code: string): Promise<any> {
-  try {
-    // Construct the path based on the code to match files in src/lib/data/regencies/
-    // e.g., /src/lib/data/regencies/3204.geojson for Kabupaten Bandung
-    const response = await fetch(`/src/lib/data/regencies/${code}.geojson`);
-    if (!response.ok) {
-      throw new Error(`Failed to load regency GeoJSON for code ${code}: ${response.statusText}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(`Error loading regency GeoJSON for code ${code}:`, error);
-    throw error;
+export async function loadRegencyGeoJSON(
+  code: string
+): Promise<GeoJSON.GeoJSON> {
+  const response = await fetch(`/data/regencies/${code}.geojson`);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to load regency GeoJSON for code ${code}: ${response.statusText}`
+    );
   }
+  return await response.json();
 }
 
 /**
  * Get the list of available province codes from the data directory
  * @returns Promise resolving to array of province codes
  */
-export async function getAvailableProvinceCodes(): Promise<string[]> {
+export function getAvailableProvinceCodes(): Promise<string[]> {
   // In a real implementation, this would fetch from the database
   // For now, return an empty array as this requires server-side directory reading
-  return [];
+  return Promise.resolve([]);
 }
 
 /**
  * Get the list of available regency codes from the data directory
  * @returns Promise resolving to array of regency codes
  */
-export async function getAvailableRegencyCodes(): Promise<string[]> {
+export function getAvailableRegencyCodes(): Promise<string[]> {
   // In a real implementation, this would fetch from the database
   // For now, return an empty array as this requires server-side directory reading
-  return [];
+  return Promise.resolve([]);
 }

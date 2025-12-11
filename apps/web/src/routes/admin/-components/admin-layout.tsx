@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { Menu } from "lucide-react";
+import { Menu } from 'lucide-react';
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { AdminSidebar } from "./admin-sidebar";
+} from '@/components/ui/sidebar';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { AdminSidebar } from './admin-sidebar';
 
 type AdminLayoutProps = {
   children: React.ReactNode;

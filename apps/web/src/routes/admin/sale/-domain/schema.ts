@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const SaleSchema = z.object({
   id: z.uuid(),
@@ -13,4 +13,4 @@ export const SaleSchema = z.object({
   year: z.string().min(4).max(4),
   rkapYearly: z.number(),
   realizationLastYear: z.number(),
-})
+});

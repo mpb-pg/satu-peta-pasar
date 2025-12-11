@@ -1,26 +1,35 @@
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { ReactNode, isValidElement, cloneElement, ReactElement } from "react";
-import { MapSidebar } from "./map-sidebar";
-import { Menu } from "lucide-react";
-import { MapProvider, useMapParams } from "./map-context";
+import { Menu } from 'lucide-react';
+import {
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@/components/ui/sidebar';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { MapProvider, useMapParams } from './map-context';
+import { MapSidebar } from './map-sidebar';
 
 type MapLayoutProps = {
   children: ReactNode;
-}
+};
 
 export function MapLayout({ children }: MapLayoutProps) {
   const isMobile = useIsMobile();
   return (
     <MapProvider>
       <SidebarProvider defaultOpen={!isMobile}>
-        <MapLayoutContent isMobile={isMobile}>{children}</MapLayoutContent>
+        <MapLayoutContent>{children}</MapLayoutContent>
       </SidebarProvider>
     </MapProvider>
   );
 }
 
-function MapLayoutContent({ children, isMobile }: { children: ReactNode; isMobile: boolean }) {
+function MapLayoutContent({ children }: { children: ReactNode }) {
   const { params } = useMapParams();
   const injectedFilters = params?.filters as any | undefined;
 

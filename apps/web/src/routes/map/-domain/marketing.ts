@@ -1,4 +1,4 @@
-import { AdministrativeLevel } from "../-app/administrative-boundaries-service";
+import type { AdministrativeLevel } from '../-app/administrative-boundaries-service';
 
 export interface MapViewState {
   center: [number, number]; // [latitude, longitude]
@@ -15,7 +15,7 @@ export interface FilterCriteria {
 }
 
 export interface MarketingMapProps {
-  productData?: any[];
+  productData?: unknown[];
   administrativeLevel?: AdministrativeLevel;
   filters?: FilterCriteria;
   onMapViewChange?: (viewState: MapViewState) => void;

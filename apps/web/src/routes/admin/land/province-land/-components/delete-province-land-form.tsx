@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
 
 export function DeleteProvinceLandForm({
   open,
@@ -21,15 +21,19 @@ export function DeleteProvinceLandForm({
   onDelete: (provinceLandId: string) => void;
 }) {
   const queryClient = useQueryClient();
+  const toast = useToast();
 
   const deleteMutation = useMutation<
     Awaited<ReturnType<typeof orpc.admin.land.province_land.delete.call>>,
     Error,
     Parameters<typeof orpc.admin.land.province_land.delete.call>[0]
   >({
-    mutationFn: (provinceLandData) => orpc.admin.land.province_land.delete.call(provinceLandData),
+    mutationFn: (provinceLandData) =>
+      orpc.admin.land.province_land.delete.call(provinceLandData),
     onError: (error) => {
-      console.log("Error deleting province land:", error);
+      toast.error(
+        `Failed to delete province land. Please try again. ${error.message}`
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -37,7 +41,6 @@ export function DeleteProvinceLandForm({
       });
     },
   });
-  const toast = useToast();
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
@@ -45,9 +48,7 @@ export function DeleteProvinceLandForm({
         <DialogTitle>
           Are you sure you want to delete this province land?
         </DialogTitle>
-        <DialogDescription>
-          This action cannot be undone.
-        </DialogDescription>
+        <DialogDescription>This action cannot be undone.</DialogDescription>
         <div className="mt-4 flex justify-end gap-2">
           <Button onClick={() => onOpenChange(false)} variant="secondary">
             Cancel
@@ -58,7 +59,7 @@ export function DeleteProvinceLandForm({
               try {
                 if (provinceLand) {
                   await deleteMutation.mutateAsync({ id: provinceLand.id });
-                  toast.success("Province land deleted successfully!");
+                  toast.success('Province land deleted successfully!');
                   onDelete(provinceLand.id);
                   onOpenChange(false);
                 }

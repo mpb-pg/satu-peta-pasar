@@ -2,15 +2,15 @@ import {
   useNavigate,
   useRouteContext,
   useRouter,
-} from "@tanstack/react-router";
+} from '@tanstack/react-router';
 import {
   ChevronsUpDown,
   Languages,
   LogOut,
   Settings,
   User,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,29 +18,29 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar";
-import authClient from "@/lib/auth/auth-client";
-import { dynamicActivate } from "@/lib/lingui/i18n";
-import type { User as UserType } from "../-domain/navigation";
+} from '@/components/ui/sidebar';
+import authClient from '@/lib/auth/auth-client';
+import { dynamicActivate } from '@/lib/lingui/i18n';
+import type { User as UserType } from '../-domain/navigation';
 
 const locales = {
-  en: "English",
-  id: "Indonesian",
+  en: 'English',
+  id: 'Indonesian',
 };
 
 export function NavUser({ user }: { user: UserType }) {
   const { isMobile } = useSidebar();
   const { i18n } = useRouteContext({
-    from: "__root__",
+    from: '__root__',
   });
   const navigate = useNavigate({
-    from: "/admin",
+    from: '/admin',
   });
   const router = useRouter();
 
@@ -48,7 +48,7 @@ export function NavUser({ user }: { user: UserType }) {
     authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          window.location.href = "/";
+          window.location.href = '/';
         },
       },
     });
@@ -76,9 +76,9 @@ export function NavUser({ user }: { user: UserType }) {
                 <AvatarImage alt={user.name} src={user.avatar} />
                 <AvatarFallback className="rounded-lg">
                   {user.name
-                    .split(" ")
+                    .split(' ')
                     .map((n) => n[0])
-                    .join("")
+                    .join('')
                     .toUpperCase()}
                 </AvatarFallback>
               </Avatar>
@@ -92,7 +92,7 @@ export function NavUser({ user }: { user: UserType }) {
           <DropdownMenuContent
             align="end"
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
+            side={isMobile ? 'bottom' : 'right'}
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
@@ -101,9 +101,9 @@ export function NavUser({ user }: { user: UserType }) {
                   <AvatarImage alt={user.name} src={user.avatar} />
                   <AvatarFallback className="rounded-lg">
                     {user.name
-                      .split(" ")
+                      .split(' ')
                       .map((n) => n[0])
-                      .join("")
+                      .join('')
                       .toUpperCase()}
                   </AvatarFallback>
                 </Avatar>

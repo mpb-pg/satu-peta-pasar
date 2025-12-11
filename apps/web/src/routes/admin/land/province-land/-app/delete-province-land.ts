@@ -1,7 +1,7 @@
-import { provinceLands } from "@/lib/db/schema/map_product";
-import { protectedProcedure } from "@/lib/orpc";
-import { eq } from "drizzle-orm";
-import z from "zod";
+import { eq } from 'drizzle-orm';
+import z from 'zod';
+import { provinceLands } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
 
 export const deleteProvinceLand = protectedProcedure
   .input(

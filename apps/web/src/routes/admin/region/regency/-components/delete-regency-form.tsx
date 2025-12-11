@@ -1,13 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
-import { orpc } from "@/lib/orpc/client";
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { orpc } from '@/lib/orpc/client';
 
 export function DeleteRegencyForm({
   open,
@@ -27,7 +27,8 @@ export function DeleteRegencyForm({
     Error,
     Parameters<typeof orpc.admin.region.regency.delete.call>[0]
   >({
-    mutationFn: (regencyData) => orpc.admin.region.regency.delete.call(regencyData),
+    mutationFn: (regencyData) =>
+      orpc.admin.region.regency.delete.call(regencyData),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.region.regency.get.queryKey({ input: {} }),
@@ -39,9 +40,7 @@ export function DeleteRegencyForm({
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <DialogTitle>
-          Are you sure you want to delete this regency?
-        </DialogTitle>
+        <DialogTitle>Are you sure you want to delete this regency?</DialogTitle>
         <DialogDescription>This action cannot be undone.</DialogDescription>
 
         <div className="mt-4">
@@ -63,7 +62,7 @@ export function DeleteRegencyForm({
               try {
                 if (regency) {
                   await deleteMutation.mutateAsync({ id: regency.id });
-                  toast.success("Regency deleted successfully!");
+                  toast.success('Regency deleted successfully!');
                   onDelete(regency.id);
                   onOpenChange(false);
                 }
