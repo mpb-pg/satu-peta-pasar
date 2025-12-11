@@ -14,7 +14,7 @@ export async function loadProvinceGeoJSON(
   // get specific coordinates for the province code
   const data = await response.json();
   const feature = data.features.find(
-    (f: any) => f.properties.code.toString() === code
+    (f: any) => f.properties.code === Number(code)
   );
   if (!feature) {
     throw new Error(`Province with code ${code} not found in GeoJSON data`);
