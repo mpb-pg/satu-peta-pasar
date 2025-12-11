@@ -63,6 +63,8 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
           selectedProductBrand={selectedBrand}
           selectedLandType={selectedLandType}
           selectedCommodityType={selectedCommodityType}
+          selectedLandType={selectedLandType}
+          selectedProductBrand={selectedBrand}
         />
       </div>
     </div>

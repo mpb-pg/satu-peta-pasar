@@ -27,14 +27,6 @@ import { createTodo } from '@/routes/todos/-app/create-todo';
 import { deleteTodo } from '@/routes/todos/-app/delete-todo';
 import { getTodos } from '@/routes/todos/-app/get-todos';
 import { toggleTodo } from '@/routes/todos/-app/toggle-todo';
-import { createLandType } from '@/routes/admin/land/-app/create-land-type';
-import { updateLandType } from '@/routes/admin/land/-app/update-land-type';
-import { deleteLandType } from '@/routes/admin/land/-app/delete-land-type';
-import { getProvinceLands } from '@/routes/admin/land/province-land/-app/get-province-lands';
-import { createProvinceLand } from '@/routes/admin/land/province-land/-app/create-province-land';
-import { updateProvinceLand } from '@/routes/admin/land/province-land/-app/update-province-land';
-import { deleteProvinceLand } from '@/routes/admin/land/province-land/-app/delete-province-land';
-import { getProvincePotentials } from '@/routes/admin/potential/province_potential/-app/get-province-potentials';
 /**
  * Main oRPC Router
  *
