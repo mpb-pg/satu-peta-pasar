@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import L from 'leaflet';
@@ -44,6 +45,7 @@ const stallMarkerIcon = L.divIcon({
   popupAnchor: [0, -32],
 });
 const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
+  const { t } = useLingui();
   const [stallsData, setStallsData] = useState<Stall[]>([]);
 
   // Fetch stalls from oRPC
@@ -110,7 +112,7 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong>Address:</strong> {stall.address}
+                      <strong>{t`Address`}:</strong> {stall.address}
                     </p>
                   )}
                   {stall.owner && (
@@ -121,7 +123,7 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong>Owner:</strong> {stall.owner}
+                      <strong>{t`Owner`}:</strong> {stall.owner}
                     </p>
                   )}
                   {stall.notelp && (
@@ -132,7 +134,7 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong>Phone:</strong> {stall.notelp}
+                      <strong>{t`Phone`}:</strong> {stall.notelp}
                     </p>
                   )}
                   {stall.criteria && (
@@ -143,7 +145,7 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong>Criteria:</strong> {stall.criteria}
+                      <strong>{t`Criteria`}:</strong> {stall.criteria}
                     </p>
                   )}
                 </div>
@@ -164,7 +166,7 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                   }}
                   to="/stall/$id"
                 >
-                  View Details
+                  {t`View Details`}
                 </Link>
               </div>
             </Popup>

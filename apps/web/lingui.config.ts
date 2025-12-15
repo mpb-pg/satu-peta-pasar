@@ -28,6 +28,18 @@ export default defineConfig({
       include: ['src/routes/todos/**'],
       exclude: ['**/node_modules/**'],
     },
+    // Admin feature translations
+    {
+      path: '<rootDir>/src/routes/admin/-locales/admin-{locale}',
+      include: ['src/routes/admin/**'],
+      exclude: ['**/node_modules/**'],
+    },
+    // Map feature translations
+    {
+      path: '<rootDir>/src/routes/map/-locales/map-{locale}',
+      include: ['src/routes/map/**'],
+      exclude: ['**/node_modules/**'],
+    },
   ],
   format: 'po',
   formatOptions: {

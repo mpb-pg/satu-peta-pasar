@@ -2,6 +2,7 @@ import type React from 'react';
 import { useEffect, useState } from 'react';
 import { GeoJSON, MapContainer, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useLingui } from '@lingui/react/macro';
 import L from 'leaflet';
 import { Button } from '@/components/ui/button';
 import {
@@ -153,6 +154,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
   filters,
   onMapViewChange,
 }) => {
+  const { t } = useLingui();
   const [showStallMarkers, setShowStallMarkers] = useState<boolean>(false);
   const [showChoropleth, setShowChoropleth] = useState<boolean>(false);
   const [choroplethLoading, setChoroplethLoading] = useState<boolean>(false);
@@ -199,7 +201,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
             size="sm"
             variant="outline"
           >
-            {showStallMarkers ? 'Hide Kios' : 'Show Kios'}
+            {showStallMarkers ? t`Hide Kios` : t`Show Kios`}
           </Button>
           <Button
             aria-pressed={!showChoropleth}
@@ -207,7 +209,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
             size="sm"
             variant="outline"
           >
-            {showChoropleth ? 'Hide Heatmap' : 'Show Heatmap'}
+            {showChoropleth ? t`Hide Potential` : t`Show Potential`}
           </Button>
           {choroplethLoading && (
             <div
@@ -242,7 +244,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
                   />
                 </circle>
               </svg>
-              <div style={{ fontSize: 12, color: '#333' }}>Loading...</div>
+              <div style={{ fontSize: 12, color: '#333' }}>{t`Loading...`}</div>
             </div>
           )}
         </div>

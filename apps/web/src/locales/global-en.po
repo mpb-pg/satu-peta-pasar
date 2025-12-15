@@ -12,3 +12,32 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+
+#: src/components/header.tsx
+msgid "Admin Panel"
+msgstr "Admin Panel"
+
+#: src/components/header.tsx
+msgid "Home"
+msgstr "Home"
+
+#: src/components/header.tsx
+msgid "Potential Maps"
+msgstr "Potential Maps"
+
+#: src/components/header.tsx
+msgid "Sign In"
+msgstr "Sign In"
+
+#: src/components/header.tsx
+msgid "Sign Out"
+msgstr "Sign Out"
+
+#: src/components/header.tsx
+msgid "Sign Up"
+msgstr "Sign Up"
+
+#. placeholder {0}: user.name
+#: src/components/header.tsx
+msgid "Welcome, {0}!"
+msgstr "Welcome, {0}!"

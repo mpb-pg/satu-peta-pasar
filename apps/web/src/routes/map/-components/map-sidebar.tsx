@@ -1,5 +1,6 @@
 'use client';
 
+import { useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Label } from '@/components/ui/label';
@@ -37,6 +38,7 @@ export function MapSidebar({
   ...props
 }: { className?: string } & React.ComponentProps<typeof Sidebar> &
   MarketingMapProps) {
+  const { t } = useLingui();
   const toast = useToast();
   const [provinces, setProvinces] = useState<
     { id: string; name: string; code: string }[]
@@ -237,7 +239,7 @@ export function MapSidebar({
             <SidebarMenuButton asChild size="lg">
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  Marketing Map Control
+                  {t`Marketing Map Control`}
                 </span>
               </div>
             </SidebarMenuButton>
@@ -250,7 +252,7 @@ export function MapSidebar({
         <SidebarMenu>
           <SidebarMenuItem className="ml-4">
             <Label className="mb-2" htmlFor="administrasi-level">
-              Administrative Level
+              {t`Administrative Level`}
             </Label>
             <Select
               onValueChange={(value) =>
@@ -259,17 +261,17 @@ export function MapSidebar({
               value={currentLevel}
             >
               <SelectTrigger className="w-[150px]">
-                <SelectValue placeholder="Administrative Level" />
+                <SelectValue placeholder={t`Administrative Level`} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem key="national" value="national">
-                  National
+                  {t`National`}
                 </SelectItem>
                 <SelectItem key="province" value="province">
-                  Province
+                  {t`Province`}
                 </SelectItem>
                 <SelectItem key="regency" value="regency">
-                  Regency
+                  {t`Regency`}
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -278,7 +280,7 @@ export function MapSidebar({
           {currentLevel === 'province' && (
             <SidebarMenuItem className="mt-2 ml-4">
               <Label className="mb-2" htmlFor="province">
-                Province
+                {t`Province`}
               </Label>
               <Select
                 onValueChange={(value) => handleProvinceChange(value)}
@@ -302,7 +304,7 @@ export function MapSidebar({
             <>
               <SidebarMenuItem className="mt-2 ml-4">
                 <Label className="mb-2" htmlFor="regency">
-                  Province
+                  {t`Province`}
                 </Label>
                 <Select
                   onValueChange={(value) => handleProvinceChange(value)}
@@ -322,7 +324,7 @@ export function MapSidebar({
               </SidebarMenuItem>
               <SidebarMenuItem className="mt-2 ml-4">
                 <Label className="mb-2" htmlFor="regency">
-                  Regency
+                  {t`Regency`}
                 </Label>
                 <Select
                   onValueChange={(value) => handleRegencyChange(value)}
@@ -346,7 +348,7 @@ export function MapSidebar({
           {/* Filters block */}
           <SidebarMenuItem className="mt-2 ml-4">
             <Label className="mb-2" htmlFor="filter">
-              Filter by
+              {t`Filter by`}
             </Label>
             <Select
               onValueChange={(value) => handleFilterChange(value)}
@@ -356,7 +358,7 @@ export function MapSidebar({
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="product_brand">Product Brand</SelectItem>
+                <SelectItem value="product_brand">{t`Product Brand`}</SelectItem>
                 {/* <SelectItem value="land_type">Land Type</SelectItem> */}
                 {/* <SelectItem value="commodity_type">Commodity Type</SelectItem> */}
               </SelectContent>
@@ -366,7 +368,7 @@ export function MapSidebar({
           {currentFilter === 'product_brand' && (
             <SidebarMenuItem className="mt-2 ml-4">
               <Label className="mb-2" htmlFor="product-brand">
-                Product Brand
+                {t`Product Brand`}
               </Label>
               <Select
                 onValueChange={(value) => handleBrandChange(value)}
@@ -389,7 +391,7 @@ export function MapSidebar({
           {currentFilter === 'land_type' && (
             <SidebarMenuItem className="mt-2 ml-4">
               <Label className="mb-2" htmlFor="land-type">
-                Land Type
+                {t`Land Type`}
               </Label>
               <Select
                 onValueChange={(value) => {
@@ -416,7 +418,7 @@ export function MapSidebar({
           {currentFilter === 'commodity_type' && (
             <SidebarMenuItem className="mt-2 ml-4">
               <Label className="mb-2" htmlFor="commodity-type">
-                Commodity Type
+                {t`Commodity Type`}
               </Label>
               <Select
                 onValueChange={(value) => handleCommodityTypeChange(value)}

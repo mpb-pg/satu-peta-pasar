@@ -1,3 +1,4 @@
+import { Trans, useLingui } from '@lingui/react/macro';
 import { Link } from '@tanstack/react-router';
 import LanguageSwitcher from '@/components/language-switcher';
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,7 @@ import { Route } from '@/routes/__root';
 
 export default function Header() {
   const { user } = Route.useRouteContext();
+  const { t } = useLingui();
 
   const handleSignOut = () => {
     authClient.signOut({
@@ -21,12 +23,16 @@ export default function Header() {
     <header className="flex justify-between gap-2 border-amber-950 border-b bg-white p-2 text-black shadow-md">
       <nav className="flex flex-row">
         <div className="px-2 font-bold">
-          <Link to="/">Home</Link>
+          <Link to="/">
+            <Trans>Home</Trans>
+          </Link>
         </div>
 
         {user ? (
           <div className="px-2 font-bold">
-            <Link to="/map">Potential Maps</Link>
+            <Link to="/map">
+              <Trans>Potential Maps</Trans>
+            </Link>
           </div>
         ) : null}
 
@@ -50,24 +56,26 @@ export default function Header() {
             {/* {user.isAdmin && ( */}
             <Link to="/admin">
               <Button size="sm" variant="ghost">
-                Admin Panel
+                <Trans>Admin Panel</Trans>
               </Button>
             </Link>
             {/* )} */}
-            <span className="text-sm">Welcome, {user.name}!</span>
+            <span className="text-sm">{t`Welcome, ${user.name}!`}</span>
             <Button onClick={handleSignOut} size="sm" variant="outline">
-              Sign Out
+              <Trans>Sign Out</Trans>
             </Button>
           </>
         ) : (
           <>
             <Link to="/auth/login">
               <Button size="sm" variant="outline">
-                Sign In
+                <Trans>Sign In</Trans>
               </Button>
             </Link>
             <Link to="/auth/signup">
-              <Button size="sm">Sign Up</Button>
+              <Button size="sm">
+                <Trans>Sign Up</Trans>
+              </Button>
             </Link>
           </>
         )}

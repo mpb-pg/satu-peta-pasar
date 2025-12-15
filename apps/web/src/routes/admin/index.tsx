@@ -1,3 +1,4 @@
+import { useLingui } from '@lingui/react/macro';
 import { createFileRoute } from '@tanstack/react-router';
 import { Activity } from 'lucide-react';
 import {
@@ -14,14 +15,16 @@ export const Route = createFileRoute('/admin/')({
 
 function AdminDashboard() {
   const { user } = Route.useRouteContext();
+  const { t } = useLingui();
 
   return (
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="font-bold text-3xl tracking-tight">Dashboard</h1>
+        <h1 className="font-bold text-3xl tracking-tight">{t`Dashboard`}</h1>
         <p className="text-muted-foreground text-sm">
-          Welcome back, {user?.name} Here's an overview of marketing maps
+          {t`Welcome back, ${user?.name}`}{' '}
+          {t`Here's an overview of marketing maps`}
         </p>
       </div>
 
@@ -30,7 +33,7 @@ function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="font-medium text-sm">
-              Number of Provinces
+              {t`Number of Provinces`}
             </CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -43,7 +46,7 @@ function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="font-medium text-sm">
-              Number of Regencies
+              {t`Number of Regencies`}
             </CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -56,7 +59,7 @@ function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="font-medium text-sm">
-              Number of Land Type
+              {t`Number of Land Type`}
             </CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
@@ -71,7 +74,7 @@ function AdminDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="font-medium text-sm">
-              Number of Commodities
+              {t`Number of Commodities`}
             </CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
