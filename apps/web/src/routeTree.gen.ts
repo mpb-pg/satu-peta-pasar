@@ -12,7 +12,6 @@ import { createServerRootRoute } from '@tanstack/react-start/server'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestRouteImport } from './routes/test'
-import { Route as MapsRouteImport } from './routes/maps'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as MapRouteRouteImport } from './routes/map/route'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
@@ -53,11 +52,6 @@ const rootServerRouteImport = createServerRootRoute()
 const TestRoute = TestRouteImport.update({
   id: '/test',
   path: '/test',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MapsRoute = MapsRouteImport.update({
-  id: '/maps',
-  path: '/maps',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -244,7 +238,6 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteRouteWithChildren
   '/map': typeof MapRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
-  '/maps': typeof MapsRoute
   '/test': typeof TestRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -277,7 +270,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
-  '/maps': typeof MapsRoute
   '/test': typeof TestRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -313,7 +305,6 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteRouteWithChildren
   '/map': typeof MapRouteRouteWithChildren
   '/dashboard': typeof DashboardRoute
-  '/maps': typeof MapsRoute
   '/test': typeof TestRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -350,7 +341,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/map'
     | '/dashboard'
-    | '/maps'
     | '/test'
     | '/auth/login'
     | '/auth/signup'
@@ -383,7 +373,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/dashboard'
-    | '/maps'
     | '/test'
     | '/auth/login'
     | '/auth/signup'
@@ -418,7 +407,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/map'
     | '/dashboard'
-    | '/maps'
     | '/test'
     | '/auth/login'
     | '/auth/signup'
@@ -454,7 +442,6 @@ export interface RootRouteChildren {
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   MapRouteRoute: typeof MapRouteRouteWithChildren
   DashboardRoute: typeof DashboardRoute
-  MapsRoute: typeof MapsRoute
   TestRoute: typeof TestRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
@@ -504,13 +491,6 @@ declare module '@tanstack/react-router' {
       path: '/test'
       fullPath: '/test'
       preLoaderRoute: typeof TestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/maps': {
-      id: '/maps'
-      path: '/maps'
-      fullPath: '/maps'
-      preLoaderRoute: typeof MapsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -819,7 +799,6 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRouteRoute: AdminRouteRouteWithChildren,
   MapRouteRoute: MapRouteRouteWithChildren,
   DashboardRoute: DashboardRoute,
-  MapsRoute: MapsRoute,
   TestRoute: TestRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
