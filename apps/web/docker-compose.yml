@@ -1,23 +1,42 @@
-name: my-better-t-app
+name: siperan-app
 
 services:
+  web:
+    build:
+      context: ../..
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "${APP_PORT:-3007}:3000"
+    environment:
+      - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-password}@postgres:${DB_PORT:-5432}/${DB_NAME:-siperan_db}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3000}
+      - NODE_ENV=production
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
   postgres:
     image: postgres:16-alpine
-    container_name: my-better-t-app-postgres
+    container_name: siperan-app-postgres
     environment:
-      POSTGRES_DB: my_better_t_app
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB=${DB_NAME:-siperan_db}
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASS:-password}
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5433}:5432"
     volumes:
-      - my_better_t_app_postgres_data:/var/lib/postgresql/data
+      - siperan_app_postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
       interval: 10s
       timeout: 5s
       retries: 5
     restart: unless-stopped
 
 volumes:
-  my_better_t_app_postgres_data:
+  siperan_app_postgres_data:
