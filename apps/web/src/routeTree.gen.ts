@@ -21,6 +21,7 @@ import { Route as ProductPotentialIndexRouteImport } from './routes/product-pote
 import { Route as ProductKnowledgeIndexRouteImport } from './routes/product-knowledge/index'
 import { Route as MapIndexRouteImport } from './routes/map/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as StallIdRouteImport } from './routes/stall/$id'
 import { Route as DemoOrpcTodoRouteImport } from './routes/demo/orpc-todo'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
@@ -96,6 +97,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRouteRoute,
+} as any)
+const StallIdRoute = StallIdRouteImport.update({
+  id: '/stall/$id',
+  path: '/stall/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DemoOrpcTodoRoute = DemoOrpcTodoRouteImport.update({
   id: '/demo/orpc-todo',
@@ -229,6 +235,7 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/stall/$id': typeof StallIdRoute
   '/admin/': typeof AdminIndexRoute
   '/map/': typeof MapIndexRoute
   '/product-knowledge': typeof ProductKnowledgeIndexRoute
@@ -259,6 +266,7 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/stall/$id': typeof StallIdRoute
   '/admin': typeof AdminIndexRoute
   '/map': typeof MapIndexRoute
   '/product-knowledge': typeof ProductKnowledgeIndexRoute
@@ -292,6 +300,7 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/demo/orpc-todo': typeof DemoOrpcTodoRoute
+  '/stall/$id': typeof StallIdRoute
   '/admin/': typeof AdminIndexRoute
   '/map/': typeof MapIndexRoute
   '/product-knowledge/': typeof ProductKnowledgeIndexRoute
@@ -326,6 +335,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/stall/$id'
     | '/admin/'
     | '/map/'
     | '/product-knowledge'
@@ -356,6 +366,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/stall/$id'
     | '/admin'
     | '/map'
     | '/product-knowledge'
@@ -388,6 +399,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/demo/orpc-todo'
+    | '/stall/$id'
     | '/admin/'
     | '/map/'
     | '/product-knowledge/'
@@ -421,6 +433,7 @@ export interface RootRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
   DemoOrpcTodoRoute: typeof DemoOrpcTodoRoute
+  StallIdRoute: typeof StallIdRoute
   ProductKnowledgeIndexRoute: typeof ProductKnowledgeIndexRoute
   ProductPotentialIndexRoute: typeof ProductPotentialIndexRoute
   SalesRealizationIndexRoute: typeof SalesRealizationIndexRoute
@@ -529,6 +542,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRouteRoute
+    }
+    '/stall/$id': {
+      id: '/stall/$id'
+      path: '/stall/$id'
+      fullPath: '/stall/$id'
+      preLoaderRoute: typeof StallIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/demo/orpc-todo': {
       id: '/demo/orpc-todo'
@@ -762,6 +782,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
   DemoOrpcTodoRoute: DemoOrpcTodoRoute,
+  StallIdRoute: StallIdRoute,
   ProductKnowledgeIndexRoute: ProductKnowledgeIndexRoute,
   ProductPotentialIndexRoute: ProductPotentialIndexRoute,
   SalesRealizationIndexRoute: SalesRealizationIndexRoute,

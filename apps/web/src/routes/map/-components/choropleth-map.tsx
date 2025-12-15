@@ -14,8 +14,6 @@ interface ChoroplethMapProps {
 
 const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   productBrandId,
-  landTypeId,
-  commodityTypeId,
   onLoadingChange,
 }) => {
   const map = useMap();
@@ -26,16 +24,16 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
       input: { productBrandId },
     })
   );
-
-  const landData = useQuery(
-    orpc.admin.land.province_land.get.queryOptions({ input: { landTypeId } })
-  );
-
-  const commodityData = useQuery(
-    orpc.admin.commodity.province_commodity.get.queryOptions({
-      input: { commodityTypeId },
-    })
-  );
+  // convert potential with divide by 1000 to get in ton
+  useEffect(() => {
+    if (potentialsData.data?.data) {
+      const converted = potentialsData.data.data.map((item: any) => ({
+        ...item,
+        potential: item.potential ? item.potential / 1000 : 0,
+      }));
+      potentialsData.data.data = converted;
+    }
+  }, [potentialsData.data]);
 
   // Fetch provinces list and build a map of provinceCode -> province metadata
   const provincesData = useQuery(
@@ -120,7 +118,7 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   //   };
   // }, [provinceMap]);
 
-  const { data: geoJsonData, isLoading: isGeoLoading } = useQuery({
+  const { data: geoJsonData } = useQuery({
     queryKey: ['indonesia-geojson'],
     queryFn: async () => {
       // Pastikan file ada di folder public/data/
@@ -191,7 +189,7 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
       const provinceMeta = provinceMap[code];
       copy.properties.provinceId = provinceMeta ? provinceMeta.id : null;
       const meta = potentials[String(copy.properties.provinceId ?? '')] ?? null;
-      copy.properties.potential = meta?.potential ?? 0;
+      copy.properties.potential = meta?.potential ? meta.potential : 0;
       copy.properties.productBrandName = meta?.productBrandName ?? null;
       copy.properties.productBrandId = meta?.productBrandId ?? null;
       return copy;
@@ -199,7 +197,7 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
     // compute min/max for legend
     const values = features.map((f: any) =>
-      Number(f.properties.potential ?? 0)
+      Number(f.properties.potential ? f.properties.potential : 0)
     );
     const min = Math.min(...values);
     const max = Math.max(...values);
@@ -312,12 +310,10 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
     // add productBrandName
     const productBrandName =
       feature.properties?.productBrandName ?? 'Unknown Brand';
-    const potential = feature.properties?.potential
-      ? feature.properties.potential / 1000
-      : 0;
+    const potential = feature.properties?.potential ?? 0;
     const formatted_potential = Number(potential).toLocaleString();
     layer.bindPopup(
-      `<strong>${name}</strong><br/>Product: ${productBrandName}<br/>Product Potential: ${formatted_potential} ton`
+      `<strong>${name}</strong><br/><b>Product:</b> ${productBrandName}<br/><b>Product Potential:</b> ${formatted_potential} ton`
     );
   };
 

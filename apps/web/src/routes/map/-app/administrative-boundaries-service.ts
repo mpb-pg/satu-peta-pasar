@@ -1,4 +1,3 @@
-import type { Feature, FeatureCollection } from 'geojson';
 import { orpc } from '../../../lib/orpc/client';
 
 export type AdministrativeLevel = 'national' | 'province' | 'regency';
@@ -11,51 +10,6 @@ export interface AdministrativeBoundary {
 }
 
 export class AdministrativeBoundariesService {
-  /**
-   * Get boundaries for a specific administrative level
-   * @param level The administrative level to fetch boundaries for
-   * @returns Promise resolving to GeoJSON FeatureCollection
-   */
-  // async getBoundaries(level: AdministrativeLevel): Promise<FeatureCollection> {
-  //   switch (level) {
-  //     case 'national':
-  //       return this.loadNationalBoundaries();
-  //     case 'province':
-  //       return this.loadProvinceBoundaries();
-  //     case 'regency':
-  //       return this.loadRegencyBoundaries();
-  //     default:
-  //       throw new Error(`Unsupported administrative level: ${level}`);
-  //   }
-  // }
-
-  /**
-   * Get a specific boundary by its ID and level
-   * @param level The administrative level
-   * @param id The ID of the boundary
-   * @returns Promise resolving to GeoJSON Feature or null if not found
-   */
-  // async getBoundaryById(
-  //   level: AdministrativeLevel,
-  //   id: string
-  // ): Promise<Feature | null> {
-  //   const boundaries = await this.getBoundaries(level);
-  //   const feature = boundaries.features.find((f: any) => f.id === id);
-  //   return feature || null;
-  // }
-
-  /**
-   * Get all boundary IDs for a specific level
-   * @param level The administrative level
-   * @returns Promise resolving to array of boundary IDs
-   */
-  // async getAllBoundariesForLevel(
-  //   level: AdministrativeLevel
-  // ): Promise<string[]> {
-  //   const boundaries = await this.getBoundaries(level);
-  //   return boundaries.features.map((feature: any) => feature.id);
-  // }
-
   /**
    * Get all administrative boundaries for a level with metadata
    * @param level The administrative level
@@ -76,73 +30,8 @@ export class AdministrativeBoundariesService {
     }
   }
 
-  // private async loadNationalBoundaries(): Promise<FeatureCollection> {
-  //   // For national level, we'll use a simplified Indonesia boundary
-  //   try {
-  //     const response = await fetch('/data/indonesia-boundary.geojson');
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `Failed to load national boundaries: ${response.statusText}`
-  //       );
-  //     }
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error('Error loading national boundaries:', error);
-  //     // Return a fallback empty collection
-  //     return {
-  //       type: 'FeatureCollection',
-  //       features: [],
-  //     };
-  //   }
-  // }
-
-  // private async loadProvinceBoundaries(): Promise<FeatureCollection> {
-  //   // This would load all province boundaries from combined GeoJSON
-  //   try {
-  //     const response = await fetch(
-  //       '/src/lib/data/provinces-boundaries.geojson'
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `Failed to load province boundaries: ${response.statusText}`
-  //       );
-  //     }
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error('Error loading province boundaries:', error);
-  //     // Return a fallback empty collection
-  //     return {
-  //       type: 'FeatureCollection',
-  //       features: [],
-  //     };
-  //   }
-  // }
-
-  // private async loadRegencyBoundaries(): Promise<FeatureCollection> {
-  //   // This would load all regency boundaries from combined GeoJSON
-  //   try {
-  //     const response = await fetch(
-  //       '/src/lib/data/regencies-boundaries.geojson'
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `Failed to load regency boundaries: ${response.statusText}`
-  //       );
-  //     }
-  //     return await response.json();
-  //   } catch (error) {
-  //     console.error('Error loading regency boundaries:', error);
-  //     // Return a fallback empty collection
-  //     return {
-  //       type: 'FeatureCollection',
-  //       features: [],
-  //     };
-  //   }
-  // }
-
   private async getNationalBoundaries(): Promise<AdministrativeBoundary[]> {
     // Return Indonesia as a single national boundary
-    console.log('Fetching national boundaries');
     return [
       {
         id: 'd56c1151-c54b-45c7-ab14-1162ca281d7a',

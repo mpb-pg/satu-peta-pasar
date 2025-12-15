@@ -20,6 +20,8 @@ import { createRegency } from '@/routes/admin/region/regency/-app/create-regency
 import { deleteRegency } from '@/routes/admin/region/regency/-app/delete-regency';
 import { getRegencies } from '@/routes/admin/region/regency/-app/get-regencies';
 import { updateRegency } from '@/routes/admin/region/regency/-app/update-regency';
+import { getStallProductBrand } from '@/routes/admin/stall/-app/get-stall-product-brand';
+import { getStalls } from '@/routes/admin/stall/-app/get-stalls';
 import { getSession } from '@/routes/auth/-app/get-session';
 import { createTodo } from '@/routes/todos/-app/create-todo';
 import { deleteTodo } from '@/routes/todos/-app/delete-todo';
@@ -159,6 +161,11 @@ export default {
       product_brand: {
         get: getProductBrands,
       },
+    },
+
+    stall: {
+      get: getStalls,
+      getStallProduct: getStallProductBrand,
     },
   },
 };

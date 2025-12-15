@@ -24,20 +24,22 @@ export default function Header() {
           <Link to="/">Home</Link>
         </div>
 
+        {user ? (
+            <div className="px-2 font-bold">
+              <Link to="/map">Potential Maps</Link>
+            </div>
+          ) : null }
+
         <div className="px-2 font-bold">
-          <Link to="/map">Potential Maps</Link>
+          {/* <Link to="/product-potential">Product Potential</Link> */}
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/product-potential">Product Potential</Link>
+          {/* <Link to="/sales-realization">Sales Realization</Link> */}
         </div>
 
         <div className="px-2 font-bold">
-          <Link to="/sales-realization">Sales Realization</Link>
-        </div>
-
-        <div className="px-2 font-bold">
-          <Link to="/product-knowledge">Product Knowledge</Link>
+          {/* <Link to="/product-knowledge">Product Knowledge</Link> */}
         </div>
       </nav>
 

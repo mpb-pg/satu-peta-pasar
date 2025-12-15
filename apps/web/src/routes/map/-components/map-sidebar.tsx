@@ -357,8 +357,8 @@ export function MapSidebar({
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="product_brand">Product Brand</SelectItem>
-                <SelectItem value="land_type">Land Type</SelectItem>
-                <SelectItem value="commodity_type">Commodity Type</SelectItem>
+                {/* <SelectItem value="land_type">Land Type</SelectItem> */}
+                {/* <SelectItem value="commodity_type">Commodity Type</SelectItem> */}
               </SelectContent>
             </Select>
           </SidebarMenuItem>

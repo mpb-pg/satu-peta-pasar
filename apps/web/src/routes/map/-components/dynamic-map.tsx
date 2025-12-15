@@ -10,6 +10,7 @@ import {
 } from '../../../lib/utils/geojson-utils';
 import type { AdministrativeLevel } from '../-app/administrative-boundaries-service';
 import ChoroplethMap from './choropleth-map';
+import StallMarkers from './stall-markers';
 
 interface MapViewState {
   center: [number, number];
@@ -152,6 +153,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
   filters,
   onMapViewChange,
 }) => {
+  const [showStallMarkers, setShowStallMarkers] = useState<boolean>(false);
   const [showChoropleth, setShowChoropleth] = useState<boolean>(false);
   const [choroplethLoading, setChoroplethLoading] = useState<boolean>(false);
   const center: [number, number] = [-0.7893, 113.9213];
@@ -183,14 +185,29 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
           pointerEvents: 'auto',
         }}
       >
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: 8,
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Button
+            aria-pressed={showStallMarkers}
+            onClick={() => setShowStallMarkers((v) => !v)}
+            size="sm"
+            variant="outline"
+          >
+            {showStallMarkers ? 'Hide Kios' : 'Show Kios'}
+          </Button>
           <Button
             aria-pressed={!showChoropleth}
             onClick={() => setShowChoropleth((v) => !v)}
             size="sm"
             variant="outline"
           >
-            {showChoropleth ? 'Hide Choropleth' : 'Show Choropleth'}
+            {showChoropleth ? 'Hide Heatmap' : 'Show Heatmap'}
           </Button>
           {choroplethLoading && (
             <div
@@ -245,6 +262,9 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
           onLoadingChange={setChoroplethLoading}
           productBrandId={selectedProductBrand}
         />
+      )}
+      {showStallMarkers && (
+        <StallMarkers filters={filters} showStallMarkers={showStallMarkers} />
       )}
       <MapViewHandler onMapViewChange={onMapViewChange} />
     </MapContainer>
