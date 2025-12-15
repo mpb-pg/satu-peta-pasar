@@ -41,11 +41,11 @@ COPY --from=builder /usr/src/monorepo/apps/web/.output ./.output
 COPY --from=builder /usr/src/monorepo/node_modules ./node_modules
 
 # Copy compiled lingui messages
-COPY --from=builder /usr/src/monorepo/apps/web/src/locales ./src/locales
-COPY --from=builder /usr/src/monorepo/apps/web/src/routes/auth/-locales ./src/routes/auth/-locales
-COPY --from=builder /usr/src/monorepo/apps/web/src/routes/todos/-locales ./src/routes/todos/-locales
-COPY --from=builder /usr/src/monorepo/apps/web/src/routes/admin/-locales ./src/routes/admin/-locales
-COPY --from=builder /usr/src/monorepo/apps/web/src/routes/map/-locales ./src/routes/map/-locales
+# COPY --from=builder /usr/src/monorepo/apps/web/src/locales ./src/locales
+# COPY --from=builder /usr/src/monorepo/apps/web/src/routes/auth/-locales ./src/routes/auth/-locales
+# COPY --from=builder /usr/src/monorepo/apps/web/src/routes/todos/-locales ./src/routes/todos/-locales
+# COPY --from=builder /usr/src/monorepo/apps/web/src/routes/admin/-locales ./src/routes/admin/-locales
+# COPY --from=builder /usr/src/monorepo/apps/web/src/routes/map/-locales ./src/routes/map/-locales
 # COPY --from=builder /usr/src/monorepo/apps/web/src/routes/-locales ./src/routes/-locales
 
 # Copy package.json for runtime
