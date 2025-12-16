@@ -10,8 +10,8 @@ services:
     environment:
       - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-password}@postgres:${DB_PORT:-5432}/${DB_NAME:-siperan_db}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
-      - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
-      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3000}
+      - BETTER_AUTH_URL=${BETTER_AUTH_URL}
+      - CORS_ORIGIN=${CORS_ORIGIN}
       - NODE_ENV=production
     env_file:
       - ./.env
