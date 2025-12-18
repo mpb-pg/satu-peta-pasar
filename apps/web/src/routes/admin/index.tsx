@@ -25,8 +25,7 @@ function AdminDashboard() {
           <Trans>Dashboard</Trans>
         </h1>
         <p className="text-muted-foreground text-sm">
-          {t`Welcome back, ${user?.name}`}
-          {' '}
+          {t`Welcome back, ${user?.name}`}{' '}
           <Trans>Here's an overview of marketing maps</Trans>
         </p>
       </div>
@@ -95,7 +94,9 @@ function AdminDashboard() {
             <Trans>New and Development Product</Trans>
           </CardTitle>
           <CardDescription>
-            <Trans>Products of concern to the New Product Management Unit</Trans>
+            <Trans>
+              Products of concern to the New Product Management Unit
+            </Trans>
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -109,7 +110,10 @@ function AdminDashboard() {
                   <Trans>Petrofish</Trans>
                 </p>
                 <p className="text-muted-foreground text-xs">
-                  <Trans>New Probiotic Innovations Petrofish grows natural food and contains beneficial microbes!</Trans>
+                  <Trans>
+                    New Probiotic Innovations Petrofish grows natural food and
+                    contains beneficial microbes!
+                  </Trans>
                 </p>
               </div>
             </div>
@@ -123,7 +127,10 @@ function AdminDashboard() {
                   <Trans>NPK Phonska Cair</Trans>
                 </p>
                 <p className="text-muted-foreground text-xs">
-                  <Trans>Foliar fertilizer with NPK 10-8-3 content enriched with complete micronutrients and ZPT!</Trans>
+                  <Trans>
+                    Foliar fertilizer with NPK 10-8-3 content enriched with
+                    complete micronutrients and ZPT!
+                  </Trans>
                 </p>
               </div>
             </div>
@@ -137,7 +144,10 @@ function AdminDashboard() {
                   <Trans>Phonska OCA Plus</Trans>
                 </p>
                 <p className="text-muted-foreground text-xs">
-                  <Trans>Liquid organic fertilizer containing organic carbon, macro and micro nutrients and functional microbes!</Trans>
+                  <Trans>
+                    Liquid organic fertilizer containing organic carbon, macro
+                    and micro nutrients and functional microbes!
+                  </Trans>
                 </p>
               </div>
             </div>

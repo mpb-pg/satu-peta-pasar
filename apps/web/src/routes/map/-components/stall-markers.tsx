@@ -111,7 +111,10 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong><Trans>Address</Trans>:</strong> {stall.address}
+                      <strong>
+                        <Trans>Address</Trans>:
+                      </strong>{' '}
+                      {stall.address}
                     </p>
                   )}
                   {stall.owner && (
@@ -122,7 +125,10 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong><Trans>Owner</Trans>:</strong> {stall.owner}
+                      <strong>
+                        <Trans>Owner</Trans>:
+                      </strong>{' '}
+                      {stall.owner}
                     </p>
                   )}
                   {stall.notelp && (
@@ -133,7 +139,10 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong><Trans>Phone</Trans>:</strong> {stall.notelp}
+                      <strong>
+                        <Trans>Phone</Trans>:
+                      </strong>{' '}
+                      {stall.notelp}
                     </p>
                   )}
                   {stall.criteria && (
@@ -144,7 +153,10 @@ const StallMarkers: React.FC<StallMarkersProps> = ({ showStallMarkers }) => {
                         color: '#666',
                       }}
                     >
-                      <strong><Trans>Criteria</Trans>:</strong> {stall.criteria}
+                      <strong>
+                        <Trans>Criteria</Trans>:
+                      </strong>{' '}
+                      {stall.criteria}
                     </p>
                   )}
                 </div>
