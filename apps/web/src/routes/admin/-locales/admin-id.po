@@ -26,20 +26,40 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: src/routes/admin/index.tsx
+msgid "Foliar fertilizer with NPK 10-8-3 content enriched with complete micronutrients and ZPT!"
+msgstr ""
+
+#: src/routes/admin/index.tsx
 msgid "Here's an overview of marketing maps"
 msgstr "Tampilan Overview Peta Pemasaran"
-
-#: src/routes/admin/-components/admin-layout.tsx
-msgid "Narketing Map Admin"
-msgstr "Admin Peta Pemasaran"
 
 #: src/routes/admin/-components/nav-user.tsx
 msgid "Language"
 msgstr "Bahasa"
 
+#: src/routes/admin/index.tsx
+msgid "Liquid organic fertilizer containing organic carbon, macro and micro nutrients and functional microbes!"
+msgstr ""
+
 #: src/routes/admin/-components/admin-sidebar.tsx
 msgid "Marketing Map"
 msgstr "Peta Pemasaran"
+
+#: src/routes/admin/-components/admin-layout.tsx
+msgid "Marketing Map Admin"
+msgstr ""
+
+#: src/routes/admin/index.tsx
+msgid "New and Development Product"
+msgstr ""
+
+#: src/routes/admin/index.tsx
+msgid "New Probiotic Innovations Petrofish grows natural food and contains beneficial microbes!"
+msgstr ""
+
+#: src/routes/admin/index.tsx
+msgid "NPK Phonska Cair"
+msgstr ""
 
 #: src/routes/admin/index.tsx
 msgid "Number of Commodities"
@@ -56,6 +76,18 @@ msgstr "Jumlah Provinsi"
 #: src/routes/admin/index.tsx
 msgid "Number of Regencies"
 msgstr "Jumlah Kabupaten"
+
+#: src/routes/admin/index.tsx
+msgid "Petrofish"
+msgstr ""
+
+#: src/routes/admin/index.tsx
+msgid "Phonska OCA Plus"
+msgstr ""
+
+#: src/routes/admin/index.tsx
+msgid "Products of concern to the New Product Management Unit"
+msgstr ""
 
 #: src/routes/admin/-components/nav-user.tsx
 msgid "Profile"

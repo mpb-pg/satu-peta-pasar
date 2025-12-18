@@ -1,6 +1,6 @@
 'use client';
 
-import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import { Menu } from 'lucide-react';
 import {
   SidebarInset,
@@ -15,7 +15,6 @@ type AdminLayoutProps = {
 };
 
 export function AdminLayout({ children }: AdminLayoutProps) {
-  const { t } = useLingui();
   const isMobile = useIsMobile();
 
   return (
@@ -31,10 +30,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <div className="flex h-16 shrink-0 items-center gap-2 px-4 lg:hidden">
               <SidebarTrigger>
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">{t`Toggle sidebar`}</span>
+                <span className="sr-only">
+                  <Trans>Toggle sidebar</Trans>
+                </span>
               </SidebarTrigger>
               <div className="flex-1">
-                <h1 className="font-semibold">{t`Marketing Map Admin`}</h1>
+                <h1 className="font-semibold">
+                  <Trans>Marketing Map Admin</Trans>
+                </h1>
               </div>
             </div>
 
@@ -42,7 +45,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <div className="hidden h-16 shrink-0 items-center gap-2 px-4 lg:flex">
               <SidebarTrigger>
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">{t`Toggle sidebar`}</span>
+                <span className="sr-only">
+                  <Trans>Toggle sidebar</Trans>
+                </span>
               </SidebarTrigger>
             </div>
           </header>

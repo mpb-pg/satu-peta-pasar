@@ -18,7 +18,6 @@ msgid "Address"
 msgstr "Address"
 
 #: src/routes/map/-components/map-sidebar.tsx
-#: src/routes/map/-components/map-sidebar.tsx
 msgid "Administrative Level"
 msgstr "Administrative Level"
 

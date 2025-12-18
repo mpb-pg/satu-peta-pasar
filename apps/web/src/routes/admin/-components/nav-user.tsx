@@ -1,4 +1,4 @@
-import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import {
   useNavigate,
   useRouteContext,
@@ -36,7 +36,6 @@ const locales = {
 };
 
 export function NavUser({ user }: { user: UserType }) {
-  const { t } = useLingui();
   const { isMobile } = useSidebar();
   const { i18n } = useRouteContext({
     from: '__root__',
@@ -118,16 +117,16 @@ export function NavUser({ user }: { user: UserType }) {
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />
-              {t`Profile`}
+              <Trans>Profile</Trans>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
-              {t`Settings`}
+              <Trans>Settings</Trans>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="px-2 py-1.5 font-semibold text-muted-foreground text-xs">
-                {t`Language`}
+                <Trans>Language</Trans>
               </div>
             </DropdownMenuLabel>
             {Object.entries(locales).map(([locale, label]) => (
@@ -145,7 +144,7 @@ export function NavUser({ user }: { user: UserType }) {
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>
               <LogOut className="mr-2 h-4 w-4" />
-              {t`Sign out`}
+              <Trans>Sign out</Trans>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

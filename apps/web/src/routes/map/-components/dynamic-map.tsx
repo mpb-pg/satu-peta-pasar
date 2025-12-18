@@ -2,7 +2,7 @@ import type React from 'react';
 import { useEffect, useState } from 'react';
 import { GeoJSON, MapContainer, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useLingui } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import L from 'leaflet';
 import { Button } from '@/components/ui/button';
 import {
@@ -244,7 +244,9 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
                   />
                 </circle>
               </svg>
-              <div style={{ fontSize: 12, color: '#333' }}>{t`Loading...`}</div>
+              <div style={{ fontSize: 12, color: '#333' }}>
+                <Trans>Loading...</Trans>
+              </div>
             </div>
           )}
         </div>

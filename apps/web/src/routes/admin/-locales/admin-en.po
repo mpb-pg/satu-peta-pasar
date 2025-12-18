@@ -26,20 +26,40 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: src/routes/admin/index.tsx
+msgid "Foliar fertilizer with NPK 10-8-3 content enriched with complete micronutrients and ZPT!"
+msgstr "Foliar fertilizer with NPK 10-8-3 content enriched with complete micronutrients and ZPT!"
+
+#: src/routes/admin/index.tsx
 msgid "Here's an overview of marketing maps"
 msgstr "Here's an overview of marketing maps"
-
-#: src/routes/admin/-components/admin-layout.tsx
-msgid "Marketing Map Admin"
-msgstr "Marketing Map Admin"
 
 #: src/routes/admin/-components/nav-user.tsx
 msgid "Language"
 msgstr "Language"
 
+#: src/routes/admin/index.tsx
+msgid "Liquid organic fertilizer containing organic carbon, macro and micro nutrients and functional microbes!"
+msgstr "Liquid organic fertilizer containing organic carbon, macro and micro nutrients and functional microbes!"
+
 #: src/routes/admin/-components/admin-sidebar.tsx
 msgid "Marketing Map"
 msgstr "Marketing Map"
+
+#: src/routes/admin/-components/admin-layout.tsx
+msgid "Marketing Map Admin"
+msgstr "Marketing Map Admin"
+
+#: src/routes/admin/index.tsx
+msgid "New and Development Product"
+msgstr "New and Development Product"
+
+#: src/routes/admin/index.tsx
+msgid "New Probiotic Innovations Petrofish grows natural food and contains beneficial microbes!"
+msgstr "New Probiotic Innovations Petrofish grows natural food and contains beneficial microbes!"
+
+#: src/routes/admin/index.tsx
+msgid "NPK Phonska Cair"
+msgstr "NPK Phonska Cair"
 
 #: src/routes/admin/index.tsx
 msgid "Number of Commodities"
@@ -56,6 +76,18 @@ msgstr "Number of Provinces"
 #: src/routes/admin/index.tsx
 msgid "Number of Regencies"
 msgstr "Number of Regencies"
+
+#: src/routes/admin/index.tsx
+msgid "Petrofish"
+msgstr "Petrofish"
+
+#: src/routes/admin/index.tsx
+msgid "Phonska OCA Plus"
+msgstr "Phonska OCA Plus"
+
+#: src/routes/admin/index.tsx
+msgid "Products of concern to the New Product Management Unit"
+msgstr "Products of concern to the New Product Management Unit"
 
 #: src/routes/admin/-components/nav-user.tsx
 msgid "Profile"

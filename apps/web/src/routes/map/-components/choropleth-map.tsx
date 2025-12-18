@@ -24,16 +24,7 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
       input: { productBrandId },
     })
   );
-  // convert potential with divide by 1000 to get in ton
-  useEffect(() => {
-    if (potentialsData.data?.data) {
-      const converted = potentialsData.data.data.map((item: any) => ({
-        ...item,
-        potential: item.potential ? item.potential / 1000 : 0,
-      }));
-      potentialsData.data.data = converted;
-    }
-  }, [potentialsData.data]);
+  console.log('potentialsData', potentialsData);
 
   // Fetch provinces list and build a map of provinceCode -> province metadata
   const provincesData = useQuery(
@@ -153,13 +144,17 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
         >,
         row: any
       ) => {
-        if (!row) return acc;
+        if (!row) {
+          return acc;
+        }
         const key = String(
           row.provinceId ?? row.province_id ?? row.provinceCode ?? ''
         );
-        if (!key) return acc;
+        if (!key) {
+          return acc;
+        }
         acc[key] = {
-          potential: Number(row.potential ?? row.value ?? 0),
+          potential: row.potential ? Number(row.potential) / 1000 : 0,
           productBrandName:
             row.productBrandName ??
             row.product_brand_name ??

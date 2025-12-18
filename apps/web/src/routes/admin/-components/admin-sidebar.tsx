@@ -1,6 +1,6 @@
 'use client';
 
-import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import { Link } from '@tanstack/react-router';
 import { useAtomValue } from 'jotai';
 import { Sprout } from 'lucide-react';
@@ -27,7 +27,6 @@ export function AdminSidebar({
   className,
   ...props
 }: { className?: string } & React.ComponentProps<typeof Sidebar>) {
-  const { t } = useLingui();
   const user = useAtomValue(currentUserAtom);
 
   return (
@@ -47,8 +46,12 @@ export function AdminSidebar({
                   <Sprout className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{t`Marketing Map`}</span>
-                  <span className="truncate text-xs">{t`Admin Panel`}</span>
+                  <span className="truncate font-semibold">
+                    <Trans>Marketing Map</Trans>
+                  </span>
+                  <span className="truncate text-xs">
+                    <Trans>Admin Panel</Trans>
+                  </span>
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -78,7 +81,9 @@ export function AdminSidebar({
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="font-medium">{t`Back to Home`}</span>
+                <span className="font-medium">
+                  <Trans>Back to Home</Trans>
+                </span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
