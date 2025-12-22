@@ -111,3 +111,11 @@ export const stallNavigationItems: NavigationItem[] = [
     icon: Activity,
   },
 ];
+
+export const userNavigationItems: NavigationItem[] = [
+  {
+    title: 'User Management',
+    url: '/admin/user',
+    icon: Activity,
+  },
+];

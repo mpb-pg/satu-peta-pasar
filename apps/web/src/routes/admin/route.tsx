@@ -1,11 +1,12 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
+import { orpc } from '@/lib/orpc/client';
 import { AdminLayout } from './-components/admin-layout';
 import { currentUserAtom } from './-libs/admin-atoms';
 
 export const Route = createFileRoute('/admin')({
-  beforeLoad: ({ context }) => {
+  beforeLoad: async ({ context }) => {
     // Protect admin routes - require authentication
     if (!context.user) {
       throw redirect({
@@ -16,20 +17,20 @@ export const Route = createFileRoute('/admin')({
         }),
       });
     }
+    try {
+      const res = await orpc.admin.user.getById.call({
+        userId: context.user.id,
+      });
 
-    // make problem on maps
-    // const rows = await db
-    //   .select({ role: access_role.role })
-    //   .from(access_role)
-    //   .where(eq(access_role.userId, context.user.id))
-    //   .limit(1);
-
-    // const isAdmin = rows[0]?.role === "admin";
-    // if (!isAdmin) {
-    //   throw redirect({
-    //     to: "/",
-    //   });
-    // }
+      const isAdmin = res.data?.some((r) => r.role === 'admin');
+      if (!isAdmin) {
+        throw redirect({ to: '/' });
+      }
+    } catch {
+      throw redirect({
+        to: '/',
+      });
+    }
   },
   component: AdminLayoutRoute,
 });

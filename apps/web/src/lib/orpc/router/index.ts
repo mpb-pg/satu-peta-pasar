@@ -22,6 +22,10 @@ import { getRegencies } from '@/routes/admin/region/regency/-app/get-regencies';
 import { updateRegency } from '@/routes/admin/region/regency/-app/update-regency';
 import { getStallProductBrand } from '@/routes/admin/stall/-app/get-stall-product-brand';
 import { getStalls } from '@/routes/admin/stall/-app/get-stalls';
+import { deleteUser } from '@/routes/admin/user/-app/delete-user';
+import { getUserById } from '@/routes/admin/user/-app/get-user-by-id';
+import { getUsers } from '@/routes/admin/user/-app/get-users';
+import { updateUser } from '@/routes/admin/user/-app/update-user';
 import { getSession } from '@/routes/auth/-app/get-session';
 import { createTodo } from '@/routes/todos/-app/create-todo';
 import { deleteTodo } from '@/routes/todos/-app/delete-todo';
@@ -139,6 +143,15 @@ export default {
         // deleteRegencyCommodity,
       },
     },
+    product: {
+      product_type: {
+        get: getProductTypes,
+      },
+      product_brand: {
+        get: getProductBrands,
+      },
+    },
+
     potential: {
       province_potential: {
         get: getProvincePotentials,
@@ -154,18 +167,21 @@ export default {
       },
     },
 
-    product: {
-      product_type: {
-        get: getProductTypes,
-      },
-      product_brand: {
-        get: getProductBrands,
-      },
+    sale: {
+      // sale_overview: {},
+      // sales_realization: {}
     },
 
     stall: {
       get: getStalls,
       getStallProduct: getStallProductBrand,
+    },
+
+    user: {
+      get: getUsers,
+      getById: getUserById,
+      update: updateUser,
+      delete: deleteUser,
     },
   },
 };

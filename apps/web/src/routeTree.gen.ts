@@ -26,6 +26,7 @@ import { Route as StallIdRouteImport } from './routes/stall/$id'
 import { Route as DemoOrpcTodoRouteImport } from './routes/demo/orpc-todo'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AdminUserIndexRouteImport } from './routes/admin/user/index'
 import { Route as AdminStallIndexRouteImport } from './routes/admin/stall/index'
 import { Route as AdminSaleIndexRouteImport } from './routes/admin/sale/index'
 import { Route as AdminProductIndexRouteImport } from './routes/admin/product/index'
@@ -123,6 +124,11 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/auth/login',
   path: '/auth/login',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUserIndexRoute = AdminUserIndexRouteImport.update({
+  id: '/user/',
+  path: '/user/',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminStallIndexRoute = AdminStallIndexRouteImport.update({
   id: '/stall/',
@@ -256,6 +262,7 @@ export interface FileRoutesByFullPath {
   '/admin/product': typeof AdminProductIndexRoute
   '/admin/sale': typeof AdminSaleIndexRoute
   '/admin/stall': typeof AdminStallIndexRoute
+  '/admin/user': typeof AdminUserIndexRoute
   '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
   '/admin/commodity/province-commodity': typeof AdminCommodityProvinceCommodityIndexRoute
   '/admin/commodity/regency-commodity': typeof AdminCommodityRegencyCommodityIndexRoute
@@ -288,6 +295,7 @@ export interface FileRoutesByTo {
   '/admin/product': typeof AdminProductIndexRoute
   '/admin/sale': typeof AdminSaleIndexRoute
   '/admin/stall': typeof AdminStallIndexRoute
+  '/admin/user': typeof AdminUserIndexRoute
   '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
   '/admin/commodity/province-commodity': typeof AdminCommodityProvinceCommodityIndexRoute
   '/admin/commodity/regency-commodity': typeof AdminCommodityRegencyCommodityIndexRoute
@@ -323,6 +331,7 @@ export interface FileRoutesById {
   '/admin/product/': typeof AdminProductIndexRoute
   '/admin/sale/': typeof AdminSaleIndexRoute
   '/admin/stall/': typeof AdminStallIndexRoute
+  '/admin/user/': typeof AdminUserIndexRoute
   '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
   '/admin/commodity/province-commodity/': typeof AdminCommodityProvinceCommodityIndexRoute
   '/admin/commodity/regency-commodity/': typeof AdminCommodityRegencyCommodityIndexRoute
@@ -359,6 +368,7 @@ export interface FileRouteTypes {
     | '/admin/product'
     | '/admin/sale'
     | '/admin/stall'
+    | '/admin/user'
     | '/admin/land/province-land/$landType'
     | '/admin/commodity/province-commodity'
     | '/admin/commodity/regency-commodity'
@@ -391,6 +401,7 @@ export interface FileRouteTypes {
     | '/admin/product'
     | '/admin/sale'
     | '/admin/stall'
+    | '/admin/user'
     | '/admin/land/province-land/$landType'
     | '/admin/commodity/province-commodity'
     | '/admin/commodity/regency-commodity'
@@ -425,6 +436,7 @@ export interface FileRouteTypes {
     | '/admin/product/'
     | '/admin/sale/'
     | '/admin/stall/'
+    | '/admin/user/'
     | '/admin/land/province-land/$landType'
     | '/admin/commodity/province-commodity/'
     | '/admin/commodity/regency-commodity/'
@@ -591,6 +603,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/user/': {
+      id: '/admin/user/'
+      path: '/user'
+      fullPath: '/admin/user'
+      preLoaderRoute: typeof AdminUserIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/stall/': {
       id: '/admin/stall/'
       path: '/stall'
@@ -745,6 +764,7 @@ interface AdminRouteRouteChildren {
   AdminProductIndexRoute: typeof AdminProductIndexRoute
   AdminSaleIndexRoute: typeof AdminSaleIndexRoute
   AdminStallIndexRoute: typeof AdminStallIndexRoute
+  AdminUserIndexRoute: typeof AdminUserIndexRoute
   AdminLandProvinceLandLandTypeRoute: typeof AdminLandProvinceLandLandTypeRoute
   AdminCommodityProvinceCommodityIndexRoute: typeof AdminCommodityProvinceCommodityIndexRoute
   AdminCommodityRegencyCommodityIndexRoute: typeof AdminCommodityRegencyCommodityIndexRoute
@@ -764,6 +784,7 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminProductIndexRoute: AdminProductIndexRoute,
   AdminSaleIndexRoute: AdminSaleIndexRoute,
   AdminStallIndexRoute: AdminStallIndexRoute,
+  AdminUserIndexRoute: AdminUserIndexRoute,
   AdminLandProvinceLandLandTypeRoute: AdminLandProvinceLandLandTypeRoute,
   AdminCommodityProvinceCommodityIndexRoute:
     AdminCommodityProvinceCommodityIndexRoute,

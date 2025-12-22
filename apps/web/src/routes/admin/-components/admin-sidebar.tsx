@@ -18,6 +18,7 @@ import {
   marketingMapNavigationItems,
   saleNavigationItems,
   stallNavigationItems,
+  userNavigationItems,
 } from '../-domain/navigation-items';
 import { currentUserAtom } from '../-libs/admin-atoms';
 import { NavMain } from './nav-main';
@@ -96,6 +97,8 @@ export function AdminSidebar({
         <NavMain items={saleNavigationItems} label="Sale" />
 
         <NavMain items={stallNavigationItems} label="Stall" />
+
+        <NavMain items={userNavigationItems} label="User Management" />
       </SidebarContent>
 
       {/* Footer with User Profile */}
