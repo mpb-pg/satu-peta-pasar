@@ -51,8 +51,8 @@ COPY --from=builder /usr/src/monorepo/node_modules ./node_modules
 # Copy package.json for runtime
 COPY --from=builder /usr/src/monorepo/apps/web/package.json ./package.json
 
-# Expose port 3000
-EXPOSE 3000
+# Expose port 3007
+EXPOSE 3007
 
 # Start the application using the start script from package.json
 CMD ["bun", "run", "start"]
