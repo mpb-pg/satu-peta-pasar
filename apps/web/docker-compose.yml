@@ -5,8 +5,8 @@ services:
     build:
       context: ../..
       dockerfile: apps/web/Dockerfile
-    expose:
-      - "3000"
+    ports:
+      - "${APP_PORT:-3007}:3000"
     environment:
       - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASS:-password}@${DB_HOST:-localhost}:${DB_PORT:-5432}/${DB_NAME:-siperan_db}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
