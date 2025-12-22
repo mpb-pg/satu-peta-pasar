@@ -40,11 +40,13 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
   const contextSelectedBrand = params?.productBrand as string;
   const contextSelectedLandType = params?.landType as string;
   const contextSelectedCommodityType = params?.commodityType as string;
+  const contextSelectedYear = params?.year as string | undefined;
 
   const currentLevel = contextCurrentLevel;
   const selectedBrand = contextSelectedBrand;
   const selectedLandType = contextSelectedLandType;
   const selectedCommodityType = contextSelectedCommodityType;
+  const selectedYear = contextSelectedYear;
 
   const updatedFilters: FilterCriteria = contextFilters ?? {
     ...filters,
@@ -61,6 +63,7 @@ const MarketingMap: React.FC<MarketingMapProps> = ({
           selectedCommodityType={selectedCommodityType}
           selectedLandType={selectedLandType}
           selectedProductBrand={selectedBrand}
+          year={selectedYear}
         />
       </div>
     </div>

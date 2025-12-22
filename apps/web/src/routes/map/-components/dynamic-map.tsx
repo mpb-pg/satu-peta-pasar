@@ -32,6 +32,7 @@ interface DynamicMapProps {
   selectedProductBrand?: string;
   selectedLandType?: string;
   selectedCommodityType?: string;
+  year?: string;
   filters?: FilterCriteria;
   onMapViewChange?: (viewState: MapViewState) => void;
 }
@@ -151,6 +152,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
   selectedProductBrand,
   selectedLandType,
   selectedCommodityType,
+  year,
   filters,
   onMapViewChange,
 }) => {
@@ -265,6 +267,7 @@ const DynamicMap: React.FC<DynamicMapProps> = ({
           landTypeId={selectedLandType}
           onLoadingChange={setChoroplethLoading}
           productBrandId={selectedProductBrand}
+          year={year}
         />
       )}
       {showStallMarkers && (

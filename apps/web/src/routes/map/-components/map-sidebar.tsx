@@ -143,6 +143,9 @@ export function MapSidebar({
   const [selectedCommodityType, setSelectedCommodityType] = useState<
     string | undefined
   >();
+  const [selectedYear, setSelectedYear] = useState<string>(
+    String(new Date().getFullYear())
+  );
 
   useEffect(() => {
     if (
@@ -197,6 +200,9 @@ export function MapSidebar({
   const handleCommodityTypeChange = (commodityType: string) => {
     setSelectedCommodityType(commodityType);
   };
+  const handleYearChange = (year: string) => {
+    setSelectedYear(year);
+  };
 
   const updatedFilters: FilterCriteria = useMemo(
     () => ({
@@ -215,6 +221,7 @@ export function MapSidebar({
     updateParam('productBrand', selectedBrand);
     updateParam('landType', selectedLandType);
     updateParam('commodityType', selectedCommodityType);
+    updateParam('year', selectedYear);
   }, [
     updatedFilters,
     updateParam,
@@ -222,6 +229,7 @@ export function MapSidebar({
     selectedBrand,
     selectedLandType,
     selectedCommodityType,
+    selectedYear,
   ]);
 
   return (
@@ -249,6 +257,31 @@ export function MapSidebar({
       {/* Main Content */}
       <SidebarContent>
         <SidebarMenu>
+          
+          {/* Year selection */}
+          <SidebarMenuItem className="mt-2 ml-4">
+            <Label className="mb-2" htmlFor="year">
+              <Trans>Year</Trans>
+            </Label>
+            <Select onValueChange={(value) => handleYearChange(value)} value={selectedYear}>
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Select Year" />
+              </SelectTrigger>
+              <SelectContent>
+                {[
+                  String(new Date().getFullYear()),
+                  String(new Date().getFullYear() - 1),
+                  String(new Date().getFullYear() - 2),
+                  String(new Date().getFullYear() - 3),
+                ].map((y) => (
+                  <SelectItem key={y} value={y}>
+                    {y}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </SidebarMenuItem>
+
           <SidebarMenuItem className="ml-4">
             <Label className="mb-2" htmlFor="administrasi-level">
               <Trans>Administrative Level</Trans>
@@ -259,7 +292,7 @@ export function MapSidebar({
               }
               value={currentLevel}
             >
-              <SelectTrigger className="w-[150px]">
+              <SelectTrigger className="w-40">
                 <SelectValue placeholder="Administrative Level" />
               </SelectTrigger>
               <SelectContent>
@@ -285,7 +318,7 @@ export function MapSidebar({
                 onValueChange={(value) => handleProvinceChange(value)}
                 value={selectedProvince}
               >
-                <SelectTrigger className="w-[150px]">
+                <SelectTrigger className="w-40">
                   <SelectValue placeholder="Province" />
                 </SelectTrigger>
                 <SelectContent>
@@ -309,9 +342,9 @@ export function MapSidebar({
                   onValueChange={(value) => handleProvinceChange(value)}
                   value={selectedProvince}
                 >
-                  <SelectTrigger className="w-[150px]">
-                    <SelectValue placeholder="Province" />
-                  </SelectTrigger>
+                    <SelectTrigger className="w-40">
+                      <SelectValue placeholder="Province" />
+                    </SelectTrigger>
                   <SelectContent>
                     {provinces?.map((province) => (
                       <SelectItem key={province.id} value={province.id}>
@@ -329,9 +362,9 @@ export function MapSidebar({
                   onValueChange={(value) => handleRegencyChange(value)}
                   value={selectedRegency}
                 >
-                  <SelectTrigger className="w-[150px]">
-                    <SelectValue placeholder="Regency" />
-                  </SelectTrigger>
+                    <SelectTrigger className="w-40">
+                      <SelectValue placeholder="Regency" />
+                    </SelectTrigger>
                   <SelectContent>
                     {regencies?.map((regency) => (
                       <SelectItem key={regency.id} value={regency.id}>
@@ -353,7 +386,7 @@ export function MapSidebar({
               onValueChange={(value) => handleFilterChange(value)}
               value={currentFilter}
             >
-              <SelectTrigger className="w-[150px]">
+              <SelectTrigger className="w-40">
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>
@@ -375,7 +408,7 @@ export function MapSidebar({
                 onValueChange={(value) => handleBrandChange(value)}
                 value={selectedBrand}
               >
-                <SelectTrigger className="w-[150px]">
+                <SelectTrigger className="w-40">
                   <SelectValue placeholder="Select a Product Brand" />
                 </SelectTrigger>
                 <SelectContent>
@@ -400,7 +433,7 @@ export function MapSidebar({
                 }}
                 value={selectedLandType}
               >
-                <SelectTrigger className="w-[150px]">
+                <SelectTrigger className="w-40">
                   <SelectValue placeholder="Select a Land Type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -425,7 +458,7 @@ export function MapSidebar({
                 onValueChange={(value) => handleCommodityTypeChange(value)}
                 value={selectedCommodityType}
               >
-                <SelectTrigger className="w-[150px]">
+                <SelectTrigger className="w-40">
                   <SelectValue placeholder="Select a Commodity Type" />
                 </SelectTrigger>
                 <SelectContent>

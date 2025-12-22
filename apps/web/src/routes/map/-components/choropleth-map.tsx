@@ -10,10 +10,12 @@ interface ChoroplethMapProps {
   landTypeId?: string | undefined;
   commodityTypeId?: string | undefined;
   onLoadingChange?: (loading: boolean) => void;
+  year?: string | undefined;
 }
 
 const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   productBrandId,
+  year,
   onLoadingChange,
 }) => {
   const map = useMap();
@@ -21,7 +23,7 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
 
   const potentialsData = useQuery(
     orpc.admin.potential.province_potential.get.queryOptions({
-      input: { productBrandId },
+      input: { productBrandId, year },
     })
   );
   console.log('potentialsData', potentialsData);
@@ -206,13 +208,14 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   const geoKey = useMemo(() => {
     if (!enriched) return 'empty';
     // Use provinceCode and potential — concise and reflects visible changes
-    return enriched.features
+    return `${year ?? 'all'}:` +
+      enriched.features
       .map(
         (f: any) =>
           `${String(f.properties?.provinceCode ?? f.properties?.code ?? f.properties?.id ?? '')}:${String(f.properties?.potential ?? 0)}`
       )
       .join('|');
-  }, [enriched]);
+  }, [enriched, year]);
 
   // Report loading status to parent when queries or enriched change
   useEffect(() => {

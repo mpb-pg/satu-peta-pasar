@@ -15,6 +15,7 @@ export const getProvincePotentials = protectedProcedure
       search: z.string().optional(),
       provinceId: z.string().optional(),
       productBrandId: z.string().optional(),
+      year: z.string().optional(),
     })
   )
   .handler(async ({ input, context }) => {
@@ -46,6 +47,9 @@ export const getProvincePotentials = protectedProcedure
       conditions.push(
         eq(provincePotentials.productBrandId, input.productBrandId)
       );
+    }
+    if (input.year) {
+      conditions.push(eq(provincePotentials.year, input.year));
     }
     if (input.search) {
       conditions.push(
