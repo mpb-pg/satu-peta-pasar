@@ -1,6 +1,6 @@
 'use client';
 
-import { Trans } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Label } from '@/components/ui/label';
@@ -38,6 +38,7 @@ export function MapSidebar({
   ...props
 }: { className?: string } & React.ComponentProps<typeof Sidebar> &
   MarketingMapProps) {
+  const { i18n } = useLingui();
   const toast = useToast();
   const [provinces, setProvinces] = useState<
     { id: string; name: string; code: string }[]
@@ -164,6 +165,29 @@ export function MapSidebar({
   const { data: commodityTypes } = useQuery(
     orpc.admin.commodity.commodity_type.get.queryOptions({ input: {} })
   );
+
+  // Province potential data to determine last updated time
+  const { data: provincePotential } = useQuery(
+    orpc.admin.potential.province_potential.get.queryOptions({ input: {} })
+  );
+
+  const latestUpdatedAtText = useMemo(() => {
+    const items =
+      (provincePotential?.data as Array<{ updatedAt: string | number | Date }>) ?? [];
+    if (!items.length) return undefined;
+    const latestMs = items.reduce((max: number, item) => {
+      const t = Number(new Date(item.updatedAt));
+      return t > max ? t : max;
+    }, 0);
+    if (!latestMs) return undefined;
+    return i18n.date(new Date(latestMs), {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }, [provincePotential, i18n]);
 
   const filteredCommodityTypes = selectedLandType
     ? commodityTypes?.data.filter(
@@ -477,6 +501,34 @@ export function MapSidebar({
             </SidebarMenuItem>
           )}
         </SidebarMenu>
+
+        {/* Bottom information block */}
+        <div className="mt-6 border-t px-4 py-3 text-xs text-muted-foreground">
+          <p className="mb-2">
+            <Trans>
+              This data is based on data consisting of 14 commodities:
+            </Trans>
+          </p>
+          <ul className="ml-4 list-disc space-y-1">
+            <li><Trans>Rice</Trans></li>
+            <li><Trans>Corn</Trans></li>
+            <li><Trans>Soybeans</Trans></li>
+            <li><Trans>Peanuts</Trans></li>
+            <li><Trans>Cassava</Trans></li>
+            <li><Trans>Cabbage</Trans></li>
+            <li><Trans>Mustard greens</Trans></li>
+            <li><Trans>Potatoes</Trans></li>
+            <li><Trans>Tomatoes</Trans></li>
+            <li><Trans>Chili</Trans></li>
+            <li><Trans>Shallots</Trans></li>
+            <li><Trans>Melons</Trans></li>
+            <li><Trans>Watermelon</Trans></li>
+            <li><Trans>Sugarcane</Trans></li>
+          </ul>
+          <p className="mt-3">
+            <Trans>Last updated on:</Trans> {latestUpdatedAtText ?? '—'}
+          </p>
+        </div>
       </SidebarContent>
     </Sidebar>
   );

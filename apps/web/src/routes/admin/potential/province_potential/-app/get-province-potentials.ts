@@ -31,6 +31,8 @@ export const getProvincePotentials = protectedProcedure
         provinceName: provinces.name,
         productBrandName: productBrands.name,
         potential: provincePotentials.potential,
+        year: provincePotentials.year,
+        updatedAt: provincePotentials.updatedAt,
       })
       .from(provincePotentials)
       .innerJoin(provinces, eq(provincePotentials.provinceId, provinces.id))
