@@ -5,14 +5,16 @@ services:
     build:
       context: ../..
       dockerfile: apps/web/Dockerfile
-    expose:
-      - "3007"
+    ports:
+      - "3007:3007"
     labels:
       - "coolify.managed=true"
       - "traefik.enable=true"
       - "traefik.http.routers.http-0.rule=Host(`1petapasar.manajemenprodukbaru-pg.com`)"
       - "traefik.http.routers.http-0.entrypoints=http"
       - "traefik.http.services.http-0.loadbalancer.server.port=3007"
+    networks:
+      - coolify
     environment:
       - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASS:-password}@${DB_HOST:-localhost}:${DB_PORT:-5432}/${DB_NAME:-siperan_db}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
@@ -43,6 +45,10 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
+
+  networks:
+    coolify:
+      external: true
 
 volumes:
   siperan_app_postgres_data:
