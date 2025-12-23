@@ -52,6 +52,9 @@ COPY --from=builder /usr/src/monorepo/node_modules ./node_modules
 COPY --from=builder /usr/src/monorepo/apps/web/package.json ./package.json
 
 # Expose port 3007
+ENV NODE_ENV=production
+ENV PORT=3007
+
 EXPOSE 3007
 
 # Start the application using the start script from package.json
