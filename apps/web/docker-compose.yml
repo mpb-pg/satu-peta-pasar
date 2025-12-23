@@ -10,9 +10,18 @@ services:
     labels:
       - "coolify.managed=true"
       - "traefik.enable=true"
-      - "traefik.http.routers.http-0.rule=Host(`1petapasar.manajemenprodukbaru-pg.com`)"
-      - "traefik.http.routers.http-0.entrypoints=http"
-      - "traefik.http.services.http-0.loadbalancer.server.port=3007"
+      # Router untuk HTTP (otomatis redirect ke HTTPS biasanya diatur global, tapi kita buat eksplisit)
+      - "traefik.http.routers.web-router.rule=Host(`1petapasar.manajemenprodukbaru-pg.com`)"
+      - "traefik.http.routers.web-router.entrypoints=web"
+
+      # Router untuk HTTPS
+      - "traefik.http.routers.web-router-secure.rule=Host(`1petapasar.manajemenprodukbaru-pg.com`)"
+      - "traefik.http.routers.web-router-secure.entrypoints=websecure"
+      - "traefik.http.routers.web-router-secure.tls=true"
+      - "traefik.http.routers.web-router-secure.tls.certresolver=letsencrypt" # Sesuaikan jika Anda pakai resolver lain
+
+      # Service Load Balancer (tetap ke port 3007)
+      - "traefik.http.services.web-service.loadbalancer.server.port=3007"
     networks:
       - coolify
     environment:
