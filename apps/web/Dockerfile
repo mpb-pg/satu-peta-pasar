@@ -38,7 +38,7 @@ ENV NODE_ENV=production
 COPY --from=builder /usr/src/monorepo/apps/web/.output ./.output
 
 # Copy necessary dependencies
-COPY --from=builder /usr/src/monorepo/node_modules ./node_modules
+# COPY --from=builder /usr/src/monorepo/node_modules ./node_modules
 
 # Copy compiled lingui messages
 # COPY --from=builder /usr/src/monorepo/apps/web/src/locales ./src/locales
@@ -52,7 +52,6 @@ COPY --from=builder /usr/src/monorepo/node_modules ./node_modules
 COPY --from=builder /usr/src/monorepo/apps/web/package.json ./package.json
 
 # Expose port 3007
-ENV NODE_ENV=production
 ENV PORT=3007
 
 EXPOSE 3007
