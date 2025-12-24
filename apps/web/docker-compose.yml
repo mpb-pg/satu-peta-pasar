@@ -10,9 +10,14 @@ services:
     labels:
       - "coolify.managed=true"
       - "traefik.enable=true"
-      - "traefik.http.routers.http-0.rule=Host(`1petapasar.manajemenprodukbaru-pg.com`)"
-      - "traefik.http.routers.http-0.entrypoints=http"
-      - "traefik.http.services.http-0.loadbalancer.server.port=3007"
+
+      # HTTP router only
+      - traefik.http.routers.web-http.rule=Host(`1petapasar.manajemenprodukbaru-pg.com`)
+      - traefik.http.routers.web-http.entrypoints=http
+      - traefik.http.routers.web-http.tls=false
+
+      # Service
+      - traefik.http.services.web.loadbalancer.server.port=3007
     networks:
       - coolify
     environment:
