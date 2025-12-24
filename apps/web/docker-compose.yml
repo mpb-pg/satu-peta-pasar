@@ -5,19 +5,8 @@ services:
     build:
       context: ../..
       dockerfile: apps/web/Dockerfile
-    ports:
-      - "3007:3007"
-    labels:
-      - "coolify.managed=true"
-      - "traefik.enable=true"
-
-      # HTTP router only
-      - traefik.http.routers.web-http.rule=Host(`1petapasar.manajemenprodukbaru-pg.com`)
-      - traefik.http.routers.web-http.entrypoints=http
-      - traefik.http.routers.web-http.tls=false
-
-      # Service
-      - traefik.http.services.web.loadbalancer.server.port=3007
+    expose:
+      - "3000"
     environment:
       - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASS:-password}@${DB_HOST:-localhost}:${DB_PORT:-5432}/${DB_NAME:-siperan_db}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
