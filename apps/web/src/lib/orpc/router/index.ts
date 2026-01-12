@@ -1,5 +1,8 @@
 import { protectedProcedure, publicProcedure } from '@/lib/orpc';
+import { createCommodityType } from '@/routes/admin/commodity/-app/create-commodity-type';
+import { deleteCommodityType } from '@/routes/admin/commodity/-app/delete-commodity-type';
 import { getCommodityTypes } from '@/routes/admin/commodity/-app/get-commodity-types';
+import { updateCommodityType } from '@/routes/admin/commodity/-app/update-commodity-type';
 import { getProvinceCommodities } from '@/routes/admin/commodity/province-commodity/-app/get-province-commodities';
 import { createLandType } from '@/routes/admin/land/-app/create-land-type';
 import { deleteLandType } from '@/routes/admin/land/-app/delete-land-type';
@@ -126,9 +129,9 @@ export default {
     commodity: {
       commodity_type: {
         get: getCommodityTypes,
-        // createCommodityTypes,
-        // updateCommodityTypes,
-        // deleteCommodityTypes,
+        create: createCommodityType,
+        update: updateCommodityType,
+        delete: deleteCommodityType,
       },
       province_commodity: {
         get: getProvinceCommodities,

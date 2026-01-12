@@ -8,6 +8,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { orpc } from '@/lib/orpc/client';
 import { useAppForm } from '../-hooks/form';
+import { useEffect } from 'react';
 
 export function EditLandTypeForm({
   open,
@@ -68,6 +69,10 @@ export function EditLandTypeForm({
       }
     },
   });
+
+  useEffect(() => {
+    form.setFieldValue('name', currentLandType?.name ?? '');
+  }, [open, currentLandType, form]);
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
