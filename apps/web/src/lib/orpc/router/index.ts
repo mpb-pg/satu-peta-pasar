@@ -4,6 +4,10 @@ import { deleteCommodityType } from '@/routes/admin/commodity/-app/delete-commod
 import { getCommodityTypes } from '@/routes/admin/commodity/-app/get-commodity-types';
 import { updateCommodityType } from '@/routes/admin/commodity/-app/update-commodity-type';
 import { getProvinceCommodities } from '@/routes/admin/commodity/province-commodity/-app/get-province-commodities';
+import { createRegencyCommodity } from '@/routes/admin/commodity/regency-commodity/-app/create-regency-commodity';
+import { deleteRegencyCommodity } from '@/routes/admin/commodity/regency-commodity/-app/delete-regency-commodity';
+import { getRegencyCommodities } from '@/routes/admin/commodity/regency-commodity/-app/get-regency-commodities';
+import { updateRegencyCommodity } from '@/routes/admin/commodity/regency-commodity/-app/update-regency-commodity';
 import { createLandType } from '@/routes/admin/land/-app/create-land-type';
 import { deleteLandType } from '@/routes/admin/land/-app/delete-land-type';
 import { getLandTypes } from '@/routes/admin/land/-app/get-land-types';
@@ -140,10 +144,10 @@ export default {
         // deleteProvinceCommodity,
       },
       regency_commodity: {
-        // getRegencyCommodities,
-        // createRegencyCommodity,
-        // updateRegencyCommodity,
-        // deleteRegencyCommodity,
+        get: getRegencyCommodities,
+        create: createRegencyCommodity,
+        update: updateRegencyCommodity,
+        delete: deleteRegencyCommodity,
       },
     },
     product: {
