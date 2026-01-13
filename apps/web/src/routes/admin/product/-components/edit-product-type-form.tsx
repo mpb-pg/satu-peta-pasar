@@ -10,32 +10,32 @@ import { useToast } from '@/hooks/use-toast';
 import { orpc } from '@/lib/orpc/client';
 import { useAppForm } from '../-hooks/form';
 
-export function EditLandTypeForm({
+export function EditProductTypeForm({
   open,
   onOpenChange,
-  landTypeId,
+  productTypeId,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  landTypeId: string | null;
+  productTypeId: string | null;
 }) {
   const queryClient = useQueryClient();
 
-  const { data: landTypes } = useQuery(
-    orpc.admin.land.land_type.get.queryOptions({ input: {} })
+  const { data: productTypes } = useQuery(
+    orpc.admin.product.product_type.get.queryOptions({ input: {} })
   );
-  const currentLandType = landTypes?.data.find((lt) => lt.id === landTypeId);
+  const current = productTypes?.data.find((p) => p.id === productTypeId);
 
   const updateMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.land.land_type.update.call>>,
+    Awaited<ReturnType<typeof orpc.admin.product.product_type.update.call>>,
     Error,
-    Parameters<typeof orpc.admin.land.land_type.update.call>[0]
+    Parameters<typeof orpc.admin.product.product_type.update.call>[0]
   >({
-    mutationFn: (landTypeData) =>
-      orpc.admin.land.land_type.update.call(landTypeData),
+    mutationFn: (productTypeData) =>
+      orpc.admin.product.product_type.update.call(productTypeData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.land.land_type.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.product.product_type.get.queryKey({ input: {} }),
       });
     },
   });
@@ -43,42 +43,40 @@ export function EditLandTypeForm({
   const toast = useToast();
   const form = useAppForm({
     defaultValues: {
-      name: currentLandType?.name ?? '',
+      name: current?.name ?? '',
+      description: current?.description ?? '',
     },
     validators: {
       onBlur: () => {
-        const errors = {
-          fields: {},
-        } as {
-          fields: Record<string, string>;
-        };
-
+        const errors = { fields: {} } as { fields: Record<string, string> };
         return errors;
       },
     },
     onSubmit: async ({ value }) => {
       try {
         await updateMutation.mutateAsync({
-          id: currentLandType?.id as string,
+          id: current?.id as string,
           name: value.name,
+          description: value.description,
         });
-        toast.success('Land type updated successfully!');
+        toast.success('Product type updated successfully!');
         onOpenChange(false);
       } catch (_error) {
-        toast.error('Failed to update land type. Please try again.');
+        toast.error('Failed to update product type. Please try again.');
       }
     },
   });
 
   useEffect(() => {
-    form.setFieldValue('name', currentLandType?.name ?? '');
-  }, [open, currentLandType, form]);
+    form.setFieldValue('name', current?.name ?? '');
+    form.setFieldValue('description', current?.description ?? '');
+  }, [open, current, form]);
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <DialogTitle>Edit Land Type</DialogTitle>
-        <DialogDescription>Edit the land type</DialogDescription>
+        <DialogTitle>Edit Product Type</DialogTitle>
+        <DialogDescription>Edit the product type</DialogDescription>
 
         <form
           className="space-y-4"
@@ -94,7 +92,7 @@ export function EditLandTypeForm({
               validators={{
                 onBlur: ({ value }) => {
                   if (!value || value.trim().length === 0) {
-                    return 'Name is required (ex. Hortikultura)';
+                    return 'Name is required';
                   }
                   return;
                 },
@@ -102,15 +100,25 @@ export function EditLandTypeForm({
             >
               {(field) => (
                 <field.textField
-                  label="Land Type Name"
-                  placeholder="ex. Hortikultura"
+                  label="Product Type Name"
+                  placeholder="ex. Fertilizer"
                 />
               )}
             </form.AppField>
 
+            <form.AppField name="description">
+              {(field) => (
+                <field.textArea
+                  label="Description"
+                  placeholder="Optional description"
+                />
+              )}
+            </form.AppField>
+
+            <div />
             <div className="mt-7 flex justify-end">
               <form.AppForm>
-                <form.subscribeButton label="Create" />
+                <form.subscribeButton label="Update" />
               </form.AppForm>
             </div>
           </div>

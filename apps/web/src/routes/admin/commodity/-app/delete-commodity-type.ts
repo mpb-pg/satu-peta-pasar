@@ -1,7 +1,7 @@
-import { commodityTypes } from "@/lib/db/schema/map-product";
-import { protectedProcedure } from "@/lib/orpc";
-import { eq } from "drizzle-orm";
-import z from "zod";
+import { eq } from 'drizzle-orm';
+import z from 'zod';
+import { commodityTypes } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
 
 export const deleteCommodityType = protectedProcedure
   .input(

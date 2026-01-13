@@ -47,15 +47,15 @@ function RouteComponent() {
   return (
     <div className="container mx-auto space-y-8 px-4 py-8">
       <div className="text-left">
-        <h1 className="font-bold text-3xl">Manage Land Types</h1>
-        <p className="text-slate-600">Create and manage land types</p>
+        <h1 className="font-bold text-3xl">Manage Province Land</h1>
+        <p className="text-slate-600">Create and manage province land types</p>
       </div>
       <Card>
         <CardHeader className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
             <CardTitle>Land Type List</CardTitle>
             <CardDescription>
-              Manage and organize your land types
+              Choose your land types
             </CardDescription>
           </div>
           <div className="flex w-full flex-wrap gap-2 sm:w-auto">

@@ -5,7 +5,9 @@ import { protectedProcedure } from '@/lib/orpc';
 import { RegencyCommoditySchema } from '../-domain/schema';
 
 export const createRegencyCommodity = protectedProcedure
-  .input(RegencyCommoditySchema.omit({ id: true, createdAt: true, updatedAt: true }))
+  .input(
+    RegencyCommoditySchema.omit({ id: true, createdAt: true, updatedAt: true })
+  )
   .handler(async ({ input, context }) => {
     const newRegencyCommodity = {
       id: generateUUID(),

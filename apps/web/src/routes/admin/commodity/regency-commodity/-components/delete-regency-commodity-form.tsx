@@ -17,14 +17,20 @@ export function DeleteRegencyCommodityForm({
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  regencyCommodity: { id: string; regencyId: string; commodityTypeId: string } | null;
+  regencyCommodity: {
+    id: string;
+    regencyId: string;
+    commodityTypeId: string;
+  } | null;
   onDelete: (regencyCommodityId: string) => void;
 }) {
   const queryClient = useQueryClient();
   const toast = useToast();
 
   const deleteMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.commodity.regency_commodity.delete.call>>,
+    Awaited<
+      ReturnType<typeof orpc.admin.commodity.regency_commodity.delete.call>
+    >,
     Error,
     Parameters<typeof orpc.admin.commodity.regency_commodity.delete.call>[0]
   >({
@@ -37,7 +43,9 @@ export function DeleteRegencyCommodityForm({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.commodity.regency_commodity.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.commodity.regency_commodity.get.queryKey({
+          input: {},
+        }),
       });
     },
   });

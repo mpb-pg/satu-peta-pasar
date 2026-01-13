@@ -27,7 +27,9 @@ export function CreateRegencyCommodityForm({
   );
 
   const createMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.commodity.regency_commodity.create.call>>,
+    Awaited<
+      ReturnType<typeof orpc.admin.commodity.regency_commodity.create.call>
+    >,
     Error,
     Parameters<typeof orpc.admin.commodity.regency_commodity.create.call>[0]
   >({
@@ -35,12 +37,14 @@ export function CreateRegencyCommodityForm({
       orpc.admin.commodity.regency_commodity.create.call(regencyCommodityData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.commodity.regency_commodity.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.commodity.regency_commodity.get.queryKey({
+          input: {},
+        }),
       });
     },
     onError: (error) => {
       console.error('Error creating regency commodity:', error);
-    }
+    },
   });
 
   const toast = useToast();
@@ -174,14 +178,11 @@ export function CreateRegencyCommodityForm({
               }}
             >
               {(field) => (
-                <field.textField
-                  label="Year"
-                  placeholder="ex. 2024"
-                />
+                <field.textField label="Year" placeholder="ex. 2024" />
               )}
             </form.AppField>
 
-            <div></div>
+            <div />
             <div className="mt-7 flex justify-end">
               <form.AppForm>
                 <form.subscribeButton label="Create" />

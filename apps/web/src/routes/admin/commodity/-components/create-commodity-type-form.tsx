@@ -31,7 +31,9 @@ export function CreateCommodityTypeForm({
       orpc.admin.commodity.commodity_type.create.call(commodityTypeData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.commodity.commodity_type.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.commodity.commodity_type.get.queryKey({
+          input: {},
+        }),
       });
     },
   });
@@ -118,7 +120,7 @@ export function CreateCommodityTypeForm({
                 <field.selectField
                   label="Land Type"
                   placeholder="Select a land type"
-                  options={
+                  values={
                     landTypes?.data.map((lt) => ({
                       label: lt.name,
                       value: lt.id,
@@ -140,10 +142,7 @@ export function CreateCommodityTypeForm({
               }}
             >
               {(field) => (
-                <field.textField
-                  label="Year"
-                  placeholder="ex. 2024"
-                />
+                <field.textField label="Year" placeholder="ex. 2024" />
               )}
             </form.AppField>
 

@@ -34,7 +34,6 @@ export const updateRegencyCommodity = protectedProcedure
       .where(eq(regencyCommodities.id, input.id))
       .returning();
 
-
     if (!updatedRegencyCommodity) {
       throw new Error('Regency Commodity not found');
     }

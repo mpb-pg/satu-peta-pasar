@@ -1,7 +1,7 @@
-import { protectedProcedure } from "@/lib/orpc";
-import { CommodityTypeSchema } from "../-domain/schema";
-import { commodityTypes } from "@/lib/db/schema/map-product";
-import { eq } from "drizzle-orm";
+import { eq } from 'drizzle-orm';
+import { commodityTypes } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
+import { CommodityTypeSchema } from '../-domain/schema';
 
 export const updateCommodityType = protectedProcedure
   .input(
@@ -12,7 +12,7 @@ export const updateCommodityType = protectedProcedure
       year: true,
     })
       .partial()
-      .required({ id: true})
+      .required({ id: true })
   )
   .handler(async ({ input, context }) => {
     const updateData = Object.fromEntries(

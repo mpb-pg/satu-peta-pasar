@@ -8,6 +8,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { orpc } from '@/lib/orpc/client';
 import { useAppForm } from '../-hooks/form';
+import { useEffect } from 'react';
 
 export function EditProvinceLandForm({
   open,
@@ -81,6 +82,12 @@ export function EditProvinceLandForm({
       }
     },
   });
+
+  useEffect(() => {
+    form.setFieldValue('provinceId', currentProvinceLand?.provinceId ?? '');
+    form.setFieldValue('landTypeId', currentProvinceLand?.landTypeId ?? '');
+    form.setFieldValue('area', currentProvinceLand?.area ?? 0);
+  }, [open, currentProvinceLand, form]);
 
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>

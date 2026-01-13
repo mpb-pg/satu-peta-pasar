@@ -24,7 +24,9 @@ type RegencyCommodityListItem = {
   year: string;
 };
 
-export const Route = createFileRoute('/admin/commodity/regency-commodity/$commodityType')({
+export const Route = createFileRoute(
+  '/admin/commodity/regency-commodity/$commodityType'
+)({
   component: RouteComponent,
   validateSearch: z.object({
     q: z.string().optional(),
@@ -48,7 +50,8 @@ function RouteComponent() {
     (rc) => rc.commodityTypeId === commodityTypeIdSlug
   );
   const commodityTypeName =
-    commodityTypes?.data.find((ct) => ct.id === commodityTypeIdSlug)?.name || 'Unknown';
+    commodityTypes?.data.find((ct) => ct.id === commodityTypeIdSlug)?.name ||
+    'Unknown';
 
   const navigate = Route.useNavigate();
   const search = Route.useSearch();
@@ -114,7 +117,9 @@ function RouteComponent() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-4 text-left">
-        <h1 className="font-bold text-3xl">{commodityTypeName} area by Regency</h1>
+        <h1 className="font-bold text-3xl">
+          {commodityTypeName} area by Regency
+        </h1>
         <p className="text-slate-600">
           Overview of regencies and their {commodityTypeName} areas
         </p>
@@ -174,7 +179,8 @@ function RouteComponent() {
                             {regencyCommodity.regencyName}
                           </CardTitle>
                           <CardDescription className="mt-1 text-xs">
-                            Area: {regencyCommodity.area?.toFixed(2) || 'No area'}{' '}
+                            Area:{' '}
+                            {regencyCommodity.area?.toFixed(2) || 'No area'}{' '}
                             hectares
                           </CardDescription>
                           <CardDescription className="text-xs">
@@ -222,7 +228,6 @@ function RouteComponent() {
       />
 
       <EditRegencyCommodityForm
-        regencyCommodityId={edit ?? null}
         onOpenChange={(open) => {
           if (!open) {
             navigate({
@@ -232,6 +237,7 @@ function RouteComponent() {
           }
         }}
         open={Boolean(edit)}
+        regencyCommodityId={edit ?? null}
       />
 
       <DeleteRegencyCommodityForm

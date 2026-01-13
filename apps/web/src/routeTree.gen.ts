@@ -43,6 +43,7 @@ import { Route as AdminLandRegencyLandIndexRouteImport } from './routes/admin/la
 import { Route as AdminLandProvinceLandIndexRouteImport } from './routes/admin/land/province-land/index'
 import { Route as AdminCommodityRegencyCommodityIndexRouteImport } from './routes/admin/commodity/regency-commodity/index'
 import { Route as AdminCommodityProvinceCommodityIndexRouteImport } from './routes/admin/commodity/province-commodity/index'
+import { Route as AdminProductProductDosageProductBrandRouteImport } from './routes/admin/product/product-dosage/$productBrand'
 import { Route as AdminLandProvinceLandLandTypeRouteImport } from './routes/admin/land/province-land/$landType'
 import { Route as AdminCommodityRegencyCommodityCommodityTypeRouteImport } from './routes/admin/commodity/regency-commodity/$commodityType'
 import { ServerRoute as ApiSplatServerRouteImport } from './routes/api/$'
@@ -218,6 +219,12 @@ const AdminCommodityProvinceCommodityIndexRoute =
     path: '/commodity/province-commodity/',
     getParentRoute: () => AdminRouteRoute,
   } as any)
+const AdminProductProductDosageProductBrandRoute =
+  AdminProductProductDosageProductBrandRouteImport.update({
+    id: '/product/product-dosage/$productBrand',
+    path: '/product/product-dosage/$productBrand',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
 const AdminLandProvinceLandLandTypeRoute =
   AdminLandProvinceLandLandTypeRouteImport.update({
     id: '/land/province-land/$landType',
@@ -272,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/admin/user': typeof AdminUserIndexRoute
   '/admin/commodity/regency-commodity/$commodityType': typeof AdminCommodityRegencyCommodityCommodityTypeRoute
   '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
+  '/admin/product/product-dosage/$productBrand': typeof AdminProductProductDosageProductBrandRoute
   '/admin/commodity/province-commodity': typeof AdminCommodityProvinceCommodityIndexRoute
   '/admin/commodity/regency-commodity': typeof AdminCommodityRegencyCommodityIndexRoute
   '/admin/land/province-land': typeof AdminLandProvinceLandIndexRoute
@@ -306,6 +314,7 @@ export interface FileRoutesByTo {
   '/admin/user': typeof AdminUserIndexRoute
   '/admin/commodity/regency-commodity/$commodityType': typeof AdminCommodityRegencyCommodityCommodityTypeRoute
   '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
+  '/admin/product/product-dosage/$productBrand': typeof AdminProductProductDosageProductBrandRoute
   '/admin/commodity/province-commodity': typeof AdminCommodityProvinceCommodityIndexRoute
   '/admin/commodity/regency-commodity': typeof AdminCommodityRegencyCommodityIndexRoute
   '/admin/land/province-land': typeof AdminLandProvinceLandIndexRoute
@@ -343,6 +352,7 @@ export interface FileRoutesById {
   '/admin/user/': typeof AdminUserIndexRoute
   '/admin/commodity/regency-commodity/$commodityType': typeof AdminCommodityRegencyCommodityCommodityTypeRoute
   '/admin/land/province-land/$landType': typeof AdminLandProvinceLandLandTypeRoute
+  '/admin/product/product-dosage/$productBrand': typeof AdminProductProductDosageProductBrandRoute
   '/admin/commodity/province-commodity/': typeof AdminCommodityProvinceCommodityIndexRoute
   '/admin/commodity/regency-commodity/': typeof AdminCommodityRegencyCommodityIndexRoute
   '/admin/land/province-land/': typeof AdminLandProvinceLandIndexRoute
@@ -381,6 +391,7 @@ export interface FileRouteTypes {
     | '/admin/user'
     | '/admin/commodity/regency-commodity/$commodityType'
     | '/admin/land/province-land/$landType'
+    | '/admin/product/product-dosage/$productBrand'
     | '/admin/commodity/province-commodity'
     | '/admin/commodity/regency-commodity'
     | '/admin/land/province-land'
@@ -415,6 +426,7 @@ export interface FileRouteTypes {
     | '/admin/user'
     | '/admin/commodity/regency-commodity/$commodityType'
     | '/admin/land/province-land/$landType'
+    | '/admin/product/product-dosage/$productBrand'
     | '/admin/commodity/province-commodity'
     | '/admin/commodity/regency-commodity'
     | '/admin/land/province-land'
@@ -451,6 +463,7 @@ export interface FileRouteTypes {
     | '/admin/user/'
     | '/admin/commodity/regency-commodity/$commodityType'
     | '/admin/land/province-land/$landType'
+    | '/admin/product/product-dosage/$productBrand'
     | '/admin/commodity/province-commodity/'
     | '/admin/commodity/regency-commodity/'
     | '/admin/land/province-land/'
@@ -735,6 +748,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCommodityProvinceCommodityIndexRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/product/product-dosage/$productBrand': {
+      id: '/admin/product/product-dosage/$productBrand'
+      path: '/product/product-dosage/$productBrand'
+      fullPath: '/admin/product/product-dosage/$productBrand'
+      preLoaderRoute: typeof AdminProductProductDosageProductBrandRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/land/province-land/$landType': {
       id: '/admin/land/province-land/$landType'
       path: '/land/province-land/$landType'
@@ -787,6 +807,7 @@ interface AdminRouteRouteChildren {
   AdminUserIndexRoute: typeof AdminUserIndexRoute
   AdminCommodityRegencyCommodityCommodityTypeRoute: typeof AdminCommodityRegencyCommodityCommodityTypeRoute
   AdminLandProvinceLandLandTypeRoute: typeof AdminLandProvinceLandLandTypeRoute
+  AdminProductProductDosageProductBrandRoute: typeof AdminProductProductDosageProductBrandRoute
   AdminCommodityProvinceCommodityIndexRoute: typeof AdminCommodityProvinceCommodityIndexRoute
   AdminCommodityRegencyCommodityIndexRoute: typeof AdminCommodityRegencyCommodityIndexRoute
   AdminLandProvinceLandIndexRoute: typeof AdminLandProvinceLandIndexRoute
@@ -809,6 +830,8 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminCommodityRegencyCommodityCommodityTypeRoute:
     AdminCommodityRegencyCommodityCommodityTypeRoute,
   AdminLandProvinceLandLandTypeRoute: AdminLandProvinceLandLandTypeRoute,
+  AdminProductProductDosageProductBrandRoute:
+    AdminProductProductDosageProductBrandRoute,
   AdminCommodityProvinceCommodityIndexRoute:
     AdminCommodityProvinceCommodityIndexRoute,
   AdminCommodityRegencyCommodityIndexRoute:

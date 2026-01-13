@@ -1,11 +1,11 @@
-import { protectedProcedure } from "@/lib/orpc";
-import { CommodityTypeSchema } from "../-domain/schema";
-import { generateUUID } from "@/lib/db/schema";
-import { commodityTypes } from "@/lib/db/schema/map-product";
-import { ORPCError } from "@orpc/client";
+import { ORPCError } from '@orpc/client';
+import { generateUUID } from '@/lib/db/schema';
+import { commodityTypes } from '@/lib/db/schema/map-product';
+import { protectedProcedure } from '@/lib/orpc';
+import { CommodityTypeSchema } from '../-domain/schema';
 
 export const createCommodityType = protectedProcedure
-  .input(CommodityTypeSchema.omit({id: true }))
+  .input(CommodityTypeSchema.omit({ id: true }))
   .handler(async ({ input, context }) => {
     const newCommodityType = {
       id: generateUUID(),

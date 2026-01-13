@@ -173,13 +173,15 @@ export function MapSidebar({
 
   const latestUpdatedAtText = useMemo(() => {
     const items =
-      (provincePotential?.data as Array<{ updatedAt: string | number | Date }>) ?? [];
-    if (!items.length) return undefined;
+      (provincePotential?.data as Array<{
+        updatedAt: string | number | Date;
+      }>) ?? [];
+    if (!items.length) return;
     const latestMs = items.reduce((max: number, item) => {
       const t = Number(new Date(item.updatedAt));
       return t > max ? t : max;
     }, 0);
-    if (!latestMs) return undefined;
+    if (!latestMs) return;
     return i18n.date(new Date(latestMs), {
       year: 'numeric',
       month: 'short',
@@ -281,13 +283,15 @@ export function MapSidebar({
       {/* Main Content */}
       <SidebarContent>
         <SidebarMenu>
-          
           {/* Year selection */}
           <SidebarMenuItem className="mt-2 ml-4">
             <Label className="mb-2" htmlFor="year">
               <Trans>Year</Trans>
             </Label>
-            <Select onValueChange={(value) => handleYearChange(value)} value={selectedYear}>
+            <Select
+              onValueChange={(value) => handleYearChange(value)}
+              value={selectedYear}
+            >
               <SelectTrigger className="w-40">
                 <SelectValue placeholder="Select Year" />
               </SelectTrigger>
@@ -366,9 +370,9 @@ export function MapSidebar({
                   onValueChange={(value) => handleProvinceChange(value)}
                   value={selectedProvince}
                 >
-                    <SelectTrigger className="w-40">
-                      <SelectValue placeholder="Province" />
-                    </SelectTrigger>
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Province" />
+                  </SelectTrigger>
                   <SelectContent>
                     {provinces?.map((province) => (
                       <SelectItem key={province.id} value={province.id}>
@@ -386,9 +390,9 @@ export function MapSidebar({
                   onValueChange={(value) => handleRegencyChange(value)}
                   value={selectedRegency}
                 >
-                    <SelectTrigger className="w-40">
-                      <SelectValue placeholder="Regency" />
-                    </SelectTrigger>
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Regency" />
+                  </SelectTrigger>
                   <SelectContent>
                     {regencies?.map((regency) => (
                       <SelectItem key={regency.id} value={regency.id}>
@@ -503,27 +507,55 @@ export function MapSidebar({
         </SidebarMenu>
 
         {/* Bottom information block */}
-        <div className="mt-6 border-t px-4 py-3 text-xs text-muted-foreground">
+        <div className="mt-6 border-t px-4 py-3 text-muted-foreground text-xs">
           <p className="mb-2">
             <Trans>
               This data is based on data consisting of 14 commodities:
             </Trans>
           </p>
           <ul className="ml-4 list-disc space-y-1">
-            <li><Trans>Rice</Trans></li>
-            <li><Trans>Corn</Trans></li>
-            <li><Trans>Soybeans</Trans></li>
-            <li><Trans>Peanuts</Trans></li>
-            <li><Trans>Cassava</Trans></li>
-            <li><Trans>Cabbage</Trans></li>
-            <li><Trans>Mustard greens</Trans></li>
-            <li><Trans>Potatoes</Trans></li>
-            <li><Trans>Tomatoes</Trans></li>
-            <li><Trans>Chili</Trans></li>
-            <li><Trans>Shallots</Trans></li>
-            <li><Trans>Melons</Trans></li>
-            <li><Trans>Watermelon</Trans></li>
-            <li><Trans>Sugarcane</Trans></li>
+            <li>
+              <Trans>Rice</Trans>
+            </li>
+            <li>
+              <Trans>Corn</Trans>
+            </li>
+            <li>
+              <Trans>Soybeans</Trans>
+            </li>
+            <li>
+              <Trans>Peanuts</Trans>
+            </li>
+            <li>
+              <Trans>Cassava</Trans>
+            </li>
+            <li>
+              <Trans>Cabbage</Trans>
+            </li>
+            <li>
+              <Trans>Mustard greens</Trans>
+            </li>
+            <li>
+              <Trans>Potatoes</Trans>
+            </li>
+            <li>
+              <Trans>Tomatoes</Trans>
+            </li>
+            <li>
+              <Trans>Chili</Trans>
+            </li>
+            <li>
+              <Trans>Shallots</Trans>
+            </li>
+            <li>
+              <Trans>Melons</Trans>
+            </li>
+            <li>
+              <Trans>Watermelon</Trans>
+            </li>
+            <li>
+              <Trans>Sugarcane</Trans>
+            </li>
           </ul>
           <p className="mt-3">
             <Trans>Last updated on:</Trans> {latestUpdatedAtText ?? '—'}

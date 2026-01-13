@@ -55,7 +55,7 @@ function RouteComponent() {
           <div>
             <CardTitle>Commodity Type List</CardTitle>
             <CardDescription>
-              Manage and organize your commodity types
+              Choose your commodity types
             </CardDescription>
           </div>
           <div className="flex w-full flex-wrap gap-2 sm:w-auto">
@@ -97,7 +97,9 @@ function RouteComponent() {
                       <div className="flex items-start justify-between">
                         <div>
                           <CardTitle className="text-lg">
-                            <Link to={`./${commodityType.id}`}>{commodityType.name}</Link>
+                            <Link to={`./${commodityType.id}`}>
+                              {commodityType.name}
+                            </Link>
                           </CardTitle>
                         </div>
                       </div>

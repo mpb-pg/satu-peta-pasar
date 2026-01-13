@@ -18,7 +18,17 @@ import { getProvinceLands } from '@/routes/admin/land/province-land/-app/get-pro
 import { updateProvinceLand } from '@/routes/admin/land/province-land/-app/update-province-land';
 import { getProvincePotentials } from '@/routes/admin/potential/province_potential/-app/get-province-potentials';
 import { getProductTypes } from '@/routes/admin/product/-app/get-product-types';
+import { createProductType } from '@/routes/admin/product/-app/create-product-type';
+import { updateProductType } from '@/routes/admin/product/-app/update-product-type';
+import { deleteProductType } from '@/routes/admin/product/-app/delete-product-type';
 import { getProductBrands } from '@/routes/admin/product/product-brand/-app/get-product-brands';
+import { createProductBrand } from '@/routes/admin/product/product-brand/-app/create-product-brand';
+import { updateProductBrand } from '@/routes/admin/product/product-brand/-app/update-product-brand';
+import { deleteProductBrand } from '@/routes/admin/product/product-brand/-app/delete-product-brand';
+import { getProductDosages } from '@/routes/admin/product/product-dosage/-app/get-product-dosages';
+import { createProductDosage } from '@/routes/admin/product/product-dosage/-app/create-product-dosage';
+import { updateProductDosage } from '@/routes/admin/product/product-dosage/-app/update-product-dosage';
+import { deleteProductDosage } from '@/routes/admin/product/product-dosage/-app/delete-product-dosage';
 import { createProvince } from '@/routes/admin/region/province/-app/create-province';
 import { deleteProvince } from '@/routes/admin/region/province/-app/delete-province';
 import { getProvinces } from '@/routes/admin/region/province/-app/get-provinces';
@@ -153,9 +163,21 @@ export default {
     product: {
       product_type: {
         get: getProductTypes,
+        create: createProductType,
+        update: updateProductType,
+        delete: deleteProductType,
       },
       product_brand: {
         get: getProductBrands,
+        create: createProductBrand,
+        update: updateProductBrand,
+        delete: deleteProductBrand,
+      },
+      product_dosage: {
+        get: getProductDosages,
+        create: createProductDosage,
+        update: updateProductDosage,
+        delete: deleteProductDosage,
       },
     },
 

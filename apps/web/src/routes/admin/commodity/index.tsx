@@ -58,7 +58,9 @@ function RouteComponent() {
 
   useEffect(() => {
     if (deleteParam && commodityTypes) {
-      const commodityType = commodityTypes?.data?.find((ct) => ct.id === deleteParam);
+      const commodityType = commodityTypes?.data?.find(
+        (ct) => ct.id === deleteParam
+      );
       if (commodityType) {
         setCurrentDeleteCommodityType(commodityType);
       }

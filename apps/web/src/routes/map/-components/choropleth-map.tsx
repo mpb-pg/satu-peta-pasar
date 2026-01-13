@@ -208,13 +208,15 @@ const ChoroplethMap: React.FC<ChoroplethMapProps> = ({
   const geoKey = useMemo(() => {
     if (!enriched) return 'empty';
     // Use provinceCode and potential — concise and reflects visible changes
-    return `${year ?? 'all'}:` +
+    return (
+      `${year ?? 'all'}:` +
       enriched.features
-      .map(
-        (f: any) =>
-          `${String(f.properties?.provinceCode ?? f.properties?.code ?? f.properties?.id ?? '')}:${String(f.properties?.potential ?? 0)}`
-      )
-      .join('|');
+        .map(
+          (f: any) =>
+            `${String(f.properties?.provinceCode ?? f.properties?.code ?? f.properties?.id ?? '')}:${String(f.properties?.potential ?? 0)}`
+        )
+        .join('|')
+    );
   }, [enriched, year]);
 
   // Report loading status to parent when queries or enriched change

@@ -8,6 +8,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { orpc } from '@/lib/orpc/client';
 import { useAppForm } from '../-hooks/form';
+import { useEffect } from 'react';
 
 export function EditRegencyCommodityForm({
   open,
@@ -36,7 +37,9 @@ export function EditRegencyCommodityForm({
   );
 
   const updateMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.commodity.regency_commodity.update.call>>,
+    Awaited<
+      ReturnType<typeof orpc.admin.commodity.regency_commodity.update.call>
+    >,
     Error,
     Parameters<typeof orpc.admin.commodity.regency_commodity.update.call>[0]
   >({
@@ -44,7 +47,9 @@ export function EditRegencyCommodityForm({
       orpc.admin.commodity.regency_commodity.update.call(regencyCommodityData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.commodity.regency_commodity.get.queryKey({ input: {} }),
+        queryKey: orpc.admin.commodity.regency_commodity.get.queryKey({
+          input: {},
+        }),
       });
     },
   });
@@ -85,11 +90,23 @@ export function EditRegencyCommodityForm({
     },
   });
 
+  useEffect(() => {
+    form.setFieldValue('regencyId', currentRegencyCommodity?.regencyId ?? '');
+    form.setFieldValue(
+      'commodityTypeId',
+      currentRegencyCommodity?.commodityTypeId ?? ''
+    );
+    form.setFieldValue('area', currentRegencyCommodity?.area ?? 0);
+    form.setFieldValue('year', currentRegencyCommodity?.year ?? '');
+  }, [open, currentRegencyCommodity, form]);
+
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>Update Regency Commodity</DialogTitle>
-        <DialogDescription>Update the regency commodity details</DialogDescription>
+        <DialogDescription>
+          Update the regency commodity details
+        </DialogDescription>
 
         <form
           className="space-y-4"
@@ -100,24 +117,28 @@ export function EditRegencyCommodityForm({
           }}
         >
           <div className="grid-col-1 grid gap-4 md:grid-cols-2">
-            <form.AppField
-              name="regencyId"
-            >
+            <form.AppField name="regencyId">
               {(field) => (
                 <field.readOnlyField
                   label="Regency"
-                  value={regencies?.data?.find((reg) => reg.id === currentRegencyCommodity?.regencyId)?.name || ''}
+                  value={
+                    regencies?.data?.find(
+                      (reg) => reg.id === currentRegencyCommodity?.regencyId
+                    )?.name || ''
+                  }
                 />
               )}
             </form.AppField>
 
-            <form.AppField
-              name="commodityTypeId"
-            >
+            <form.AppField name="commodityTypeId">
               {(field) => (
                 <field.readOnlyField
                   label="Commodity Type"
-                  value={commodityTypes?.data?.find((ct) => ct.id === currentRegencyCommodity?.commodityTypeId)?.name || ''}
+                  value={
+                    commodityTypes?.data?.find(
+                      (ct) => ct.id === currentRegencyCommodity?.commodityTypeId
+                    )?.name || ''
+                  }
                 />
               )}
             </form.AppField>
@@ -141,9 +162,7 @@ export function EditRegencyCommodityForm({
               )}
             </form.AppField>
 
-            <form.AppField
-              name="year"
-            >
+            <form.AppField name="year">
               {(field) => (
                 <field.readOnlyField
                   label="Year"
@@ -152,7 +171,7 @@ export function EditRegencyCommodityForm({
               )}
             </form.AppField>
 
-            <div></div>
+            <div />
             <div className="mt-7 flex justify-end">
               <form.AppForm>
                 <form.subscribeButton label="Update" />

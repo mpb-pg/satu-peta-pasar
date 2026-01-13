@@ -2,8 +2,8 @@ import { and, eq, or } from 'drizzle-orm';
 import z from 'zod';
 import {
   commodityTypes,
-  regencyCommodities,
   regencies,
+  regencyCommodities,
 } from '@/lib/db/schema/map-product';
 import { protectedProcedure } from '@/lib/orpc';
 
@@ -34,7 +34,10 @@ export const getRegencyCommodities = protectedProcedure
         year: regencyCommodities.year,
       })
       .from(regencyCommodities)
-      .innerJoin(commodityTypes, eq(regencyCommodities.commodityTypeId, commodityTypes.id))
+      .innerJoin(
+        commodityTypes,
+        eq(regencyCommodities.commodityTypeId, commodityTypes.id)
+      )
       .innerJoin(regencies, eq(regencyCommodities.regencyId, regencies.id));
 
     const conditions: ReturnType<typeof eq | typeof or>[] = [];
@@ -42,7 +45,9 @@ export const getRegencyCommodities = protectedProcedure
       conditions.push(eq(regencyCommodities.regencyId, input.regencyId));
     }
     if (input.commodityTypeId) {
-      conditions.push(eq(regencyCommodities.commodityTypeId, input.commodityTypeId));
+      conditions.push(
+        eq(regencyCommodities.commodityTypeId, input.commodityTypeId)
+      );
     }
     if (input.search) {
       conditions.push(

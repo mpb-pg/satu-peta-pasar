@@ -9,36 +9,33 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { orpc } from '@/lib/orpc/client';
 
-export function DeleteCommodityTypeForm({
+export function DeleteProductDosageForm({
   open,
   onOpenChange,
-  commodityType,
+  productDosage,
   onDelete,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  commodityType: { id: string; name: string } | null;
-  onDelete: (commodityTypeId: string) => void;
+  productDosage: { id: string; productBrandName?: string } | null;
+  onDelete: (id: string) => void;
 }) {
   const queryClient = useQueryClient();
 
   const toast = useToast();
 
   const deleteMutation = useMutation<
-    Awaited<ReturnType<typeof orpc.admin.commodity.commodity_type.delete.call>>,
+    Awaited<ReturnType<typeof orpc.admin.product.product_dosage.delete.call>>,
     Error,
-    Parameters<typeof orpc.admin.commodity.commodity_type.delete.call>[0]
+    Parameters<typeof orpc.admin.product.product_dosage.delete.call>[0]
   >({
-    mutationFn: (commodityTypeData) =>
-      orpc.admin.commodity.commodity_type.delete.call(commodityTypeData),
+    mutationFn: (payload) => orpc.admin.product.product_dosage.delete.call(payload),
     onError: () => {
-      toast.error('Failed to delete commodity type. Please try again.');
+      toast.error('Failed to delete product dosage. Please try again.');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: orpc.admin.commodity.commodity_type.get.queryKey({
-          input: {},
-        }),
+        queryKey: orpc.admin.product.product_dosage.get.queryKey({ input: {} }),
       });
     },
   });
@@ -46,14 +43,12 @@ export function DeleteCommodityTypeForm({
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <DialogTitle>
-          Are you sure you want to delete this commodity type?
-        </DialogTitle>
+        <DialogTitle>Are you sure you want to delete this product dosage?</DialogTitle>
         <DialogDescription>This action cannot be undone.</DialogDescription>
 
         <div className="mt-4">
           <p>
-            <strong>Commodity Type Name:</strong> {commodityType?.name}
+            <strong>Product Brand:</strong> {productDosage?.productBrandName}
           </p>
         </div>
 
@@ -64,16 +59,14 @@ export function DeleteCommodityTypeForm({
           <Button
             onClick={async () => {
               try {
-                if (commodityType) {
-                  await deleteMutation.mutateAsync({ id: commodityType.id });
-                  toast.success('Commodity type deleted successfully!');
-                  onDelete(commodityType.id);
+                if (productDosage) {
+                  await deleteMutation.mutateAsync({ id: productDosage.id });
+                  toast.success('Product dosage deleted successfully!');
+                  onDelete(productDosage.id);
                   onOpenChange(false);
                 }
               } catch (_error) {
-                toast.error(
-                  'Failed to delete commodity type. Please try again.'
-                );
+                toast.error('Failed to delete product dosage. Please try again.');
               }
             }}
             variant="destructive"

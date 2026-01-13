@@ -1,11 +1,11 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 import { Link } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
 import LanguageSwitcher from '@/components/language-switcher';
 import { Button } from '@/components/ui/button';
 import authClient from '@/lib/auth/auth-client';
 import { orpc } from '@/lib/orpc/client';
 import { Route } from '@/routes/__root';
-import { useEffect, useState } from 'react';
 
 export default function Header() {
   const { user } = Route.useRouteContext();
@@ -39,7 +39,13 @@ export default function Header() {
           userId: user.id,
         });
 
-        type UserRes = { id: string; name: string; email: string; role: string; created_at: Date };
+        type UserRes = {
+          id: string;
+          name: string;
+          email: string;
+          role: string;
+          created_at: Date;
+        };
         const data =
           (res as unknown as { data?: UserRes[] })?.data ??
           (res as unknown as { value?: { data?: UserRes[] } })?.value?.data;
@@ -94,13 +100,13 @@ export default function Header() {
         <LanguageSwitcher />
         {user ? (
           <>
-            {hasAdminAccess &&
+            {hasAdminAccess && (
               <Link to="/admin">
                 <Button size="sm" variant="ghost">
                   <Trans>Admin Panel</Trans>
                 </Button>
               </Link>
-            } 
+            )}
             <span className="text-sm">{t`Welcome, ${user.name}!`}</span>
             <Button onClick={handleSignOut} size="sm" variant="outline">
               <Trans>Sign Out</Trans>
