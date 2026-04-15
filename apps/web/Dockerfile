@@ -21,6 +21,7 @@ RUN cd apps/web && bun run lingui:compile
 
 # Build the web application using turbo
 ENV SKIP_ENV_VALIDATION=true
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 RUN bun run build
 
 # Debug: Check what was built

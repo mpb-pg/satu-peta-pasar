@@ -1,0 +1,12 @@
+node_modules
+.output
+.next
+.turbo
+.git
+.DS_Store
+apps/web/node_modules
+apps/web/.output
+apps/web/.tanstack
+apps/web/.nitro
+build_log.txt
+build_log_2.txt
