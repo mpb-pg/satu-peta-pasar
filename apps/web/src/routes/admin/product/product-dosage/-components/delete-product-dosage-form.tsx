@@ -29,7 +29,8 @@ export function DeleteProductDosageForm({
     Error,
     Parameters<typeof orpc.admin.product.product_dosage.delete.call>[0]
   >({
-    mutationFn: (payload) => orpc.admin.product.product_dosage.delete.call(payload),
+    mutationFn: (payload) =>
+      orpc.admin.product.product_dosage.delete.call(payload),
     onError: () => {
       toast.error('Failed to delete product dosage. Please try again.');
     },
@@ -43,7 +44,9 @@ export function DeleteProductDosageForm({
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <DialogTitle>Are you sure you want to delete this product dosage?</DialogTitle>
+        <DialogTitle>
+          Are you sure you want to delete this product dosage?
+        </DialogTitle>
         <DialogDescription>This action cannot be undone.</DialogDescription>
 
         <div className="mt-4">
@@ -66,7 +69,9 @@ export function DeleteProductDosageForm({
                   onOpenChange(false);
                 }
               } catch (_error) {
-                toast.error('Failed to delete product dosage. Please try again.');
+                toast.error(
+                  'Failed to delete product dosage. Please try again.'
+                );
               }
             }}
             variant="destructive"

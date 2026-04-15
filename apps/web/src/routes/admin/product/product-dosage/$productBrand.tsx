@@ -26,7 +26,9 @@ type ProductDosageListItem = {
   unit?: string;
 };
 
-export const Route = createFileRoute('/admin/product/product-dosage/$productBrand')({
+export const Route = createFileRoute(
+  '/admin/product/product-dosage/$productBrand'
+)({
   component: RouteComponent,
   validateSearch: z.object({
     q: z.string().optional(),
@@ -120,7 +122,9 @@ function RouteComponent() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-4 text-left">
         <h1 className="font-bold text-3xl">{productBrandName} dosages</h1>
-        <p className="text-slate-600">Overview of dosages for {productBrandName}</p>
+        <p className="text-slate-600">
+          Overview of dosages for {productBrandName}
+        </p>
       </div>
 
       <Card>
@@ -154,11 +158,13 @@ function RouteComponent() {
             if (isLoading) return <p>Loading product dosages...</p>;
             if (filtered?.length === 0) {
               return (
-                <p className="text-center text-gray-500">No product dosages found.</p>
+                <p className="text-center text-gray-500">
+                  No product dosages found.
+                </p>
               );
             }
             const filteredList = filtered.filter((d) =>
-              ((d.productBrandName || d.commodityTypeName) || '')
+              (d.productBrandName || d.commodityTypeName || '')
                 .toLowerCase()
                 .includes(searchTerm.toLowerCase())
             );
@@ -169,26 +175,36 @@ function RouteComponent() {
                     className="group relative flex flex-col overflow-hidden"
                     key={d.id}
                   >
-                            <CardHeader className="pb-2">
-                              <div className="flex items-start justify-between">
-                                <div>
-                                  <CardTitle className="text-lg">{d.commodityTypeName ?? '—'}</CardTitle>
-                                  <CardDescription className="mt-1 text-xs">
-                                    Dosage: {d.dosage ?? '—'} {d.unit ?? ''}
-                                  </CardDescription>
-                                </div>
-                              </div>
-                            </CardHeader>
-                            <CardContent className="flex-1">
-                              <div className="absolute right-4 bottom-4 flex gap-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                                <Button onClick={() => handleEdit(d)} size="sm" variant="outline">
-                                  <Edit className="h-4 w-4" />
-                                </Button>
-                                <Button onClick={() => handleDelete(d)} size="sm" variant="destructive">
-                                  <Trash2 className="h-4 w-4" />
-                                </Button>
-                              </div>
-                            </CardContent>
+                    <CardHeader className="pb-2">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <CardTitle className="text-lg">
+                            {d.commodityTypeName ?? '—'}
+                          </CardTitle>
+                          <CardDescription className="mt-1 text-xs">
+                            Dosage: {d.dosage ?? '—'} {d.unit ?? ''}
+                          </CardDescription>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="flex-1">
+                      <div className="absolute right-4 bottom-4 flex gap-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                        <Button
+                          onClick={() => handleEdit(d)}
+                          size="sm"
+                          variant="outline"
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          onClick={() => handleDelete(d)}
+                          size="sm"
+                          variant="destructive"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardContent>
                   </Card>
                 ))}
               </div>
@@ -210,7 +226,6 @@ function RouteComponent() {
       />
 
       <EditProductDosageForm
-        productDosageId={edit ?? null}
         onOpenChange={(open) => {
           if (!open) {
             navigate({
@@ -220,10 +235,17 @@ function RouteComponent() {
           }
         }}
         open={Boolean(edit)}
+        productDosageId={edit ?? null}
       />
 
       <DeleteProductDosageForm
-        productDosage={currentDeleteDosage}
+        onDelete={() => {
+          navigate({
+            to: '.',
+            search: (prev) => ({ ...prev, delete: undefined }),
+          });
+          setCurrentDeleteDosage(null);
+        }}
         onOpenChange={(open) => {
           if (!open) {
             navigate({
@@ -232,14 +254,8 @@ function RouteComponent() {
             });
           }
         }}
-        onDelete={() => {
-          navigate({
-            to: '.',
-            search: (prev) => ({ ...prev, delete: undefined }),
-          });
-          setCurrentDeleteDosage(null);
-        }}
         open={Boolean(deleteParam)}
+        productDosage={currentDeleteDosage}
       />
     </div>
   );

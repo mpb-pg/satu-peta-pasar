@@ -20,6 +20,7 @@ RUN cd apps/web && bun run lingui:extract
 RUN cd apps/web && bun run lingui:compile
 
 # Build the web application using turbo
+ENV SKIP_ENV_VALIDATION=true
 RUN bun run build
 
 # Debug: Check what was built

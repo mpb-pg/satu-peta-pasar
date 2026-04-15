@@ -1,7 +1,7 @@
-import z from 'zod';
 import { eq } from 'drizzle-orm';
+import z from 'zod';
 import { productBrands } from '@/lib/db/schema/map-product';
-import { protectedProcedure, ORPCError } from '@/lib/orpc';
+import { ORPCError, protectedProcedure } from '@/lib/orpc';
 
 export const updateProductBrand = protectedProcedure
   .input(

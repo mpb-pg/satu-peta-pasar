@@ -32,7 +32,8 @@ export function EditProductDosageForm({
     Error,
     Parameters<typeof orpc.admin.product.product_dosage.update.call>[0]
   >({
-    mutationFn: (payload) => orpc.admin.product.product_dosage.update.call(payload),
+    mutationFn: (payload) =>
+      orpc.admin.product.product_dosage.update.call(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.product.product_dosage.get.queryKey({ input: {} }),
@@ -48,7 +49,7 @@ export function EditProductDosageForm({
       dosage: current?.dosage ?? 0,
       unit: current?.unit ?? '',
     },
-    validators: { onBlur: () => ({ fields: {} } as any) },
+    validators: { onBlur: () => ({ fields: {} }) as any },
     onSubmit: async ({ value }) => {
       try {
         await updateMutation.mutateAsync({
@@ -88,22 +89,32 @@ export function EditProductDosageForm({
           <div className="grid-col-1 grid gap-4 md:grid-cols-2">
             <form.AppField name="commodityTypeId">
               {(field) => (
-                <field.readOnlyField label="Commodity Type" value={current?.commodityTypeName || ''} />
+                <field.readOnlyField
+                  label="Commodity Type"
+                  value={current?.commodityTypeName || ''}
+                />
               )}
             </form.AppField>
 
             <form.AppField name="productBrandId">
               {(field) => (
-                <field.readOnlyField label="Product Brand" value={current?.productBrandName || ''} />
+                <field.readOnlyField
+                  label="Product Brand"
+                  value={current?.productBrandName || ''}
+                />
               )}
             </form.AppField>
 
             <form.AppField name="dosage">
-              {(field) => <field.textField label="Dosage" placeholder="e.g. 50" />}
+              {(field) => (
+                <field.textField label="Dosage" placeholder="e.g. 50" />
+              )}
             </form.AppField>
 
             <form.AppField name="unit">
-              {(field) => <field.textField label="Unit" placeholder="e.g. kg/ha" />}
+              {(field) => (
+                <field.textField label="Unit" placeholder="e.g. kg/ha" />
+              )}
             </form.AppField>
 
             <div />

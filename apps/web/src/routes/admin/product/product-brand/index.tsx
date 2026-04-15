@@ -23,14 +23,12 @@ type ProductBrandListItem = {
 
 export const Route = createFileRoute('/admin/product/product-brand/')({
   component: RouteComponent,
-  validateSearch: z
-    .object({
-      q: z.string().optional(),
-      create: z.string().optional(),
-      edit: z.string().optional(),
-      delete: z.string().optional(),
-    })
-    .parse,
+  validateSearch: z.object({
+    q: z.string().optional(),
+    create: z.string().optional(),
+    edit: z.string().optional(),
+    delete: z.string().optional(),
+  }).parse,
 });
 
 function RouteComponent() {
@@ -67,15 +65,39 @@ function RouteComponent() {
   };
 
   const handleCreate = () => {
-    navigate({ to: '.', search: (prev) => ({ ...prev, create: 'true', edit: undefined, delete: undefined }) });
+    navigate({
+      to: '.',
+      search: (prev) => ({
+        ...prev,
+        create: 'true',
+        edit: undefined,
+        delete: undefined,
+      }),
+    });
   };
 
   const handleEdit = (productBrand: ProductBrandListItem) => {
-    navigate({ to: '.', search: (prev) => ({ ...prev, edit: productBrand.id, create: undefined, delete: undefined }) });
+    navigate({
+      to: '.',
+      search: (prev) => ({
+        ...prev,
+        edit: productBrand.id,
+        create: undefined,
+        delete: undefined,
+      }),
+    });
   };
 
   const handleDelete = (productBrand: ProductBrandListItem) => {
-    navigate({ to: '.', search: (prev) => ({ ...prev, delete: productBrand.id, create: undefined, edit: undefined }) });
+    navigate({
+      to: '.',
+      search: (prev) => ({
+        ...prev,
+        delete: productBrand.id,
+        create: undefined,
+        edit: undefined,
+      }),
+    });
   };
 
   return (
@@ -89,7 +111,9 @@ function RouteComponent() {
         <CardHeader className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
             <CardTitle>Product Brand List</CardTitle>
-            <CardDescription>Manage and organize your product brands</CardDescription>
+            <CardDescription>
+              Manage and organize your product brands
+            </CardDescription>
           </div>
           <div className="flex w-full flex-wrap gap-2 sm:w-auto">
             <div className="relative min-w-[150px] flex-1">
@@ -116,12 +140,20 @@ function RouteComponent() {
         <CardContent>
           {(() => {
             if (isLoading) return <p>Loading product brands...</p>;
-            if (productBrandsList.length === 0) return <p className="text-center text-gray-500">No product brands found.</p>;
+            if (productBrandsList.length === 0)
+              return (
+                <p className="text-center text-gray-500">
+                  No product brands found.
+                </p>
+              );
 
             return (
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {productBrandsList.map((pb) => (
-                  <Card className="group relative flex flex-col overflow-hidden" key={pb.id}>
+                  <Card
+                    className="group relative flex flex-col overflow-hidden"
+                    key={pb.id}
+                  >
                     <CardHeader className="pb-2">
                       <div className="flex items-start justify-between">
                         <div>
@@ -132,20 +164,30 @@ function RouteComponent() {
                     <CardContent className="flex-1">
                       <div>
                         {pb.industry && (
-                          <p className="text-sm text-slate-600">
+                          <p className="text-slate-600 text-sm">
                             <strong>Industry:</strong> {pb.industry}
                           </p>
                         )}
                         {pb.description && (
-                          <p className="mt-1 text-sm text-gray-500">{pb.description}</p>
+                          <p className="mt-1 text-gray-500 text-sm">
+                            {pb.description}
+                          </p>
                         )}
                       </div>
 
                       <div className="absolute right-4 bottom-4 flex gap-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                        <Button onClick={() => handleEdit(pb)} size="sm" variant="outline">
+                        <Button
+                          onClick={() => handleEdit(pb)}
+                          size="sm"
+                          variant="outline"
+                        >
                           <Edit className="h-4 w-4" />
                         </Button>
-                        <Button onClick={() => handleDelete(pb)} size="sm" variant="destructive">
+                        <Button
+                          onClick={() => handleDelete(pb)}
+                          size="sm"
+                          variant="destructive"
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -159,30 +201,45 @@ function RouteComponent() {
       </Card>
 
       <CreateProductBrandForm
-        open={Boolean(create)}
         onOpenChange={(open) => {
-          if (!open) navigate({ to: '.', search: (prev) => ({ ...prev, create: undefined }) });
+          if (!open)
+            navigate({
+              to: '.',
+              search: (prev) => ({ ...prev, create: undefined }),
+            });
         }}
+        open={Boolean(create)}
       />
 
       <EditProductBrandForm
-        productBrandId={edit ?? null}
-        open={Boolean(edit)}
         onOpenChange={(open) => {
-          if (!open) navigate({ to: '.', search: (prev) => ({ ...prev, edit: undefined }) });
+          if (!open)
+            navigate({
+              to: '.',
+              search: (prev) => ({ ...prev, edit: undefined }),
+            });
         }}
+        open={Boolean(edit)}
+        productBrandId={edit ?? null}
       />
 
       <DeleteProductBrandForm
-        productBrand={currentDeleteProductBrand}
-        open={Boolean(deleteParam)}
-        onOpenChange={(open) => {
-          if (!open) navigate({ to: '.', search: (prev) => ({ ...prev, delete: undefined }) });
-        }}
         onDelete={() => {
-          navigate({ to: '.', search: (prev) => ({ ...prev, delete: undefined }) });
+          navigate({
+            to: '.',
+            search: (prev) => ({ ...prev, delete: undefined }),
+          });
           setCurrentDeleteProductBrand(null);
         }}
+        onOpenChange={(open) => {
+          if (!open)
+            navigate({
+              to: '.',
+              search: (prev) => ({ ...prev, delete: undefined }),
+            });
+        }}
+        open={Boolean(deleteParam)}
+        productBrand={currentDeleteProductBrand}
       />
     </div>
   );

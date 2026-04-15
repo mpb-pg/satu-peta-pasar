@@ -1,3 +1,5 @@
+export { ORPCError, os } from '@orpc/server';
+
 import { ORPCError, os } from '@orpc/server';
 import type { Context } from './context';
 

@@ -54,9 +54,7 @@ function RouteComponent() {
         <CardHeader className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
             <CardTitle>Land Type List</CardTitle>
-            <CardDescription>
-              Choose your land types
-            </CardDescription>
+            <CardDescription>Choose your land types</CardDescription>
           </div>
           <div className="flex w-full flex-wrap gap-2 sm:w-auto">
             <div className="relative min-w-[150px] flex-1">

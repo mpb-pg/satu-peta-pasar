@@ -30,7 +30,8 @@ export function CreateProductDosageForm({
     Error,
     Parameters<typeof orpc.admin.product.product_dosage.create.call>[0]
   >({
-    mutationFn: (payload) => orpc.admin.product.product_dosage.create.call(payload),
+    mutationFn: (payload) =>
+      orpc.admin.product.product_dosage.create.call(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.product.product_dosage.get.queryKey({ input: {} }),
@@ -46,7 +47,7 @@ export function CreateProductDosageForm({
       dosage: 0,
       unit: '',
     },
-    validators: { onBlur: () => ({ fields: {} } as any) },
+    validators: { onBlur: () => ({ fields: {} }) as any },
     onSubmit: async ({ value }) => {
       try {
         await createMutation.mutateAsync({
@@ -67,7 +68,9 @@ export function CreateProductDosageForm({
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogTitle>Create New Product Dosage</DialogTitle>
-        <DialogDescription>Add dosage for a product brand and commodity</DialogDescription>
+        <DialogDescription>
+          Add dosage for a product brand and commodity
+        </DialogDescription>
 
         <form
           className="space-y-4"
@@ -83,7 +86,12 @@ export function CreateProductDosageForm({
                 <field.selectField
                   label="Commodity Type"
                   placeholder="Select commodity type"
-                  values={commodityTypes?.data.map((c) => ({ label: c.name, value: c.id })) || []}
+                  values={
+                    commodityTypes?.data.map((c) => ({
+                      label: c.name,
+                      value: c.id,
+                    })) || []
+                  }
                 />
               )}
             </form.AppField>
@@ -93,7 +101,12 @@ export function CreateProductDosageForm({
                 <field.selectField
                   label="Product Brand"
                   placeholder="Select product brand"
-                  values={productBrands?.data.map((b) => ({ label: b.name, value: b.id })) || []}
+                  values={
+                    productBrands?.data.map((b) => ({
+                      label: b.name,
+                      value: b.id,
+                    })) || []
+                  }
                 />
               )}
             </form.AppField>
@@ -105,7 +118,9 @@ export function CreateProductDosageForm({
             </form.AppField>
 
             <form.AppField name="unit">
-              {(field) => <field.textField label="Unit" placeholder="e.g. kg/ha" />}
+              {(field) => (
+                <field.textField label="Unit" placeholder="e.g. kg/ha" />
+              )}
             </form.AppField>
 
             <div className="mt-7 flex justify-end">

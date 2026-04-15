@@ -1,0 +1,131 @@
+$ bunx --bun vite build
+vite v7.2.7 building client environment for production...
+Generated route tree in 396ms
+transforming...
+✓ 2926 modules transformed.
+rendering chunks...
+computing gzip size...
+.tanstack/start/build/client-dist/.vite/manifest.json                  25.17 kB │ gzip:   2.50 kB
+.tanstack/start/build/client-dist/assets/index-CIGW-MKW.css            15.61 kB │ gzip:   6.46 kB
+.tanstack/start/build/client-dist/assets/globals-8BWMoo8g.css          83.43 kB │ gzip:  13.88 kB
+.tanstack/start/build/client-dist/assets/check-D1Mc1XBn.js              0.12 kB │ gzip:   0.14 kB
+.tanstack/start/build/client-dist/assets/index-C2c-Jhqo.js              0.13 kB │ gzip:   0.14 kB
+.tanstack/start/build/client-dist/assets/index-BLP9kxRu.js              0.14 kB │ gzip:   0.14 kB
+.tanstack/start/build/client-dist/assets/index-CB42fay9.js              0.14 kB │ gzip:   0.14 kB
+.tanstack/start/build/client-dist/assets/index-DSjeKI7X.js              0.15 kB │ gzip:   0.15 kB
+.tanstack/start/build/client-dist/assets/index-rJ2D-g9v.js              0.15 kB │ gzip:   0.15 kB
+.tanstack/start/build/client-dist/assets/index-BgZKSZ8L.js              0.15 kB │ gzip:   0.15 kB
+.tanstack/start/build/client-dist/assets/index-DXuRyZgL.js              0.15 kB │ gzip:   0.15 kB
+.tanstack/start/build/client-dist/assets/index-DYKr6mSD.js              0.15 kB │ gzip:   0.15 kB
+.tanstack/start/build/client-dist/assets/plus-BxtIH0PQ.js               0.15 kB │ gzip:   0.15 kB
+.tanstack/start/build/client-dist/assets/index-CBrAFShc.js              0.16 kB │ gzip:   0.15 kB
+.tanstack/start/build/client-dist/assets/search-DYkEJlII.js             0.17 kB │ gzip:   0.17 kB
+.tanstack/start/build/client-dist/assets/user-CybEQYVO.js               0.20 kB │ gzip:   0.18 kB
+.tanstack/start/build/client-dist/assets/global-en-BcyiIGns.js          0.22 kB │ gzip:   0.19 kB
+.tanstack/start/build/client-dist/assets/todos-en-CQcit2PS.js           0.22 kB │ gzip:   0.19 kB
+.tanstack/start/build/client-dist/assets/global-id-prQfhqTN.js          0.22 kB │ gzip:   0.20 kB
+.tanstack/start/build/client-dist/assets/activity-zqpSVhzB.js           0.23 kB │ gzip:   0.20 kB
+.tanstack/start/build/client-dist/assets/todos-id-BVQILnxh.js           0.23 kB │ gzip:   0.20 kB
+.tanstack/start/build/client-dist/assets/loader-circle-BiDlkksr.js      0.33 kB │ gzip:   0.26 kB
+.tanstack/start/build/client-dist/assets/form-BV7IiR6e.js               0.33 kB │ gzip:   0.23 kB
+.tanstack/start/build/client-dist/assets/index-DHWgXPXw.js              0.36 kB │ gzip:   0.28 kB
+.tanstack/start/build/client-dist/assets/index-B0l9Epj5.js              0.43 kB │ gzip:   0.32 kB
+.tanstack/start/build/client-dist/assets/label-BpQBEH8O.js              0.64 kB │ gzip:   0.42 kB
+.tanstack/start/build/client-dist/assets/use-toast-BHdX-Ue-.js          0.65 kB │ gzip:   0.35 kB
+.tanstack/start/build/client-dist/assets/auth-id-C5z15NVH.js            0.67 kB │ gzip:   0.41 kB
+.tanstack/start/build/client-dist/assets/map-context-CQbM5eMO.js        0.67 kB │ gzip:   0.41 kB
+.tanstack/start/build/client-dist/assets/auth-en-D5NXRyq-.js            0.68 kB │ gzip:   0.42 kB
+.tanstack/start/build/client-dist/assets/input-DzRh_jgo.js              0.81 kB │ gzip:   0.44 kB
+.tanstack/start/build/client-dist/assets/card-CRV_0_gZ.js               0.89 kB │ gzip:   0.38 kB
+.tanstack/start/build/client-dist/assets/map-en-Dp76-mZj.js             0.93 kB │ gzip:   0.59 kB
+.tanstack/start/build/client-dist/assets/map-id-D7bYJ-S8.js             0.96 kB │ gzip:   0.60 kB
+.tanstack/start/build/client-dist/assets/admin-id-Cvisi66W.js           1.02 kB │ gzip:   0.63 kB
+.tanstack/start/build/client-dist/assets/admin-en-C1Yvbm17.js           1.03 kB │ gzip:   0.63 kB
+.tanstack/start/build/client-dist/assets/badge-DLJO5d-2.js              1.14 kB │ gzip:   0.56 kB
+.tanstack/start/build/client-dist/assets/form.simple-C7ZNjtyN.js        1.38 kB │ gzip:   0.74 kB
+.tanstack/start/build/client-dist/assets/form-7VwCHHjj.js               1.95 kB │ gzip:   0.78 kB
+.tanstack/start/build/client-dist/assets/index-BJ8ey43W.js              2.09 kB │ gzip:   0.98 kB
+.tanstack/start/build/client-dist/assets/index-m7xlTVY2.js              2.11 kB │ gzip:   0.99 kB
+.tanstack/start/build/client-dist/assets/index-BnL0TVal.js              2.13 kB │ gzip:   0.99 kB
+.tanstack/start/build/client-dist/assets/trash-2-CJ_HCB49.js            2.28 kB │ gzip:   1.01 kB
+.tanstack/start/build/client-dist/assets/orpc-todo-CxNV63Re.js          3.16 kB │ gzip:   1.36 kB
+.tanstack/start/build/client-dist/assets/form.address-BI1DX_Cx.js       3.24 kB │ gzip:   1.21 kB
+.tanstack/start/build/client-dist/assets/index-8Z0-2kal.js              3.75 kB │ gzip:   0.78 kB
+.tanstack/start/build/client-dist/assets/dashboard-CR3rmCzW.js          4.41 kB │ gzip:   1.50 kB
+.tanstack/start/build/client-dist/assets/login-XV-rNOZQ.js              4.53 kB │ gzip:   2.01 kB
+.tanstack/start/build/client-dist/assets/_id-CWxbzX0k.js                4.73 kB │ gzip:   1.71 kB
+.tanstack/start/build/client-dist/assets/signup-D5c3XVCW.js             4.76 kB │ gzip:   2.08 kB
+.tanstack/start/build/client-dist/assets/index-Cpe_8k9h.js              5.18 kB │ gzip:   2.00 kB
+.tanstack/start/build/client-dist/assets/form-components-DHPWqPDJ.js    7.01 kB │ gzip:   2.70 kB
+.tanstack/start/build/client-dist/assets/index-DO3XpwDk.js              7.50 kB │ gzip:   2.50 kB
+.tanstack/start/build/client-dist/assets/index-xxPXPytS.js              7.84 kB │ gzip:   2.72 kB
+.tanstack/start/build/client-dist/assets/index-DpYfhUi8.js              7.91 kB │ gzip:   2.52 kB
+.tanstack/start/build/client-dist/assets/index-CYlCOtFS.js              8.58 kB │ gzip:   2.45 kB
+.tanstack/start/build/client-dist/assets/useQuery-CGe7w79P.js           8.65 kB │ gzip:   3.13 kB
+.tanstack/start/build/client-dist/assets/index-DQxd-T-F.js              8.69 kB │ gzip:   2.83 kB
+.tanstack/start/build/client-dist/assets/index-DNK21Qfu.js              9.08 kB │ gzip:   2.80 kB
+.tanstack/start/build/client-dist/assets/_landType-CiUJAPBh.js          9.21 kB │ gzip:   2.86 kB
+.tanstack/start/build/client-dist/assets/_productBrand-P_foXxJB.js      9.24 kB │ gzip:   2.89 kB
+.tanstack/start/build/client-dist/assets/index-BIe5oAGe.js              9.32 kB │ gzip:   2.78 kB
+.tanstack/start/build/client-dist/assets/_commodityType-ros53DEm.js     9.92 kB │ gzip:   3.05 kB
+.tanstack/start/build/client-dist/assets/route-Bhxc1B8O.js             10.17 kB │ gzip:   2.89 kB
+.tanstack/start/build/client-dist/assets/index-DvX0_CNC.js             10.22 kB │ gzip:   3.17 kB
+.tanstack/start/build/client-dist/assets/sidebar-DeV_SR78.js           20.17 kB │ gzip:   6.21 kB
+.tanstack/start/build/client-dist/assets/select-BUnIoDlD.js            21.82 kB │ gzip:   7.58 kB
+.tanstack/start/build/client-dist/assets/route-nchGXrs5.js             22.64 kB │ gzip:   8.44 kB
+.tanstack/start/build/client-dist/assets/textarea-CraXyi9t.js          43.31 kB │ gzip:  11.92 kB
+.tanstack/start/build/client-dist/assets/index-CV4mLW6e.js            164.44 kB │ gzip:  49.02 kB
+.tanstack/start/build/client-dist/assets/test-CmkFpvcl.js             353.15 kB │ gzip: 105.54 kB
+.tanstack/start/build/client-dist/assets/main-pjnY3nJS.js             723.47 kB │ gzip: 210.40 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 12.38s
+vite v7.2.7 building ssr environment for production...
+transforming...
+✓ 363 modules transformed.
+✗ Build failed in 2.61s
+error during build:
+src/routes/admin/product/-app/create-product-type.ts (3:9): "ORPCError" is not exported by "src/lib/orpc/index.ts", imported by "src/routes/admin/product/-app/create-product-type.ts".
+file: /Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/apps/web/src/routes/admin/product/-app/create-product-type.ts:3:9
+
+1: import z from 'zod';
+2: import { productTypes } from '@/lib/db/schema/map-product';
+3: import { ORPCError, protectedProcedure } from '@/lib/orpc';
+            ^
+4: 
+5: export const createProductType = protectedProcedure
+
+Error: src/routes/admin/product/-app/create-product-type.ts (3:9): "ORPCError" is not exported by "src/lib/orpc/index.ts", imported by "src/routes/admin/product/-app/create-product-type.ts".
+    at getRollupError (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/parseAst.js:401:41)
+    at error (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/parseAst.js:397:42)
+    at findVariable (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:15076:39)
+    at findVariable (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:5649:38)
+    at findVariable (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:5649:38)
+    at findVariable (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:5649:38)
+    at findVariable (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:5649:38)
+    at findVariable (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:5649:38)
+    at findVariable (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:5649:38)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:5423:40)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2813:23)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2813:23)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2809:28)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2813:23)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2809:28)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2813:23)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2813:23)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2809:28)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2813:23)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2809:28)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:12123:15)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2813:23)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2809:28)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:12647:27)
+    at bind (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:2809:28)
+    at bindReferences (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:16935:18)
+    at sortModules (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:22746:20)
+    at build (/Users/naz/MyProject/13-pkg/magenta/marketing-map/marketing-map/node_modules/.bun/rollup@4.53.3/node_modules/rollup/dist/es/shared/node-entry.js:22644:14)
+    at processTicksAndRejections (native)
+error: script "build" exited with code 1

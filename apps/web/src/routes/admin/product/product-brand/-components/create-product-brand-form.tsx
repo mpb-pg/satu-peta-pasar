@@ -27,7 +27,8 @@ export function CreateProductBrandForm({
     Error,
     Parameters<typeof orpc.admin.product.product_brand.create.call>[0]
   >({
-    mutationFn: (payload) => orpc.admin.product.product_brand.create.call(payload),
+    mutationFn: (payload) =>
+      orpc.admin.product.product_brand.create.call(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: orpc.admin.product.product_brand.get.queryKey({ input: {} }),
@@ -43,7 +44,7 @@ export function CreateProductBrandForm({
       industry: '',
       description: '',
     },
-    validators: { onBlur: () => ({ fields: {} } as any) },
+    validators: { onBlur: () => ({ fields: {} }) as any },
     onSubmit: async ({ value }) => {
       try {
         await createMutation.mutateAsync({
@@ -88,7 +89,10 @@ export function CreateProductBrandForm({
                   label="Product Type"
                   placeholder="Select a product type"
                   values={
-                    productTypes?.data.map((pt) => ({ label: pt.name, value: pt.id })) || []
+                    productTypes?.data.map((pt) => ({
+                      label: pt.name,
+                      value: pt.id,
+                    })) || []
                   }
                 />
               )}
@@ -98,22 +102,35 @@ export function CreateProductBrandForm({
               name="name"
               validators={{
                 onBlur: ({ value }) => {
-                  if (!value || value.trim().length === 0) return 'Name is required';
+                  if (!value || value.trim().length === 0)
+                    return 'Name is required';
                 },
               }}
             >
-              {(field) => <field.textField label="Brand Name" placeholder="ex. Urea Co" />}
+              {(field) => (
+                <field.textField label="Brand Name" placeholder="ex. Urea Co" />
+              )}
             </form.AppField>
 
             <form.AppField name="industry">
-              {(field) => <field.textField label="Industry" placeholder="ex. Fertilizer" />}
+              {(field) => (
+                <field.textField
+                  label="Industry"
+                  placeholder="ex. Fertilizer"
+                />
+              )}
             </form.AppField>
 
             <form.AppField name="description">
-              {(field) => <field.textArea label="Description" placeholder="Optional description" />}
+              {(field) => (
+                <field.textArea
+                  label="Description"
+                  placeholder="Optional description"
+                />
+              )}
             </form.AppField>
 
-            <div></div>
+            <div />
             <div className="mt-7 flex justify-end">
               <form.AppForm>
                 <form.subscribeButton label="Create" />

@@ -4,6 +4,8 @@
 
 A modern, type-safe, and scalable foundation for building full-stack applications. Clone, configure, and ship your next project in minutes.
 
+> A user guide is available: [GUIDEBOOK.md](GUIDEBOOK.md)
+
 ## ✨ What's Included
 
 ### 🏗️ **Unified oRPC Architecture**

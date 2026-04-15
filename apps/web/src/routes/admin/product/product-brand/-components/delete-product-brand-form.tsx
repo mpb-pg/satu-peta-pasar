@@ -29,7 +29,8 @@ export function DeleteProductBrandForm({
     Error,
     Parameters<typeof orpc.admin.product.product_brand.delete.call>[0]
   >({
-    mutationFn: (payload) => orpc.admin.product.product_brand.delete.call(payload),
+    mutationFn: (payload) =>
+      orpc.admin.product.product_brand.delete.call(payload),
     onError: () => {
       toast.error('Failed to delete product brand. Please try again.');
     },
@@ -43,7 +44,9 @@ export function DeleteProductBrandForm({
   return (
     <Dialog onOpenChange={onOpenChange} open={open}>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
-        <DialogTitle>Are you sure you want to delete this product brand?</DialogTitle>
+        <DialogTitle>
+          Are you sure you want to delete this product brand?
+        </DialogTitle>
         <DialogDescription>This action cannot be undone.</DialogDescription>
 
         <div className="mt-4">
@@ -66,7 +69,9 @@ export function DeleteProductBrandForm({
                   onOpenChange(false);
                 }
               } catch (_error) {
-                toast.error('Failed to delete product brand. Please try again.');
+                toast.error(
+                  'Failed to delete product brand. Please try again.'
+                );
               }
             }}
             variant="destructive"

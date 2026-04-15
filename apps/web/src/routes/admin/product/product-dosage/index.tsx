@@ -76,7 +76,9 @@ function RouteComponent() {
             }
             if (productBrandsList.length === 0) {
               return (
-                <p className="text-center text-gray-500">No product brands found.</p>
+                <p className="text-center text-gray-500">
+                  No product brands found.
+                </p>
               );
             }
             return (
