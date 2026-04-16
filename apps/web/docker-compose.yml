@@ -10,13 +10,11 @@ services:
     networks:
       - coolify
     environment:
-      - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASS:-password}@${DB_HOST:-localhost}:${DB_PORT:-5432}/${DB_NAME:-siperan_db}
+      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - BETTER_AUTH_URL=${BETTER_AUTH_URL}
       - CORS_ORIGIN=${CORS_ORIGIN}
       - NODE_ENV=production
-    env_file:
-      - ./.env
     depends_on:
       postgres:
         condition: service_healthy
@@ -26,9 +24,9 @@ services:
     image: postgres:16-alpine
     container_name: siperan-app-postgres
     environment:
-      - POSTGRES_DB=${DB_NAME:-siperan_db}
-      - POSTGRES_USER=${DB_USER:-postgres}
-      - POSTGRES_PASSWORD=${DB_PASS:-password}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
     ports:
       - "45432:5432"
     volumes:
