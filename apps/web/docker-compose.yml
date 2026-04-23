@@ -10,7 +10,7 @@ services:
     networks:
       - coolify
     environment:
-      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+      - DATABASE_URL=postgresql://${DB_USER}:tester123@${DB_HOST}:${DB_PORT}/${DB_NAME}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - BETTER_AUTH_URL=${BETTER_AUTH_URL}
       - CORS_ORIGIN=${CORS_ORIGIN}
@@ -26,11 +26,11 @@ services:
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_PASSWORD=tester123
     ports:
       - "45432:5432"
     volumes:
-      - siperan_app_postgres_data_v2:/var/lib/postgresql/data
+      - siperan_app_postgres_fresh:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
       interval: 10s
@@ -43,4 +43,4 @@ networks:
     external: true
 
 volumes:
-  siperan_app_postgres_data_v2:
+  siperan_app_postgres_fresh:
